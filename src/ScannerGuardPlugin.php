@@ -12,13 +12,9 @@ class ScannerGuardPlugin implements Plugin
         return 'filament-scanner-guard';
     }
 
-    public function register(Panel $panel): void
-    {
-    }
+    public function register(Panel $panel): void {}
 
-    public function boot(Panel $panel): void
-    {
-    }
+    public function boot(Panel $panel): void {}
 
     public static function make(): static
     {
