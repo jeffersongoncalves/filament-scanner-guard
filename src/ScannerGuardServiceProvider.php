@@ -11,8 +11,6 @@ class ScannerGuardServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('filament-scanner-guard')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigrations();
+            ->hasTranslations();
     }
 }
