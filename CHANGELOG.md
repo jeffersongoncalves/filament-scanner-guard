@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.1 - 2026-09-13
+
+**Full Changelog**: https://github.com/jeffersongoncalves/filament-scanner-guard/compare/3.0.0...3.0.1
+
 ## 3.0.0 - 2026-09-13
 
 ### What's Changed
