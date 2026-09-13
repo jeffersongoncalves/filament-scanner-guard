@@ -10,11 +10,14 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
+use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ScannerGuardBanResource extends Resource
 {
+    use HasPluginNavigationGroup;
+
     protected static ?string $model = ScannerGuardBan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-shield-exclamation';

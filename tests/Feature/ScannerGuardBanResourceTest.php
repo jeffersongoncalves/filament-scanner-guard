@@ -1,6 +1,8 @@
 <?php
 
+use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Widgets\StatsOverview;
 use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
@@ -50,4 +52,31 @@ it('uses the correct model for the resource', function () {
 
 it('does not allow creating records', function () {
     expect(ScannerGuardBanResource::canCreate())->toBeFalse();
+});
+
+it('defaults the navigation group to the translated label and allows overriding it', function () {
+    $plugin = ScannerGuardPlugin::get();
+
+    expect(ScannerGuardBanResource::getNavigationGroup())->toBe(__('filament-scanner-guard::default.navigation.group'))
+        ->and(MetricsPage::getNavigationGroup())->toBe(__('filament-scanner-guard::default.navigation.group'));
+
+    $plugin->navigationGroup('Custom Group');
+
+    expect(ScannerGuardBanResource::getNavigationGroup())->toBe('Custom Group')
+        ->and(MetricsPage::getNavigationGroup())->toBe('Custom Group');
+
+    $plugin->navigationGroup(null);
+});
+
+it('reports ban stats on the metrics widget', function () {
+    createBan();
+    createBan(['expires_at' => now()->subDay(), 'hit_count' => 5]);
+
+    $getStats = (new ReflectionMethod(StatsOverview::class, 'getStats'));
+    $stats = $getStats->invoke(new StatsOverview);
+
+    expect($stats[0]->getValue())->toBe(2)
+        ->and($stats[1]->getValue())->toBe(1)
+        ->and($stats[2]->getValue())->toBe(1)
+        ->and($stats[3]->getValue())->toBe(8);
 });
