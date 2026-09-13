@@ -52,11 +52,18 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-This registers a **Scanner Guard Bans** resource (list only — rows are written by the `scanner-guard` middleware, not by admins) with:
+This registers a **Scanner Guard Bans** resource (list only — rows are written by the `scanner-guard` middleware, not by admins) and a **Metrics** page, with:
 
 - Columns: `ip_hash`, `reason` (badge), `matched_value`, `hit_count`, `banned_at`, `expires_at`, `is_active`
 - A **Status** filter (active vs expired)
 - An **Unban** row action and an **Unban selected** bulk action — both delete the ban row (this is an audit-trail model, not a flag on an arbitrary model)
+- A **Metrics** page with total, active, expired and hit-count stats
+
+Both share one navigation group, `Scanner Guard` by default — override it with `->navigationGroup()`:
+
+```php
+ScannerGuardPlugin::make()->navigationGroup('Security');
+```
 
 ### Using the actions standalone
 

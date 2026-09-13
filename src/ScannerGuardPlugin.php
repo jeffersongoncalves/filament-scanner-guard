@@ -4,10 +4,13 @@ namespace JeffersonGoncalves\Filament\ScannerGuard;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 
 class ScannerGuardPlugin implements Plugin
 {
+    protected ?string $navigationGroup = null;
+
     public function getId(): string
     {
         return 'filament-scanner-guard';
@@ -15,9 +18,13 @@ class ScannerGuardPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->resources([
-            ScannerGuardBanResource::class,
-        ]);
+        $panel
+            ->resources([
+                ScannerGuardBanResource::class,
+            ])
+            ->pages([
+                MetricsPage::class,
+            ]);
     }
 
     public function boot(Panel $panel): void {}
@@ -33,5 +40,17 @@ class ScannerGuardPlugin implements Plugin
         $plugin = filament(app(static::class)->getId());
 
         return $plugin;
+    }
+
+    public function navigationGroup(?string $group): static
+    {
+        $this->navigationGroup = $group;
+
+        return $this;
+    }
+
+    public function getNavigationGroup(): ?string
+    {
+        return $this->navigationGroup ?? __('filament-scanner-guard::default.navigation.group');
     }
 }
