@@ -1,9 +1,21 @@
 <?php
 
 return [
+    'navigation' => [
+        'group' => 'Scanner Guard',
+    ],
     'resource' => [
         'label' => 'Scanner Guard Ban',
         'plural_label' => 'Scanner Guard Bans',
+    ],
+    'metrics' => [
+        'title' => 'Metrics',
+    ],
+    'stats' => [
+        'total_bans' => 'Total Bans',
+        'active_bans' => 'Active Bans',
+        'expired_bans' => 'Expired Bans',
+        'total_hits' => 'Total Hits',
     ],
     'table' => [
         'ip_hash' => 'IP Hash',

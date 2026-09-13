@@ -5,12 +5,15 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Tables\ScannerGuardBansTable;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ScannerGuardBanResource extends Resource
 {
+    use HasPluginNavigationGroup;
+
     protected static ?string $model = ScannerGuardBan::class;
 
     protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedShieldExclamation;
