@@ -18,13 +18,11 @@ Filament UI for [jeffersongoncalves/laravel-scanner-guard](https://github.com/je
 
 ## Version Compatibility
 
-| Filament | Laravel | PHP  | Branch | Version |
-|----------|---------|------|--------|---------|
-| v3       | 12      | 8.3+ | `1.x`  | `^1.0`  |
-| v4       | 12 / 13 | 8.3+ | `2.x`  | `^2.0`  |
-| v5       | 12 / 13 | 8.3+ | `3.x`  | `^3.0`  |
-
-All tags use plain SemVer **without** the `v` prefix (e.g. `2.0.0`).
+| Filament | Branch | Version |
+|----------|--------|---------|
+| v3       | `1.x`  | `^1.0`  |
+| v4       | `2.x`  | `^2.0`  |
+| v5       | `3.x`  | `^3.0`  |
 
 > **Note:** every branch requires PHP 8.3+ and Laravel 12+ because the underlying `jeffersongoncalves/laravel-scanner-guard` (via `jeffersongoncalves/laravel-visitor-fingerprint`) only supports Laravel 12/13.
 
