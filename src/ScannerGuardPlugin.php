@@ -4,6 +4,7 @@ namespace JeffersonGoncalves\Filament\ScannerGuard;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 
 class ScannerGuardPlugin implements Plugin
 {
@@ -12,7 +13,12 @@ class ScannerGuardPlugin implements Plugin
         return 'filament-scanner-guard';
     }
 
-    public function register(Panel $panel): void {}
+    public function register(Panel $panel): void
+    {
+        $panel->resources([
+            ScannerGuardBanResource::class,
+        ]);
+    }
 
     public function boot(Panel $panel): void {}
 
@@ -23,6 +29,9 @@ class ScannerGuardPlugin implements Plugin
 
     public static function get(): static
     {
-        return filament(app(static::class)->getId());
+        /** @var static $plugin */
+        $plugin = filament(app(static::class)->getId());
+
+        return $plugin;
     }
 }
