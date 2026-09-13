@@ -1,3 +1,5 @@
 <?php
 
-uses(JeffersonGoncalves\Filament\ScannerGuard\Tests\TestCase::class)->in('Feature');
+use JeffersonGoncalves\Filament\ScannerGuard\Tests\TestCase;
+
+uses(TestCase::class)->in('Feature');

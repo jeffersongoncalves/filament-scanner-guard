@@ -2,10 +2,10 @@
 
 namespace JeffersonGoncalves\Filament\ScannerGuard\Tests;
 
-use JeffersonGoncalves\Filament\ScannerGuard\Tests\Fixtures\TestPanelProvider;
-use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Support\SupportServiceProvider;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardServiceProvider;
+use JeffersonGoncalves\Filament\ScannerGuard\Tests\Fixtures\TestPanelProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
