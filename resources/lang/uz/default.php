@@ -1,0 +1,71 @@
+<?php
+
+return [
+    'navigation' => [
+        'group' => 'Scanner Guard',
+    ],
+    'resource' => [
+        'label' => 'Scanner Guard blokirovkasi',
+        'plural_label' => 'Scanner Guard blokirovkalari',
+    ],
+    'metrics' => [
+        'title' => 'Koʻrsatkichlar',
+    ],
+    'stats' => [
+        'total_bans' => 'Jami blokirovkalar',
+        'active_bans' => 'Faol blokirovkalar',
+        'expired_bans' => 'Muddati tugagan blokirovkalar',
+        'total_hits' => 'Jami murojaatlar',
+    ],
+    'table' => [
+        'ip_hash' => 'IP xeshi',
+        'reason' => 'Sabab',
+        'matched_value' => 'Mos kelgan qiymat',
+        'hit_count' => 'Murojaatlar',
+        'banned_at' => 'Bloklangan sana',
+        'expires_at' => 'Tugash sanasi',
+        'is_active' => 'Faol',
+    ],
+    'reason' => [
+        'scanner_path' => 'Skaner yoʻli',
+        'asn_blocklist' => 'ASN qora roʻyxati',
+    ],
+    'filter' => [
+        'label' => 'Holat',
+        'placeholder' => 'Barchasi',
+        'true_label' => 'Faol',
+        'false_label' => 'Muddati tugagan',
+    ],
+    'unban' => [
+        'label' => 'Blokdan chiqarish',
+        'bulk_label' => 'Tanlanganlarni blokdan chiqarish',
+        'success' => 'Blokdan chiqarildi',
+    ],
+    'charts' => [
+        'bans_per_day' => 'Kunlik blokirovkalar (soʻnggi 14 kun)',
+        'bans_by_reason' => 'Sabab boʻyicha blokirovkalar',
+        'top_matched_values' => 'Eng koʻp mos kelgan qiymatlar',
+    ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Blokirovka tafsilotlari',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Uzaytirish',
+        'success' => 'Blokirovka uzaytirildi',
+        'form' => [
+            'duration' => 'Uzaytirish muddati',
+        ],
+        'options' => [
+            'hour' => '1 soat',
+            'day' => '1 kun',
+            'week' => '1 hafta',
+            'month' => '1 oy',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Muddati tugaganlarni tozalash',
+        'success' => 'Muddati tugagan blokirovkalar tozalandi',
+    ],
+];

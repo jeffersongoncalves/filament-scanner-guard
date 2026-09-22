@@ -7,7 +7,10 @@ use Filament\Pages\Page;
 use Filament\Panel;
 use Filament\Support\Icons\Heroicon;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Widgets\BansByReasonChart;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Widgets\BansPerDayChart;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Widgets\StatsOverview;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Widgets\TopMatchedValuesChart;
 
 class MetricsPage extends Page
 {
@@ -34,6 +37,15 @@ class MetricsPage extends Page
     {
         return [
             StatsOverview::class,
+        ];
+    }
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+            BansPerDayChart::class,
+            BansByReasonChart::class,
+            TopMatchedValuesChart::class,
         ];
     }
 }

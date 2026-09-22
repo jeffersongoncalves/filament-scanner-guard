@@ -3,10 +3,13 @@
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans;
 
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Pages\ListScannerGuardBans;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Pages\ViewScannerGuardBan;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Schemas\ScannerGuardBanInfolist;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Tables\ScannerGuardBansTable;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
@@ -25,10 +28,16 @@ class ScannerGuardBanResource extends Resource
         return ScannerGuardBansTable::configure($table);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return ScannerGuardBanInfolist::configure($schema);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => ListScannerGuardBans::route('/'),
+            'view' => ViewScannerGuardBan::route('/{record}'),
         ];
     }
 
