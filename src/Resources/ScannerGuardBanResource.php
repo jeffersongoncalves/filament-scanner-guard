@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources;
 
+use Closure;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -12,6 +13,8 @@ use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
+use JeffersonGoncalves\FilamentExportAction\Actions\FilamentExportBulkAction;
+use JeffersonGoncalves\FilamentExportAction\Actions\FilamentExportHeaderAction;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ScannerGuardBanResource extends Resource
@@ -77,12 +80,36 @@ class ScannerGuardBanResource extends Resource
                         blank: fn (Builder $query): Builder => $query,
                     ),
             ])
+            ->headerActions([
+                FilamentExportHeaderAction::make('export')
+                    ->formatStates(static::exportFormatStates()),
+            ])
             ->actions([
                 UnbanAction::make(),
             ])
             ->bulkActions([
+                FilamentExportBulkAction::make('export')
+                    ->formatStates(static::exportFormatStates()),
                 UnbanBulkAction::make(),
             ]);
+    }
+
+    /**
+     * Export the full matched value (the column is truncated in the table) and
+     * neutralise spreadsheet formulas: it comes straight from attacker request paths.
+     *
+     * @return array<string, Closure>
+     */
+    public static function exportFormatStates(): array
+    {
+        return [
+            'matched_value' => fn (ScannerGuardBan $record): string => preg_match('/^[=+\-@\t\r]/', $record->matched_value)
+                ? "'".$record->matched_value
+                : $record->matched_value,
+            'is_active' => fn (ScannerGuardBan $record): string => $record->is_active
+                ? __('filament-scanner-guard::default.filter.true_label')
+                : __('filament-scanner-guard::default.filter.false_label'),
+        ];
     }
 
     public static function getPages(): array
