@@ -68,4 +68,8 @@ return [
         'label' => 'Verlopen opschonen',
         'success' => 'Verlopen bans opgeschoond',
     ],
+    'export' => [
+        'completed' => 'Uw ban-export is voltooid, :count rijen geëxporteerd.',
+        'failed' => ':count rijen konden niet worden geëxporteerd.',
+    ],
 ];

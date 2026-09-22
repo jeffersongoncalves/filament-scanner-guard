@@ -58,6 +58,13 @@ This registers a **Scanner Guard Bans** resource (list only — rows are written
 - A **Status** filter (active vs expired)
 - An **Unban** row action and an **Unban selected** bulk action — both delete the ban row (this is an audit-trail model, not a flag on an arbitrary model)
 - A **Metrics** page with total, active, expired and hit-count stats
+- Chart widgets on the list page: bans per day (14 days), bans by reason, top matched values
+- A **View** page per ban with infolist, an **Extend** row action (1h/1d/1w/1m) and a **Purge expired** header action
+- **Export** to CSV/XLSX via header `ExportAction` and bulk `ExportBulkAction` (`ScannerGuardBanExporter`)
+
+> **Note:** exports run on Filament's queued export system — the host app must have published
+> `filament-actions-migrations`, a queue worker and database notifications configured
+> (see [Filament export docs](https://filamentphp.com/docs/5.x/actions/export)).
 
 Both share one navigation group, `Scanner Guard` by default — override it with `->navigationGroup()`:
 

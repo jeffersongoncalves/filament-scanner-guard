@@ -2,8 +2,10 @@
 
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Pages;
 
+use Filament\Actions\ExportAction;
 use Filament\Resources\Pages\ListRecords;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\PurgeExpiredBansAction;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Exports\ScannerGuardBanExporter;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Widgets\BansByReasonChart;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Widgets\BansPerDayChart;
@@ -17,6 +19,8 @@ class ListScannerGuardBans extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            ExportAction::make()
+                ->exporter(ScannerGuardBanExporter::class),
             PurgeExpiredBansAction::make(),
         ];
     }

@@ -68,4 +68,8 @@ return [
         'label' => '期限切れを削除',
         'success' => '期限切れ BAN を削除しました',
     ],
+    'export' => [
+        'completed' => 'BAN のエクスポートが完了しました（:count 件）。',
+        'failed' => ':count 件のエクスポートに失敗しました。',
+    ],
 ];

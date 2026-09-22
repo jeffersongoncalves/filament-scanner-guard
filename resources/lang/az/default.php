@@ -68,4 +68,8 @@ return [
         'label' => 'Vaxtı bitmişləri təmizlə',
         'success' => 'Vaxtı bitmiş banlar təmizləndi',
     ],
+    'export' => [
+        'completed' => 'Ban ixracınız tamamlandı və :count sətir ixrac edildi.',
+        'failed' => ':count sətir ixrac edilə bilmədi.',
+    ],
 ];

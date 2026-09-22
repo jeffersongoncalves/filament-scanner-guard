@@ -68,4 +68,8 @@ return [
         'label' => 'Limpar expirados',
         'success' => 'Bloqueios expirados removidos',
     ],
+    'export' => [
+        'completed' => 'Sua exportação de bloqueios foi concluída, :count linhas exportadas.',
+        'failed' => ':count linhas falharam ao exportar.',
+    ],
 ];

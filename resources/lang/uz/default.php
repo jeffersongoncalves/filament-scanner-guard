@@ -68,4 +68,8 @@ return [
         'label' => 'Muddati otganlarni tozalash',
         'success' => 'Muddati otgan bloklar tozalandi',
     ],
+    'export' => [
+        'completed' => 'Bloklar eksporti yakunlandi, :count qator eksport qilindi.',
+        'failed' => ':count qator eksport qilinmadi.',
+    ],
 ];

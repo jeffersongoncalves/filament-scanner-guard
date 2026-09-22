@@ -68,4 +68,8 @@ return [
         'label' => 'Usuń wygasłe',
         'success' => 'Wygasłe blokady usunięte',
     ],
+    'export' => [
+        'completed' => 'Eksport blokad zakończony, wyeksportowano wierszy: :count.',
+        'failed' => 'Nie wyeksportowano wierszy: :count.',
+    ],
 ];

@@ -68,4 +68,8 @@ return [
         'label' => 'Süresi dolmuşları temizle',
         'success' => 'Süresi dolmuş yasaklar temizlendi',
     ],
+    'export' => [
+        'completed' => 'Yasak dışa aktarımınız tamamlandı, :count satır aktarıldı.',
+        'failed' => ':count satır aktarılamadı.',
+    ],
 ];

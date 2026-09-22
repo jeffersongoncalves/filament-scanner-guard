@@ -68,4 +68,8 @@ return [
         'label' => 'Abgelaufene löschen',
         'success' => 'Abgelaufene Sperren gelöscht',
     ],
+    'export' => [
+        'completed' => 'Ihr Sperr-Export ist abgeschlossen, :count Zeilen exportiert.',
+        'failed' => ':count Zeilen konnten nicht exportiert werden.',
+    ],
 ];

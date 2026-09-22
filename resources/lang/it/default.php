@@ -68,4 +68,8 @@ return [
         'label' => 'Elimina scaduti',
         'success' => 'Ban scaduti eliminati',
     ],
+    'export' => [
+        'completed' => 'Esportazione dei ban completata, :count righe esportate.',
+        'failed' => ':count righe non esportate.',
+    ],
 ];

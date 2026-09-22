@@ -68,4 +68,8 @@ return [
         'label' => 'Purgar expirados',
         'success' => 'Bloqueos expirados purgados',
     ],
+    'export' => [
+        'completed' => 'Su exportación de bloqueos se completó, :count filas exportadas.',
+        'failed' => ':count filas no se pudieron exportar.',
+    ],
 ];

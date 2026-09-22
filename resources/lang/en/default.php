@@ -68,4 +68,8 @@ return [
         'label' => 'Purge expired',
         'success' => 'Expired bans purged',
     ],
+    'export' => [
+        'completed' => 'Your ban export has completed and :count rows exported.',
+        'failed' => ':count rows failed to export.',
+    ],
 ];

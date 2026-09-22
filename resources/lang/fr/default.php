@@ -68,4 +68,8 @@ return [
         'label' => 'Purger les expirés',
         'success' => 'Bannissements expirés purgés',
     ],
+    'export' => [
+        'completed' => 'Votre export de bannissements est terminé, :count lignes exportées.',
+        'failed' => ':count lignes n’ont pas pu être exportées.',
+    ],
 ];

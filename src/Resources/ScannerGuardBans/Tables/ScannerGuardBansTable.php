@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Tables;
 
+use Filament\Actions\ExportBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Exports\ScannerGuardBanExporter;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ScannerGuardBansTable
@@ -74,6 +76,8 @@ class ScannerGuardBansTable
                 UnbanAction::make(),
             ])
             ->toolbarActions([
+                ExportBulkAction::make()
+                    ->exporter(ScannerGuardBanExporter::class),
                 UnbanBulkAction::make(),
             ]);
     }

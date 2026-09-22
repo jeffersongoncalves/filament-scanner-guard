@@ -68,4 +68,8 @@ return [
         'label' => '清理过期',
         'success' => '过期封禁已清理',
     ],
+    'export' => [
+        'completed' => '封禁导出已完成，共导出 :count 行。',
+        'failed' => ':count 行导出失败。',
+    ],
 ];
