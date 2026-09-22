@@ -4,7 +4,10 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Pages;
 
 use Filament\Pages\Page;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Widgets\BansByReasonChart;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Widgets\BansPerDayChart;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Widgets\StatsOverview;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Widgets\TopMatchedValuesChart;
 
 class MetricsPage extends Page
 {
@@ -34,6 +37,15 @@ class MetricsPage extends Page
     {
         return [
             StatsOverview::class,
+        ];
+    }
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+            BansPerDayChart::class,
+            BansByReasonChart::class,
+            TopMatchedValuesChart::class,
         ];
     }
 }
