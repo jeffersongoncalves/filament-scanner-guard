@@ -58,7 +58,9 @@ This registers a **Scanner Guard Bans** resource (list only — rows are written
 - A **Status** filter (active vs expired)
 - An **Unban** row action and an **Unban selected** bulk action — both delete the ban row (this is an audit-trail model, not a flag on an arbitrary model)
 - An **Export** header action and an **Export** bulk action (CSV, XLSX, PDF with preview) via [`jeffersongoncalves/filament-action-export`](https://github.com/jeffersongoncalves/filament-action-export) — synchronous, no queue or migrations needed; `matched_value` is exported in full with spreadsheet formulas neutralised
-- A **Metrics** page with total, active, expired and hit-count stats
+- A **View** page per ban and an **Extend** action (1 hour / 1 day / 1 week / 1 month, added to the current expiry)
+- A **Purge expired** header action that deletes every expired ban
+- A **Metrics** page with total, active, expired and hit-count stats, plus charts: bans per day (last 14 days), bans by reason and top matched values
 
 Both share one navigation group, `Scanner Guard` by default — override it with `->navigationGroup()`:
 
