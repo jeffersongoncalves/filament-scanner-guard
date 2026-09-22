@@ -12,6 +12,9 @@ class MetricsPage extends Page
 
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
 
+    // Filament v3 pages have no default view; header/footer widgets render around this empty page.
+    protected static string $view = 'filament-scanner-guard::pages.metrics';
+
     public static function getSlug(): string
     {
         return 'scanner-guard-metrics';
