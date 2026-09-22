@@ -41,4 +41,31 @@ return [
         'bulk_label' => 'Ausgewählte entsperren',
         'success' => 'Entsperrt',
     ],
+    'charts' => [
+        'bans_per_day' => 'Sperren pro Tag (letzte 14 Tage)',
+        'bans_by_reason' => 'Sperren nach Grund',
+        'top_matched_values' => 'Top übereinstimmende Werte',
+    ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Sperrdetails',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Verlängern',
+        'success' => 'Sperre verlängert',
+        'form' => [
+            'duration' => 'Verlängern um',
+        ],
+        'options' => [
+            'hour' => '1 Stunde',
+            'day' => '1 Tag',
+            'week' => '1 Woche',
+            'month' => '1 Monat',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Abgelaufene löschen',
+        'success' => 'Abgelaufene Sperren gelöscht',
+    ],
 ];

@@ -41,4 +41,31 @@ return [
         'bulk_label' => '選択を BAN 解除',
         'success' => 'BAN を解除しました',
     ],
+    'charts' => [
+        'bans_per_day' => '日別 BAN（直近14日）',
+        'bans_by_reason' => '理由別 BAN',
+        'top_matched_values' => '一致値トップ',
+    ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'BAN 詳細',
+        ],
+    ],
+    'extend' => [
+        'label' => '延長',
+        'success' => 'BAN を延長しました',
+        'form' => [
+            'duration' => '延長期間',
+        ],
+        'options' => [
+            'hour' => '1時間',
+            'day' => '1日',
+            'week' => '1週間',
+            'month' => '1か月',
+        ],
+    ],
+    'purge' => [
+        'label' => '期限切れを削除',
+        'success' => '期限切れ BAN を削除しました',
+    ],
 ];

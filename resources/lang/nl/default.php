@@ -41,4 +41,31 @@ return [
         'bulk_label' => 'Selectie deblokkeren',
         'success' => 'Gedeblokkeerd',
     ],
+    'charts' => [
+        'bans_per_day' => 'Bans per dag (laatste 14 dagen)',
+        'bans_by_reason' => 'Bans per reden',
+        'top_matched_values' => 'Top overeenkomende waarden',
+    ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Ban-details',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Verlengen',
+        'success' => 'Ban verlengd',
+        'form' => [
+            'duration' => 'Verlengen met',
+        ],
+        'options' => [
+            'hour' => '1 uur',
+            'day' => '1 dag',
+            'week' => '1 week',
+            'month' => '1 maand',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Verlopen opschonen',
+        'success' => 'Verlopen bans opgeschoond',
+    ],
 ];
