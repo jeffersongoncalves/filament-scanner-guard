@@ -41,4 +41,9 @@ return [
         'bulk_label' => 'Selectie deblokkeren',
         'success' => 'Gedeblokkeerd',
     ],
+    'charts' => [
+        'bans_per_day' => 'Bans per dag (laatste 14 dagen)',
+        'bans_by_reason' => 'Bans per reden',
+        'top_matched_values' => 'Top overeenkomende waarden',
+    ],
 ];

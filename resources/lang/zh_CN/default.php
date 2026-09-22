@@ -41,4 +41,9 @@ return [
         'bulk_label' => '解禁所选',
         'success' => '已解禁',
     ],
+    'charts' => [
+        'bans_per_day' => '每日封禁（最近14天）',
+        'bans_by_reason' => '按原因统计封禁',
+        'top_matched_values' => '匹配值 TOP',
+    ],
 ];

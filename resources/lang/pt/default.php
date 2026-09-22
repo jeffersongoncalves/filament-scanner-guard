@@ -41,4 +41,9 @@ return [
         'bulk_label' => 'Desbloquear selecionados',
         'success' => 'Desbloqueado',
     ],
+    'charts' => [
+        'bans_per_day' => 'Bloqueios por dia (últimos 14 dias)',
+        'bans_by_reason' => 'Bloqueios por motivo',
+        'top_matched_values' => 'Principais valores correspondidos',
+    ],
 ];

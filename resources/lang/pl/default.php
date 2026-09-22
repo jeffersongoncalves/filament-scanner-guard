@@ -41,4 +41,9 @@ return [
         'bulk_label' => 'Odblokuj zaznaczone',
         'success' => 'Odblokowano',
     ],
+    'charts' => [
+        'bans_per_day' => 'Blokady dziennie (ostatnie 14 dni)',
+        'bans_by_reason' => 'Blokady według powodu',
+        'top_matched_values' => 'Najczęstsze dopasowane wartości',
+    ],
 ];

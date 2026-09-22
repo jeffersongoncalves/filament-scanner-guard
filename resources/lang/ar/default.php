@@ -41,4 +41,9 @@ return [
         'bulk_label' => 'إلغاء حظر المحدد',
         'success' => 'تم إلغاء الحظر',
     ],
+    'charts' => [
+        'bans_per_day' => 'الحظر اليومي (آخر 14 يومًا)',
+        'bans_by_reason' => 'الحظر حسب السبب',
+        'top_matched_values' => 'أعلى القيم المطابقة',
+    ],
 ];

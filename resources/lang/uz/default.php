@@ -41,4 +41,9 @@ return [
         'bulk_label' => 'Seçilənləri blokdan çıxar',
         'success' => 'Blokdan çıxarıldı',
     ],
+    'charts' => [
+        'bans_per_day' => 'Kunlik bloklar (songgi 14 kun)',
+        'bans_by_reason' => 'Sabab boyicha bloklar',
+        'top_matched_values' => 'Top mos qiymatlar',
+    ],
 ];

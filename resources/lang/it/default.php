@@ -41,4 +41,9 @@ return [
         'bulk_label' => 'Sbanna selezionati',
         'success' => 'Sbannato',
     ],
+    'charts' => [
+        'bans_per_day' => 'Ban al giorno (ultimi 14 giorni)',
+        'bans_by_reason' => 'Ban per motivo',
+        'top_matched_values' => 'Principali valori corrispondenti',
+    ],
 ];

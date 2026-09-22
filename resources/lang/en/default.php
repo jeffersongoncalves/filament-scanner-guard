@@ -41,4 +41,9 @@ return [
         'bulk_label' => 'Unban selected',
         'success' => 'Unbanned',
     ],
+    'charts' => [
+        'bans_per_day' => 'Bans per day (last 14 days)',
+        'bans_by_reason' => 'Bans by reason',
+        'top_matched_values' => 'Top matched values',
+    ],
 ];

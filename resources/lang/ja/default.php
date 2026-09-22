@@ -41,4 +41,9 @@ return [
         'bulk_label' => '選択を BAN 解除',
         'success' => 'BAN を解除しました',
     ],
+    'charts' => [
+        'bans_per_day' => '日別 BAN（直近14日）',
+        'bans_by_reason' => '理由別 BAN',
+        'top_matched_values' => '一致値トップ',
+    ],
 ];

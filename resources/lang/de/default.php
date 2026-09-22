@@ -41,4 +41,9 @@ return [
         'bulk_label' => 'Ausgewählte entsperren',
         'success' => 'Entsperrt',
     ],
+    'charts' => [
+        'bans_per_day' => 'Sperren pro Tag (letzte 14 Tage)',
+        'bans_by_reason' => 'Sperren nach Grund',
+        'top_matched_values' => 'Top übereinstimmende Werte',
+    ],
 ];
