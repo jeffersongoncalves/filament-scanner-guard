@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => 'Blokady według powodu',
         'top_matched_values' => 'Najczęstsze dopasowane wartości',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Szczegóły blokady',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Przedłuż',
+        'success' => 'Blokada przedłużona',
+        'form' => [
+            'duration' => 'Przedłuż o',
+        ],
+        'options' => [
+            'hour' => '1 godzinę',
+            'day' => '1 dzień',
+            'week' => '1 tydzień',
+            'month' => '1 miesiąc',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Usuń wygasłe',
+        'success' => 'Wygasłe blokady usunięte',
+    ],
 ];

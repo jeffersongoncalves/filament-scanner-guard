@@ -2,11 +2,13 @@
 
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Tables;
 
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
@@ -67,6 +69,8 @@ class ScannerGuardBansTable
                     ),
             ])
             ->recordActions([
+                ViewAction::make(),
+                ExtendBanAction::make(),
                 UnbanAction::make(),
             ])
             ->toolbarActions([

@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => 'Bans by reason',
         'top_matched_values' => 'Top matched values',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Ban details',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Extend',
+        'success' => 'Ban extended',
+        'form' => [
+            'duration' => 'Extend by',
+        ],
+        'options' => [
+            'hour' => '1 hour',
+            'day' => '1 day',
+            'week' => '1 week',
+            'month' => '1 month',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Purge expired',
+        'success' => 'Expired bans purged',
+    ],
 ];

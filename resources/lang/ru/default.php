@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => 'Баны по причине',
         'top_matched_values' => 'Топ совпавших значений',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Детали бана',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Продлить',
+        'success' => 'Бан продлён',
+        'form' => [
+            'duration' => 'Продлить на',
+        ],
+        'options' => [
+            'hour' => '1 час',
+            'day' => '1 день',
+            'week' => '1 неделю',
+            'month' => '1 месяц',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Удалить истёкшие',
+        'success' => 'Истёкшие баны удалены',
+    ],
 ];

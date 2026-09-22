@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => 'Səbəbə görə banlar',
         'top_matched_values' => 'Top uyğun dəyərlər',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Ban təfərrüatları',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Uzat',
+        'success' => 'Ban uzadıldı',
+        'form' => [
+            'duration' => 'Müddəti uzat',
+        ],
+        'options' => [
+            'hour' => '1 saat',
+            'day' => '1 gün',
+            'week' => '1 həftə',
+            'month' => '1 ay',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Vaxtı bitmişləri təmizlə',
+        'success' => 'Vaxtı bitmiş banlar təmizləndi',
+    ],
 ];

@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => 'Sabab boyicha bloklar',
         'top_matched_values' => 'Top mos qiymatlar',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Blok tafsilotlari',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Uzatish',
+        'success' => 'Blok uzaytirildi',
+        'form' => [
+            'duration' => 'Muddatni uzaytirish',
+        ],
+        'options' => [
+            'hour' => '1 soat',
+            'day' => '1 kun',
+            'week' => '1 hafta',
+            'month' => '1 oy',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Muddati otganlarni tozalash',
+        'success' => 'Muddati otgan bloklar tozalandi',
+    ],
 ];

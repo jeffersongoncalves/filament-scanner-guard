@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => 'Ban per motivo',
         'top_matched_values' => 'Principali valori corrispondenti',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Dettagli del ban',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Estendi',
+        'success' => 'Ban esteso',
+        'form' => [
+            'duration' => 'Estendi di',
+        ],
+        'options' => [
+            'hour' => '1 ora',
+            'day' => '1 giorno',
+            'week' => '1 settimana',
+            'month' => '1 mese',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Elimina scaduti',
+        'success' => 'Ban scaduti eliminati',
+    ],
 ];

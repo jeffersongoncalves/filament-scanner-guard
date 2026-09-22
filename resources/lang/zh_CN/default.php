@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => '按原因统计封禁',
         'top_matched_values' => '匹配值 TOP',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => '封禁详情',
+        ],
+    ],
+    'extend' => [
+        'label' => '延长',
+        'success' => '封禁已延长',
+        'form' => [
+            'duration' => '延长时长',
+        ],
+        'options' => [
+            'hour' => '1 小时',
+            'day' => '1 天',
+            'week' => '1 周',
+            'month' => '1 个月',
+        ],
+    ],
+    'purge' => [
+        'label' => '清理过期',
+        'success' => '过期封禁已清理',
+    ],
 ];

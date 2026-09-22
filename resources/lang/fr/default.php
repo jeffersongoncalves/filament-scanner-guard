@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => 'Bannissements par raison',
         'top_matched_values' => 'Principales valeurs correspondantes',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Détails du bannissement',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Prolonger',
+        'success' => 'Bannissement prolongé',
+        'form' => [
+            'duration' => 'Prolonger de',
+        ],
+        'options' => [
+            'hour' => '1 heure',
+            'day' => '1 jour',
+            'week' => '1 semaine',
+            'month' => '1 mois',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Purger les expirés',
+        'success' => 'Bannissements expirés purgés',
+    ],
 ];

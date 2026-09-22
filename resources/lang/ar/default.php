@@ -46,4 +46,26 @@ return [
         'bans_by_reason' => 'الحظر حسب السبب',
         'top_matched_values' => 'أعلى القيم المطابقة',
     ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'تفاصيل الحظر',
+        ],
+    ],
+    'extend' => [
+        'label' => 'تمديد',
+        'success' => 'تم تمديد الحظر',
+        'form' => [
+            'duration' => 'تمديد بمقدار',
+        ],
+        'options' => [
+            'hour' => 'ساعة واحدة',
+            'day' => 'يوم واحد',
+            'week' => 'أسبوع واحد',
+            'month' => 'شهر واحد',
+        ],
+    ],
+    'purge' => [
+        'label' => 'حذف المنتهية',
+        'success' => 'تم حذف الحظر المنتهي',
+    ],
 ];
