@@ -3,16 +3,23 @@
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources;
 
 use Closure;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ViewScannerGuardBan;
 use JeffersonGoncalves\FilamentExportAction\Actions\FilamentExportBulkAction;
 use JeffersonGoncalves\FilamentExportAction\Actions\FilamentExportHeaderAction;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
@@ -85,6 +92,8 @@ class ScannerGuardBanResource extends Resource
                     ->formatStates(static::exportFormatStates()),
             ])
             ->actions([
+                ViewAction::make(),
+                ExtendBanAction::make(),
                 UnbanAction::make(),
             ])
             ->bulkActions([
@@ -112,10 +121,53 @@ class ScannerGuardBanResource extends Resource
         ];
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make(__('filament-scanner-guard::default.infolist.sections.ban_details'))
+                    ->columns(2)
+                    ->schema([
+                        TextEntry::make('ip_hash')
+                            ->label(__('filament-scanner-guard::default.table.ip_hash'))
+                            ->copyable()
+                            ->fontFamily('mono'),
+                        TextEntry::make('reason')
+                            ->label(__('filament-scanner-guard::default.table.reason'))
+                            ->badge()
+                            ->formatStateUsing(fn (string $state): string => match ($state) {
+                                ScannerGuardBan::REASON_ASN => __('filament-scanner-guard::default.reason.asn_blocklist'),
+                                default => __('filament-scanner-guard::default.reason.scanner_path'),
+                            })
+                            ->color(fn (string $state): string => match ($state) {
+                                ScannerGuardBan::REASON_ASN => 'danger',
+                                default => 'warning',
+                            }),
+                        TextEntry::make('matched_value')
+                            ->label(__('filament-scanner-guard::default.table.matched_value'))
+                            ->copyable()
+                            ->columnSpanFull(),
+                        TextEntry::make('hit_count')
+                            ->label(__('filament-scanner-guard::default.table.hit_count'))
+                            ->numeric(),
+                        IconEntry::make('is_active')
+                            ->label(__('filament-scanner-guard::default.table.is_active'))
+                            ->boolean(),
+                        TextEntry::make('banned_at')
+                            ->label(__('filament-scanner-guard::default.table.banned_at'))
+                            ->dateTime(),
+                        TextEntry::make('expires_at')
+                            ->label(__('filament-scanner-guard::default.table.expires_at'))
+                            ->dateTime(),
+                    ]),
+            ]);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => ListScannerGuardBans::route('/'),
+            'view' => ViewScannerGuardBan::route('/{record}'),
         ];
     }
 
