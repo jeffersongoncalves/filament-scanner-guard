@@ -41,4 +41,31 @@ return [
         'bulk_label' => 'Desbloquear selecionados',
         'success' => 'Desbloqueado',
     ],
+    'charts' => [
+        'bans_per_day' => 'Bloqueios por dia (últimos 14 dias)',
+        'bans_by_reason' => 'Bloqueios por motivo',
+        'top_matched_values' => 'Principais valores correspondidos',
+    ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Detalhes do bloqueio',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Estender',
+        'success' => 'Bloqueio estendido',
+        'form' => [
+            'duration' => 'Estender por',
+        ],
+        'options' => [
+            'hour' => '1 hora',
+            'day' => '1 dia',
+            'week' => '1 semana',
+            'month' => '1 mês',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Limpar expirados',
+        'success' => 'Bloqueios expirados removidos',
+    ],
 ];

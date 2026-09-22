@@ -41,4 +41,31 @@ return [
         'bulk_label' => 'Tanlanganlarni blokdan chiqarish',
         'success' => 'Blokdan chiqarildi',
     ],
+    'charts' => [
+        'bans_per_day' => 'Kunlik blokirovkalar (soʻnggi 14 kun)',
+        'bans_by_reason' => 'Sabab boʻyicha blokirovkalar',
+        'top_matched_values' => 'Eng koʻp mos kelgan qiymatlar',
+    ],
+    'infolist' => [
+        'sections' => [
+            'ban_details' => 'Blokirovka tafsilotlari',
+        ],
+    ],
+    'extend' => [
+        'label' => 'Uzaytirish',
+        'success' => 'Blokirovka uzaytirildi',
+        'form' => [
+            'duration' => 'Uzaytirish muddati',
+        ],
+        'options' => [
+            'hour' => '1 soat',
+            'day' => '1 kun',
+            'week' => '1 hafta',
+            'month' => '1 oy',
+        ],
+    ],
+    'purge' => [
+        'label' => 'Muddati tugaganlarni tozalash',
+        'success' => 'Muddati tugagan blokirovkalar tozalandi',
+    ],
 ];
