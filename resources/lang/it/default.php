@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Ban attivi',
         'expired_bans' => 'Ban scaduti',
         'total_hits' => 'Rilevazioni totali',
+        'recent_bans' => 'Ban (ultimi :days giorni)',
     ],
     'table' => [
         'ip_hash' => 'Hash IP',
@@ -42,7 +43,7 @@ return [
         'success' => 'Sbannato',
     ],
     'charts' => [
-        'bans_per_day' => 'Ban al giorno (ultimi 14 giorni)',
+        'bans_per_day' => 'Ban al giorno (ultimi :days giorni)',
         'bans_by_reason' => 'Ban per motivo',
         'top_matched_values' => 'Principali valori corrispondenti',
     ],

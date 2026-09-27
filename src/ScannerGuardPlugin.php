@@ -11,6 +11,8 @@ class ScannerGuardPlugin implements Plugin
 {
     protected ?string $navigationGroup = null;
 
+    protected int $chartDays = 14;
+
     public function getId(): string
     {
         return 'filament-scanner-guard';
@@ -52,5 +54,17 @@ class ScannerGuardPlugin implements Plugin
     public function getNavigationGroup(): ?string
     {
         return $this->navigationGroup ?? __('filament-scanner-guard::default.navigation.group');
+    }
+
+    public function chartDays(int $days): static
+    {
+        $this->chartDays = max($days, 1);
+
+        return $this;
+    }
+
+    public function getChartDays(): int
+    {
+        return $this->chartDays;
     }
 }

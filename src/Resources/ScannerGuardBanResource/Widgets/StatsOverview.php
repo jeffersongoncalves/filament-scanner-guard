@@ -4,6 +4,8 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanReso
 
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
+use JeffersonGoncalves\ScannerGuard\Facades\ScannerGuard;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class StatsOverview extends BaseWidget
@@ -16,12 +18,15 @@ class StatsOverview extends BaseWidget
         $active = ScannerGuardBan::active()->count();
         $expired = $total - $active;
         $hits = (int) ScannerGuardBan::query()->sum('hit_count');
+        $days = ScannerGuardPlugin::get()->getChartDays();
+        $recent = (int) ScannerGuard::dailyStats($days)->sum('bans_count');
 
         return [
             Stat::make(__('filament-scanner-guard::default.stats.total_bans'), $total),
             Stat::make(__('filament-scanner-guard::default.stats.active_bans'), $active),
             Stat::make(__('filament-scanner-guard::default.stats.expired_bans'), $expired),
             Stat::make(__('filament-scanner-guard::default.stats.total_hits'), $hits),
+            Stat::make(__('filament-scanner-guard::default.stats.recent_bans', ['days' => $days]), $recent),
         ];
     }
 }
