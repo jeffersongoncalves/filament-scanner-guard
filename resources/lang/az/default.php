@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Aktiv Banlar',
         'expired_bans' => 'Vaxtı Bitmiş Banlar',
         'total_hits' => 'Cəmi Toxunuşlar',
+        'recent_bans' => 'Banlar (son :days gün)',
     ],
     'table' => [
         'ip_hash' => 'IP Heşi',
@@ -42,7 +43,7 @@ return [
         'success' => 'Bandan çıxarıldı',
     ],
     'charts' => [
-        'bans_per_day' => 'Günlük banlar (son 14 gün)',
+        'bans_per_day' => 'Günlük banlar (son :days gün)',
         'bans_by_reason' => 'Səbəbə görə banlar',
         'top_matched_values' => 'Top uyğun dəyərlər',
     ],

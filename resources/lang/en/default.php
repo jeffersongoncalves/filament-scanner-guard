@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Active Bans',
         'expired_bans' => 'Expired Bans',
         'total_hits' => 'Total Hits',
+        'recent_bans' => 'Bans (last :days days)',
     ],
     'table' => [
         'ip_hash' => 'IP Hash',
@@ -42,7 +43,7 @@ return [
         'success' => 'Unbanned',
     ],
     'charts' => [
-        'bans_per_day' => 'Bans per day (last 14 days)',
+        'bans_per_day' => 'Bans per day (last :days days)',
         'bans_by_reason' => 'Bans by reason',
         'top_matched_values' => 'Top matched values',
     ],

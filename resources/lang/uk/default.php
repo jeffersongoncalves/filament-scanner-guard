@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Активні заборони',
         'expired_bans' => 'Завершені заборони',
         'total_hits' => 'Усього спрацьовувань',
+        'recent_bans' => 'Заборони (останні :days днів)',
     ],
     'table' => [
         'ip_hash' => 'Хеш IP',
@@ -42,7 +43,7 @@ return [
         'success' => 'Розбанено',
     ],
     'charts' => [
-        'bans_per_day' => 'Заборони за днями (останні 14 днів)',
+        'bans_per_day' => 'Заборони за днями (останні :days днів)',
         'bans_by_reason' => 'Заборони за причиною',
         'top_matched_values' => 'Топ збіглих значень',
     ],
