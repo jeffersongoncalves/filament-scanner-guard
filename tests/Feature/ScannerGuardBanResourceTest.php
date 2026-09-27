@@ -4,11 +4,16 @@ use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Widgets\StatsOverview;
 use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
+use JeffersonGoncalves\ScannerGuard\Facades\ScannerGuard;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
-function createBan(array $overrides = []): ScannerGuardBan
+/**
+ * Mirrors ScannerGuard::ban(): stores the row and bumps its day's stats.
+ * Pass $countStats = false to simulate a ban recorded before ban-time counting.
+ */
+function createBan(array $overrides = [], bool $countStats = true): ScannerGuardBan
 {
-    return ScannerGuardBan::create(array_merge([
+    $ban = ScannerGuardBan::create(array_merge([
         'ip_hash' => hash('sha256', uniqid()),
         'reason' => ScannerGuardBan::REASON_SCANNER_PATH,
         'matched_value' => 'wp-admin/setup-config.php',
@@ -16,6 +21,17 @@ function createBan(array $overrides = []): ScannerGuardBan
         'banned_at' => now(),
         'expires_at' => now()->addDay(),
     ], $overrides));
+
+    if ($countStats) {
+        ScannerGuard::mergeDailyStats($ban->banned_at->toDateString(), [
+            'bans_count' => 1,
+            'hits_total' => $ban->hit_count,
+            'reason_stats' => [$ban->reason => 1],
+            'top_matched_values' => [$ban->matched_value => $ban->hit_count],
+        ], fn (int $a, int $b): int => $a + $b);
+    }
+
+    return $ban;
 }
 
 it('registers the resource in the plugin', function () {
@@ -78,5 +94,15 @@ it('reports ban stats on the metrics widget', function () {
     expect($stats[0]->getValue())->toBe(2)
         ->and($stats[1]->getValue())->toBe(1)
         ->and($stats[2]->getValue())->toBe(1)
-        ->and($stats[3]->getValue())->toBe(8);
+        ->and($stats[3]->getValue())->toBe(8)
+        ->and($stats[4]->getValue())->toBe(2);
+});
+
+it('keeps the recent bans stat after the rows are deleted', function () {
+    createBan(['banned_at' => now()->subDays(3)])->delete();
+    createBan(['banned_at' => now()->subDays(30)]);
+
+    $stats = (new ReflectionMethod(StatsOverview::class, 'getStats'))->invoke(new StatsOverview);
+
+    expect($stats[4]->getValue())->toBe(1);
 });

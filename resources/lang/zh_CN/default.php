@@ -16,6 +16,7 @@ return [
         'active_bans' => '生效禁令',
         'expired_bans' => '过期禁令',
         'total_hits' => '命中总数',
+        'recent_bans' => '封禁（最近:days天）',
     ],
     'table' => [
         'ip_hash' => 'IP 哈希',
@@ -42,7 +43,7 @@ return [
         'success' => '已解禁',
     ],
     'charts' => [
-        'bans_per_day' => '每日封禁（最近14天）',
+        'bans_per_day' => '每日封禁（最近:days天）',
         'bans_by_reason' => '按原因统计封禁',
         'top_matched_values' => '匹配值 TOP',
     ],

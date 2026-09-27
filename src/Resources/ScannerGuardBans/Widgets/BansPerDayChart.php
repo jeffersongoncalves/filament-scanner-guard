@@ -3,7 +3,9 @@
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
+use Illuminate\Support\Carbon;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
+use JeffersonGoncalves\ScannerGuard\Facades\ScannerGuard;
 
 class BansPerDayChart extends ChartWidget
 {
@@ -15,7 +17,9 @@ class BansPerDayChart extends ChartWidget
 
     public function getHeading(): ?string
     {
-        return $this->heading ?? __('filament-scanner-guard::default.charts.bans_per_day');
+        return $this->heading ?? __('filament-scanner-guard::default.charts.bans_per_day', [
+            'days' => ScannerGuardPlugin::get()->getChartDays(),
+        ]);
     }
 
     protected function getType(): string
@@ -25,32 +29,18 @@ class BansPerDayChart extends ChartWidget
 
     protected function getData(): array
     {
-        $days = 14;
-        $labels = [];
-        $values = [];
-        $today = now()->startOfDay();
-
-        $counts = ScannerGuardBan::query()
-            ->toBase()
-            ->where('banned_at', '>=', $today->copy()->subDays($days - 1))
-            ->selectRaw('DATE(banned_at) as day, count(*) as total')
-            ->groupByRaw('DATE(banned_at)')
-            ->pluck('total', 'day');
-
-        for ($i = $days - 1; $i >= 0; $i--) {
-            $date = $today->copy()->subDays($i);
-            $labels[] = $date->translatedFormat('M d');
-            $values[] = (int) ($counts[$date->format('Y-m-d')] ?? 0);
-        }
+        // Daily stats are counted at ban time, so purging or unbanning rows
+        // doesn't erase past days from the chart.
+        $stats = ScannerGuard::dailyStats(ScannerGuardPlugin::get()->getChartDays());
 
         return [
             'datasets' => [
                 [
-                    'label' => __('filament-scanner-guard::default.charts.bans_per_day'),
-                    'data' => $values,
+                    'label' => $this->getHeading(),
+                    'data' => $stats->pluck('bans_count')->all(),
                 ],
             ],
-            'labels' => $labels,
+            'labels' => $stats->map(fn (array $day): string => Carbon::parse($day['date'])->translatedFormat('M d'))->all(),
         ];
     }
 }

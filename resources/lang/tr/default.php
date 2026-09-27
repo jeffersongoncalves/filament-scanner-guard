@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Aktif Yasak',
         'expired_bans' => 'Süresi Dolmuş Yasak',
         'total_hits' => 'Toplam İsabet',
+        'recent_bans' => 'Yasaklar (son :days gün)',
     ],
     'table' => [
         'ip_hash' => 'IP Hash',
@@ -42,7 +43,7 @@ return [
         'success' => 'Yasak kaldırıldı',
     ],
     'charts' => [
-        'bans_per_day' => 'Günlük yasak (son 14 gün)',
+        'bans_per_day' => 'Günlük yasak (son :days gün)',
         'bans_by_reason' => 'Sebebe göre yasak',
         'top_matched_values' => 'En çok eşleşen değerler',
     ],

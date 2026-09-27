@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Faol blokirovkalar',
         'expired_bans' => 'Muddati tugagan blokirovkalar',
         'total_hits' => 'Jami murojaatlar',
+        'recent_bans' => 'Blokirovkalar (soʻnggi :days kun)',
     ],
     'table' => [
         'ip_hash' => 'IP xeshi',
@@ -42,7 +43,7 @@ return [
         'success' => 'Blokdan chiqarildi',
     ],
     'charts' => [
-        'bans_per_day' => 'Kunlik blokirovkalar (soʻnggi 14 kun)',
+        'bans_per_day' => 'Kunlik blokirovkalar (soʻnggi :days kun)',
         'bans_by_reason' => 'Sabab boʻyicha blokirovkalar',
         'top_matched_values' => 'Eng koʻp mos kelgan qiymatlar',
     ],
