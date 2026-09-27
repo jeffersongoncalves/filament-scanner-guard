@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Aktywne blokady',
         'expired_bans' => 'Wygasłe blokady',
         'total_hits' => 'Wszystkie trafienia',
+        'recent_bans' => 'Blokady (ostatnie :days dni)',
     ],
     'table' => [
         'ip_hash' => 'Hash IP',
@@ -42,7 +43,7 @@ return [
         'success' => 'Odblokowano',
     ],
     'charts' => [
-        'bans_per_day' => 'Blokady dziennie (ostatnie 14 dni)',
+        'bans_per_day' => 'Blokady dziennie (ostatnie :days dni)',
         'bans_by_reason' => 'Blokady według powodu',
         'top_matched_values' => 'Najczęstsze dopasowane wartości',
     ],

@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Aktive Sperren',
         'expired_bans' => 'Abgelaufene Sperren',
         'total_hits' => 'Treffer gesamt',
+        'recent_bans' => 'Sperren (letzte :days Tage)',
     ],
     'table' => [
         'ip_hash' => 'IP-Hash',
@@ -42,7 +43,7 @@ return [
         'success' => 'Entsperrt',
     ],
     'charts' => [
-        'bans_per_day' => 'Sperren pro Tag (letzte 14 Tage)',
+        'bans_per_day' => 'Sperren pro Tag (letzte :days Tage)',
         'bans_by_reason' => 'Sperren nach Grund',
         'top_matched_values' => 'Top übereinstimmende Werte',
     ],

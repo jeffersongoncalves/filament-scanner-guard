@@ -16,6 +16,7 @@ return [
         'active_bans' => 'الحظر النشط',
         'expired_bans' => 'الحظر المنتهي',
         'total_hits' => 'إجمالي الإصابات',
+        'recent_bans' => 'الحظر (آخر :days يومًا)',
     ],
     'table' => [
         'ip_hash' => 'بصمة IP',
@@ -42,7 +43,7 @@ return [
         'success' => 'تم إلغاء الحظر',
     ],
     'charts' => [
-        'bans_per_day' => 'الحظر اليومي (آخر 14 يومًا)',
+        'bans_per_day' => 'الحظر اليومي (آخر :days يومًا)',
         'bans_by_reason' => 'الحظر حسب السبب',
         'top_matched_values' => 'أعلى القيم المطابقة',
     ],

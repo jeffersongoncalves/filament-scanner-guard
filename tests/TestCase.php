@@ -67,10 +67,12 @@ abstract class TestCase extends Orchestra
             mkdir($tempPath, 0755, true);
         }
 
-        copy(
-            __DIR__.'/../vendor/jeffersongoncalves/laravel-scanner-guard/database/migrations/create_scanner_guard_bans_table.php.stub',
-            $tempPath.'/0001_01_01_000000_create_scanner_guard_bans_table.php'
-        );
+        foreach (['create_scanner_guard_bans_table', 'create_scanner_guard_ban_daily_stats_table'] as $i => $migration) {
+            copy(
+                __DIR__."/../vendor/jeffersongoncalves/laravel-scanner-guard/database/migrations/{$migration}.php.stub",
+                $tempPath."/0001_01_01_00000{$i}_{$migration}.php"
+            );
+        }
 
         $this->loadMigrationsFrom($tempPath);
     }
