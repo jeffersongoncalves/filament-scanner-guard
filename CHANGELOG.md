@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.0 - 2026-09-27
+
+### What's Changed
+
+* build(deps): bump the actions-deps group with 2 updates by @dependabot[bot] in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/14
+* build(deps-dev): update orchestra/testbench requirement from ^10.0 to ^10.0 || ^11.0 in the composer-deps group by @dependabot[bot] in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/16
+* ci: standardize tests workflow (1.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/17
+* ci: standardize tests workflow (1.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/20
+* fix: keep bans-per-day chart history after purge/unban (1.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/26
+
+**Full Changelog**: https://github.com/jeffersongoncalves/filament-scanner-guard/compare/1.1.0...1.2.0
+
 ## 1.1.0 - 2026-09-22
 
 ### What's new (Filament v3)
