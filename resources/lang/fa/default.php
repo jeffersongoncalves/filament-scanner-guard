@@ -16,6 +16,7 @@ return [
         'active_bans' => 'مسدودیت‌های فعال',
         'expired_bans' => 'مسدودیت‌های منقضی‌شده',
         'total_hits' => 'کل برخوردها',
+        'recent_bans' => 'مسدودیت‌ها (:days روز اخیر)',
     ],
     'table' => [
         'ip_hash' => 'هش IP',
@@ -42,7 +43,7 @@ return [
         'success' => 'رفع مسدودیت شد',
     ],
     'charts' => [
-        'bans_per_day' => 'مسدودیت روزانه (۱۴ روز اخیر)',
+        'bans_per_day' => 'مسدودیت روزانه (:days روز اخیر)',
         'bans_by_reason' => 'مسدودیت بر اساس دلیل',
         'top_matched_values' => 'برترین مقادیر منطبق',
     ],

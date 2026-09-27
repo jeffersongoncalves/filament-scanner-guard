@@ -25,7 +25,7 @@
         "php": "^8.3",
         "filament/filament": "^4.0",
         "jeffersongoncalves/filament-action-export": "^2.7",
-        "jeffersongoncalves/laravel-scanner-guard": "^1.0",
+        "jeffersongoncalves/laravel-scanner-guard": "^1.2",
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {

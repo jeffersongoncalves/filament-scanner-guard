@@ -16,6 +16,7 @@ return [
         'active_bans' => '有効な BAN',
         'expired_bans' => '期限切れ BAN',
         'total_hits' => 'ヒット合計',
+        'recent_bans' => 'BAN（直近:days日）',
     ],
     'table' => [
         'ip_hash' => 'IP ハッシュ',
@@ -42,7 +43,7 @@ return [
         'success' => 'BAN を解除しました',
     ],
     'charts' => [
-        'bans_per_day' => '日別 BAN（直近14日）',
+        'bans_per_day' => '日別 BAN（直近:days日）',
         'bans_by_reason' => '理由別 BAN',
         'top_matched_values' => '一致値トップ',
     ],

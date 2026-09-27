@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Активные баны',
         'expired_bans' => 'Истёкшие баны',
         'total_hits' => 'Всего срабатываний',
+        'recent_bans' => 'Баны (последние :days дней)',
     ],
     'table' => [
         'ip_hash' => 'Хеш IP',
@@ -42,7 +43,7 @@ return [
         'success' => 'Разбанен',
     ],
     'charts' => [
-        'bans_per_day' => 'Баны по дням (последние 14 дней)',
+        'bans_per_day' => 'Баны по дням (последние :days дней)',
         'bans_by_reason' => 'Баны по причине',
         'top_matched_values' => 'Топ совпавших значений',
     ],

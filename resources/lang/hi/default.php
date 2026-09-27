@@ -16,6 +16,7 @@ return [
         'active_bans' => 'सक्रिय प्रतिबंध',
         'expired_bans' => 'समाप्त प्रतिबंध',
         'total_hits' => 'कुल हिट्स',
+        'recent_bans' => 'प्रतिबंध (पिछले :days दिन)',
     ],
     'table' => [
         'ip_hash' => 'IP हैश',
@@ -42,7 +43,7 @@ return [
         'success' => 'प्रतिबंध हटाया गया',
     ],
     'charts' => [
-        'bans_per_day' => 'प्रतिदिन प्रतिबंध (पिछले 14 दिन)',
+        'bans_per_day' => 'प्रतिदिन प्रतिबंध (पिछले :days दिन)',
         'bans_by_reason' => 'कारण अनुसार प्रतिबंध',
         'top_matched_values' => 'शीर्ष मिलान मान',
     ],
