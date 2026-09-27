@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.0 - 2026-09-27
+
+### What's Changed
+
+* ci: standardize dependabot config by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/13
+* ci: standardize tests workflow (3.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/19
+* ci: standardize tests workflow (3.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/22
+* fix: keep bans-per-day chart history after purge/unban (3.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/24
+
+**Full Changelog**: https://github.com/jeffersongoncalves/filament-scanner-guard/compare/3.1.0...3.2.0
+
 ## 3.1.0 - 2026-09-22
 
 ### What's new (Filament v5)
