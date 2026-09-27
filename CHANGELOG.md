@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.2.0 - 2026-09-27
+
+### What's Changed
+
+* build(deps): bump the actions-deps group with 2 updates by @dependabot[bot] in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/15
+* ci: standardize tests workflow (2.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/18
+* ci: standardize tests workflow (2.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/21
+* fix: keep bans-per-day chart history after purge/unban (2.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/25
+
+**Full Changelog**: https://github.com/jeffersongoncalves/filament-scanner-guard/compare/2.1.0...2.2.0
+
 ## 2.1.0 - 2026-09-22
 
 ### What's new (Filament v4)
