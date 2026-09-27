@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Actieve bans',
         'expired_bans' => 'Verlopen bans',
         'total_hits' => 'Totaal aantal hits',
+        'recent_bans' => 'Bans (laatste :days dagen)',
     ],
     'table' => [
         'ip_hash' => 'IP-hash',
@@ -42,7 +43,7 @@ return [
         'success' => 'Gedeblokkeerd',
     ],
     'charts' => [
-        'bans_per_day' => 'Bans per dag (laatste 14 dagen)',
+        'bans_per_day' => 'Bans per dag (laatste :days dagen)',
         'bans_by_reason' => 'Bans per reden',
         'top_matched_values' => 'Top overeenkomende waarden',
     ],

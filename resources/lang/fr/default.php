@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Bannissements actifs',
         'expired_bans' => 'Bannissements expirés',
         'total_hits' => 'Frappes totales',
+        'recent_bans' => 'Bannissements (:days derniers jours)',
     ],
     'table' => [
         'ip_hash' => 'Hash IP',
@@ -42,7 +43,7 @@ return [
         'success' => 'Débanni',
     ],
     'charts' => [
-        'bans_per_day' => 'Bannissements par jour (14 derniers jours)',
+        'bans_per_day' => 'Bannissements par jour (:days derniers jours)',
         'bans_by_reason' => 'Bannissements par raison',
         'top_matched_values' => 'Principales valeurs correspondantes',
     ],

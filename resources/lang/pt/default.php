@@ -16,6 +16,7 @@ return [
         'active_bans' => 'Bloqueios Ativos',
         'expired_bans' => 'Bloqueios Expirados',
         'total_hits' => 'Total de Ocorrências',
+        'recent_bans' => 'Bloqueios (últimos :days dias)',
     ],
     'table' => [
         'ip_hash' => 'Hash do IP',
@@ -42,7 +43,7 @@ return [
         'success' => 'Desbloqueado',
     ],
     'charts' => [
-        'bans_per_day' => 'Bloqueios por dia (últimos 14 dias)',
+        'bans_per_day' => 'Bloqueios por dia (últimos :days dias)',
         'bans_by_reason' => 'Bloqueios por motivo',
         'top_matched_values' => 'Principais valores correspondidos',
     ],
