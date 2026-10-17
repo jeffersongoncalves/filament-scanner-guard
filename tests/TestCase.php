@@ -16,6 +16,7 @@ use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardServiceProvider;
 use JeffersonGoncalves\Filament\ScannerGuard\Tests\Fixtures\TestPanelProvider;
+use JeffersonGoncalves\PestPluginDatabaseMigrations\LoadsPackageMigrations;
 use JeffersonGoncalves\ScannerGuard\ScannerGuardServiceProvider as LaravelScannerGuardServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -23,6 +24,7 @@ use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
+    use LoadsPackageMigrations;
     use RefreshDatabase;
 
     protected function getPackageProviders($app): array
@@ -61,22 +63,6 @@ abstract class TestCase extends Orchestra
 
     protected function defineDatabaseMigrations(): void
     {
-        // laravel-scanner-guard ships its migration as a .stub (not auto-run
-        // by package-tools without ->runsMigrations()), so copy it to a real
-        // migration file the same way its own test suite does.
-        $tempPath = sys_get_temp_dir().'/filament-scanner-guard-migrations';
-
-        if (! is_dir($tempPath)) {
-            mkdir($tempPath, 0755, true);
-        }
-
-        foreach (['create_scanner_guard_bans_table', 'create_scanner_guard_ban_daily_stats_table'] as $i => $migration) {
-            copy(
-                __DIR__."/../vendor/jeffersongoncalves/laravel-scanner-guard/database/migrations/{$migration}.php.stub",
-                $tempPath."/0001_01_01_00000{$i}_{$migration}.php"
-            );
-        }
-
-        $this->loadMigrationsFrom($tempPath);
+        $this->loadPackageMigrations(LaravelScannerGuardServiceProvider::class);
     }
 }
