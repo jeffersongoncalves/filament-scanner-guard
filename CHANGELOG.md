@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.3.0 - 2026-10-28
+
+### What's Changed
+
+* ci: auto-merge dependabot github-actions minor/patch by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/29
+* build(deps): bump shivammathur/setup-php from 2.37.2 to 2.40.0 in the actions-deps group by @dependabot[bot] in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/31
+* feat: support laravel-scanner-guard 1.5 (3.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/33
+
+**Full Changelog**: https://github.com/jeffersongoncalves/filament-scanner-guard/compare/3.2.0...3.3.0
+
 ## 3.2.0 - 2026-09-27
 
 ### What's Changed
