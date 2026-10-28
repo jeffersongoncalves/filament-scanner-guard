@@ -6,7 +6,8 @@ use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Tables\ScannerGuardBansTable;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 
 class ScannerGuardBanInfolist
 {
@@ -24,14 +25,8 @@ class ScannerGuardBanInfolist
                         TextEntry::make('reason')
                             ->label(__('filament-scanner-guard::default.table.reason'))
                             ->badge()
-                            ->formatStateUsing(fn (string $state): string => match ($state) {
-                                ScannerGuardBan::REASON_ASN => __('filament-scanner-guard::default.reason.asn_blocklist'),
-                                default => __('filament-scanner-guard::default.reason.scanner_path'),
-                            })
-                            ->color(fn (string $state): string => match ($state) {
-                                ScannerGuardBan::REASON_ASN => 'danger',
-                                default => 'warning',
-                            }),
+                            ->formatStateUsing(fn (string $state): string => ScannerGuardBansTable::reasonLabel($state))
+                            ->color(fn (string $state): string => ScannerGuardBansTable::reasonColor($state)),
                         TextEntry::make('matched_value')
                             ->label(__('filament-scanner-guard::default.table.matched_value'))
                             ->copyable()
@@ -39,6 +34,12 @@ class ScannerGuardBanInfolist
                         TextEntry::make('hit_count')
                             ->label(__('filament-scanner-guard::default.table.hit_count'))
                             ->numeric(),
+                        TextEntry::make('offense')
+                            ->label(__('filament-scanner-guard::default.table.offense'))
+                            ->badge()
+                            ->color(fn (int $state): string => $state > 1 ? 'danger' : 'gray')
+                            ->placeholder('—')
+                            ->visible(fn (): bool => ScannerGuardPlugin::escalationEnabled()),
                         IconEntry::make('is_active')
                             ->label(__('filament-scanner-guard::default.table.is_active'))
                             ->boolean(),

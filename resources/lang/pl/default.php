@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Wygasłe blokady',
         'total_hits' => 'Wszystkie trafienia',
         'recent_bans' => 'Blokady (ostatnie :days dni)',
+        'repeat_offenders' => 'Aktywni recydywiści',
     ],
     'table' => [
         'ip_hash' => 'Hash IP',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Zablokowano',
         'expires_at' => 'Wygasa',
         'is_active' => 'Aktywna',
+        'offense' => 'Wykroczenie',
     ],
     'reason' => [
         'scanner_path' => 'Ścieżka skanera',
         'asn_blocklist' => 'Czarna lista ASN',
+        'not_found_flood' => 'Zalew 404',
     ],
     'filter' => [
         'label' => 'Status',
         'placeholder' => 'Wszystkie',
         'true_label' => 'Aktywne',
         'false_label' => 'Wygasłe',
+        'repeat_offenders' => 'Recydywiści',
     ],
     'unban' => [
         'label' => 'Odblokuj',

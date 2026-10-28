@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Истёкшие баны',
         'total_hits' => 'Всего срабатываний',
         'recent_bans' => 'Баны (последние :days дней)',
+        'repeat_offenders' => 'Активные повторные нарушители',
     ],
     'table' => [
         'ip_hash' => 'Хеш IP',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Забанен',
         'expires_at' => 'Истекает',
         'is_active' => 'Активен',
+        'offense' => 'Нарушение',
     ],
     'reason' => [
         'scanner_path' => 'Путь сканера',
         'asn_blocklist' => 'Блок-лист ASN',
+        'not_found_flood' => 'Флуд 404',
     ],
     'filter' => [
         'label' => 'Статус',
         'placeholder' => 'Все',
         'true_label' => 'Активные',
         'false_label' => 'Истёкшие',
+        'repeat_offenders' => 'Повторные нарушители',
     ],
     'unban' => [
         'label' => 'Разбанить',

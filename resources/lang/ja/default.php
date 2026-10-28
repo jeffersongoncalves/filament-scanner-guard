@@ -17,6 +17,7 @@ return [
         'expired_bans' => '期限切れ BAN',
         'total_hits' => 'ヒット合計',
         'recent_bans' => 'BAN（直近:days日）',
+        'repeat_offenders' => 'アクティブな再犯',
     ],
     'table' => [
         'ip_hash' => 'IP ハッシュ',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'BAN 日時',
         'expires_at' => '有効期限',
         'is_active' => '有効',
+        'offense' => '違反回数',
     ],
     'reason' => [
         'scanner_path' => 'スキャナーパス',
         'asn_blocklist' => 'ASN ブロックリスト',
+        'not_found_flood' => '404 フラッド',
     ],
     'filter' => [
         'label' => 'ステータス',
         'placeholder' => 'すべて',
         'true_label' => '有効',
         'false_label' => '期限切れ',
+        'repeat_offenders' => '再犯',
     ],
     'unban' => [
         'label' => 'BAN 解除',

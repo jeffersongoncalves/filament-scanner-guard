@@ -21,12 +21,21 @@ class StatsOverview extends BaseWidget
         $days = ScannerGuardPlugin::get()->getChartDays();
         $recent = (int) ScannerGuard::dailyStats($days)->sum('bans_count');
 
-        return [
+        $stats = [
             Stat::make(__('filament-scanner-guard::default.stats.total_bans'), $total),
             Stat::make(__('filament-scanner-guard::default.stats.active_bans'), $active),
             Stat::make(__('filament-scanner-guard::default.stats.expired_bans'), $expired),
             Stat::make(__('filament-scanner-guard::default.stats.total_hits'), $hits),
             Stat::make(__('filament-scanner-guard::default.stats.recent_bans', ['days' => $days]), $recent),
         ];
+
+        if (ScannerGuardPlugin::escalationEnabled()) {
+            $stats[] = Stat::make(
+                __('filament-scanner-guard::default.stats.repeat_offenders'),
+                ScannerGuardBan::active()->where('offense', '>', 1)->distinct()->count('ip_hash'),
+            );
+        }
+
+        return $stats;
     }
 }
