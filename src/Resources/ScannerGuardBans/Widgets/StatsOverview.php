@@ -32,7 +32,7 @@ class StatsOverview extends BaseWidget
         if (ScannerGuardPlugin::escalationEnabled()) {
             $stats[] = Stat::make(
                 __('filament-scanner-guard::default.stats.repeat_offenders'),
-                ScannerGuardBan::active()->where('offense', '>', 1)->count(),
+                ScannerGuardBan::active()->where('offense', '>', 1)->distinct()->count('ip_hash'),
             );
         }
 
