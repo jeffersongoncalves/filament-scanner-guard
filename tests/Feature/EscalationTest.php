@@ -40,6 +40,8 @@ it('shows offenses and filters repeat offenders with escalation on', function ()
 
     $first = createBan(['offense' => 1]);
     $repeat = createBan(['offense' => 3]);
+    // Same IP banned twice (e.g. via two satellites): one offender, not two.
+    createBan(['offense' => 2, 'ip_hash' => $repeat->ip_hash]);
     createBan(['offense' => 2, 'expires_at' => now()->subDay()]);
 
     Livewire::test(ListScannerGuardBans::class)
