@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'الحظر المنتهي',
         'total_hits' => 'إجمالي الإصابات',
         'recent_bans' => 'الحظر (آخر :days يومًا)',
+        'repeat_offenders' => 'المخالفون المتكررون النشطون',
     ],
     'table' => [
         'ip_hash' => 'بصمة IP',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'تاريخ الحظر',
         'expires_at' => 'تاريخ الانتهاء',
         'is_active' => 'نشط',
+        'offense' => 'المخالفة',
     ],
     'reason' => [
         'scanner_path' => 'مسار الفحص',
         'asn_blocklist' => 'قائمة حظر ASN',
+        'not_found_flood' => 'فيض 404',
     ],
     'filter' => [
         'label' => 'الحالة',
         'placeholder' => 'الكل',
         'true_label' => 'نشط',
         'false_label' => 'منتهي',
+        'repeat_offenders' => 'المخالفون المتكررون',
     ],
     'unban' => [
         'label' => 'إلغاء الحظر',

@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Vaxtı Bitmiş Banlar',
         'total_hits' => 'Cəmi Toxunuşlar',
         'recent_bans' => 'Banlar (son :days gün)',
+        'repeat_offenders' => 'Aktiv təkrar pozucular',
     ],
     'table' => [
         'ip_hash' => 'IP Heşi',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Ban Tarixi',
         'expires_at' => 'Bitmə Tarixi',
         'is_active' => 'Aktiv',
+        'offense' => 'Pozuntu',
     ],
     'reason' => [
         'scanner_path' => 'Skaner Yolu',
         'asn_blocklist' => 'ASN Qara Siyahısı',
+        'not_found_flood' => '404 axını',
     ],
     'filter' => [
         'label' => 'Status',
         'placeholder' => 'Hamısı',
         'true_label' => 'Aktiv',
         'false_label' => 'Vaxtı bitmiş',
+        'repeat_offenders' => 'Təkrar pozucular',
     ],
     'unban' => [
         'label' => 'Bandan çıxar',

@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Expired Bans',
         'total_hits' => 'Total Hits',
         'recent_bans' => 'Bans (last :days days)',
+        'repeat_offenders' => 'Active Repeat Offenders',
     ],
     'table' => [
         'ip_hash' => 'IP Hash',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Banned At',
         'expires_at' => 'Expires At',
         'is_active' => 'Active',
+        'offense' => 'Offense',
     ],
     'reason' => [
         'scanner_path' => 'Scanner Path',
         'asn_blocklist' => 'ASN Blocklist',
+        'not_found_flood' => '404 Flood',
     ],
     'filter' => [
         'label' => 'Status',
         'placeholder' => 'All',
         'true_label' => 'Active',
         'false_label' => 'Expired',
+        'repeat_offenders' => 'Repeat offenders',
     ],
     'unban' => [
         'label' => 'Unban',

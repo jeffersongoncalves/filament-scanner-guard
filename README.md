@@ -54,7 +54,7 @@ public function panel(Panel $panel): Panel
 
 This registers a **Scanner Guard Bans** resource (list only — rows are written by the `scanner-guard` middleware, not by admins) and a **Metrics** page, with:
 
-- Columns: `ip_hash`, `reason` (badge), `matched_value`, `hit_count`, `banned_at`, `expires_at`, `is_active`
+- Columns: `ip_hash`, `reason` (badge), `matched_value`, `hit_count`, `offense` (escalation only), `banned_at`, `expires_at`, `is_active`
 - A **Status** filter (active vs expired)
 - An **Unban** row action and an **Unban selected** bulk action — both delete the ban row (this is an audit-trail model, not a flag on an arbitrary model)
 - An **Export** header action and an **Export** bulk action (CSV, XLSX, PDF with preview) via [`jeffersongoncalves/filament-action-export`](https://github.com/jeffersongoncalves/filament-action-export) — synchronous, no queue or migrations needed; `matched_value` is exported in full with spreadsheet formulas neutralised
@@ -71,6 +71,21 @@ ScannerGuardPlugin::make()
     ->navigationGroup('Security')
     ->chartDays(30);
 ```
+
+Reasons shown: scanner path, ASN blocklist and 404 flood (`not_found_flood`, core 1.4+).
+
+The resource and the Metrics page are only registered with the core's `database` driver (`scanner-guard.driver`). The `cache` and `http` drivers keep no ban rows, so on those apps the plugin registers nothing — install it on the central app instead.
+
+### Escalating bans
+
+When the core's `scanner-guard.escalation` ladder is set (core 1.5+, run its `add_offense` migration), the plugin also shows:
+
+- An **Offense** column (badge, sortable, toggleable) and entry on the View page — `1` is a first offense, higher means repeat
+- A **Repeat offenders** filter (`offense > 1`)
+- An **Active repeat offenders** stat on the Metrics page
+- The **Extend** action pre-selects the duration the IP's next offense would get, and lists every ladder step as an option
+
+With escalation off (the default) none of this is shown.
 
 ### Using the actions standalone
 

@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Muddati tugagan blokirovkalar',
         'total_hits' => 'Jami murojaatlar',
         'recent_bans' => 'Blokirovkalar (soʻnggi :days kun)',
+        'repeat_offenders' => 'Faol takroriy qoidabuzarlar',
     ],
     'table' => [
         'ip_hash' => 'IP xeshi',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Bloklangan sana',
         'expires_at' => 'Tugash sanasi',
         'is_active' => 'Faol',
+        'offense' => 'Qoidabuzarlik',
     ],
     'reason' => [
         'scanner_path' => 'Skaner yoʻli',
         'asn_blocklist' => 'ASN qora roʻyxati',
+        'not_found_flood' => '404 toshqini',
     ],
     'filter' => [
         'label' => 'Holat',
         'placeholder' => 'Barchasi',
         'true_label' => 'Faol',
         'false_label' => 'Muddati tugagan',
+        'repeat_offenders' => 'Takroriy qoidabuzarlar',
     ],
     'unban' => [
         'label' => 'Blokdan chiqarish',

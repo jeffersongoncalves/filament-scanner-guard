@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'مسدودیت‌های منقضی‌شده',
         'total_hits' => 'کل برخوردها',
         'recent_bans' => 'مسدودیت‌ها (:days روز اخیر)',
+        'repeat_offenders' => 'متخلفان تکراری فعال',
     ],
     'table' => [
         'ip_hash' => 'هش IP',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'مسدود شده در',
         'expires_at' => 'منقضی می‌شود در',
         'is_active' => 'فعال',
+        'offense' => 'تخلف',
     ],
     'reason' => [
         'scanner_path' => 'مسیر اسکنر',
         'asn_blocklist' => 'لیست سیاه ASN',
+        'not_found_flood' => 'سیل 404',
     ],
     'filter' => [
         'label' => 'وضعیت',
         'placeholder' => 'همه',
         'true_label' => 'فعال',
         'false_label' => 'منقضی‌شده',
+        'repeat_offenders' => 'متخلفان تکراری',
     ],
     'unban' => [
         'label' => 'رفع مسدودیت',

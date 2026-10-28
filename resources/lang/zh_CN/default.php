@@ -17,6 +17,7 @@ return [
         'expired_bans' => '过期禁令',
         'total_hits' => '命中总数',
         'recent_bans' => '封禁（最近:days天）',
+        'repeat_offenders' => '活跃的重复违规者',
     ],
     'table' => [
         'ip_hash' => 'IP 哈希',
@@ -26,16 +27,19 @@ return [
         'banned_at' => '封禁时间',
         'expires_at' => '到期时间',
         'is_active' => '生效中',
+        'offense' => '违规次数',
     ],
     'reason' => [
         'scanner_path' => '扫描器路径',
         'asn_blocklist' => 'ASN 黑名单',
+        'not_found_flood' => '404 洪泛',
     ],
     'filter' => [
         'label' => '状态',
         'placeholder' => '全部',
         'true_label' => '生效中',
         'false_label' => '已过期',
+        'repeat_offenders' => '重复违规者',
     ],
     'unban' => [
         'label' => '解禁',
