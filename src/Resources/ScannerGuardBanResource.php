@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,6 +21,7 @@ use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ViewScannerGuardBan;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\FilamentExportAction\Actions\FilamentExportBulkAction;
 use JeffersonGoncalves\FilamentExportAction\Actions\FilamentExportHeaderAction;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
@@ -46,14 +48,8 @@ class ScannerGuardBanResource extends Resource
                 TextColumn::make('reason')
                     ->label(__('filament-scanner-guard::default.table.reason'))
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
-                        ScannerGuardBan::REASON_ASN => __('filament-scanner-guard::default.reason.asn_blocklist'),
-                        default => __('filament-scanner-guard::default.reason.scanner_path'),
-                    })
-                    ->color(fn (string $state): string => match ($state) {
-                        ScannerGuardBan::REASON_ASN => 'danger',
-                        default => 'warning',
-                    }),
+                    ->formatStateUsing(fn (string $state): string => static::reasonLabel($state))
+                    ->color(fn (string $state): string => static::reasonColor($state)),
                 TextColumn::make('matched_value')
                     ->label(__('filament-scanner-guard::default.table.matched_value'))
                     ->searchable()
@@ -62,6 +58,14 @@ class ScannerGuardBanResource extends Resource
                     ->label(__('filament-scanner-guard::default.table.hit_count'))
                     ->numeric()
                     ->sortable(),
+                TextColumn::make('offense')
+                    ->label(__('filament-scanner-guard::default.table.offense'))
+                    ->badge()
+                    ->color(fn (int $state): string => $state > 1 ? 'danger' : 'gray')
+                    ->placeholder('—')
+                    ->sortable()
+                    ->toggleable()
+                    ->visible(fn (): bool => ScannerGuardPlugin::escalationEnabled()),
                 TextColumn::make('banned_at')
                     ->label(__('filament-scanner-guard::default.table.banned_at'))
                     ->dateTime()
@@ -86,6 +90,11 @@ class ScannerGuardBanResource extends Resource
                         false: fn (Builder $query): Builder => $query->where('expires_at', '<=', now()),
                         blank: fn (Builder $query): Builder => $query,
                     ),
+                Filter::make('repeat_offenders')
+                    ->label(__('filament-scanner-guard::default.filter.repeat_offenders'))
+                    ->toggle()
+                    ->query(fn (Builder $query): Builder => $query->where('offense', '>', 1))
+                    ->visible(fn (): bool => ScannerGuardPlugin::escalationEnabled()),
             ])
             ->headerActions([
                 FilamentExportHeaderAction::make('export')
@@ -101,6 +110,24 @@ class ScannerGuardBanResource extends Resource
                     ->formatStates(static::exportFormatStates()),
                 UnbanBulkAction::make(),
             ]);
+    }
+
+    public static function reasonLabel(string $reason): string
+    {
+        return match ($reason) {
+            ScannerGuardBan::REASON_ASN => __('filament-scanner-guard::default.reason.asn_blocklist'),
+            ScannerGuardBan::REASON_NOT_FOUND_FLOOD => __('filament-scanner-guard::default.reason.not_found_flood'),
+            default => __('filament-scanner-guard::default.reason.scanner_path'),
+        };
+    }
+
+    public static function reasonColor(string $reason): string
+    {
+        return match ($reason) {
+            ScannerGuardBan::REASON_ASN => 'danger',
+            ScannerGuardBan::REASON_NOT_FOUND_FLOOD => 'info',
+            default => 'warning',
+        };
     }
 
     /**
@@ -135,14 +162,8 @@ class ScannerGuardBanResource extends Resource
                         TextEntry::make('reason')
                             ->label(__('filament-scanner-guard::default.table.reason'))
                             ->badge()
-                            ->formatStateUsing(fn (string $state): string => match ($state) {
-                                ScannerGuardBan::REASON_ASN => __('filament-scanner-guard::default.reason.asn_blocklist'),
-                                default => __('filament-scanner-guard::default.reason.scanner_path'),
-                            })
-                            ->color(fn (string $state): string => match ($state) {
-                                ScannerGuardBan::REASON_ASN => 'danger',
-                                default => 'warning',
-                            }),
+                            ->formatStateUsing(fn (string $state): string => static::reasonLabel($state))
+                            ->color(fn (string $state): string => static::reasonColor($state)),
                         TextEntry::make('matched_value')
                             ->label(__('filament-scanner-guard::default.table.matched_value'))
                             ->copyable()
@@ -150,6 +171,12 @@ class ScannerGuardBanResource extends Resource
                         TextEntry::make('hit_count')
                             ->label(__('filament-scanner-guard::default.table.hit_count'))
                             ->numeric(),
+                        TextEntry::make('offense')
+                            ->label(__('filament-scanner-guard::default.table.offense'))
+                            ->badge()
+                            ->color(fn (int $state): string => $state > 1 ? 'danger' : 'gray')
+                            ->placeholder('—')
+                            ->visible(fn (): bool => ScannerGuardPlugin::escalationEnabled()),
                         IconEntry::make('is_active')
                             ->label(__('filament-scanner-guard::default.table.is_active'))
                             ->boolean(),

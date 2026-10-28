@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Завершені заборони',
         'total_hits' => 'Усього спрацьовувань',
         'recent_bans' => 'Заборони (останні :days днів)',
+        'repeat_offenders' => 'Активні повторні порушники',
     ],
     'table' => [
         'ip_hash' => 'Хеш IP',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Заборонено',
         'expires_at' => 'Закінчується',
         'is_active' => 'Активно',
+        'offense' => 'Порушення',
     ],
     'reason' => [
         'scanner_path' => 'Шлях сканера',
         'asn_blocklist' => 'Блок-лист ASN',
+        'not_found_flood' => 'Флуд 404',
     ],
     'filter' => [
         'label' => 'Статус',
         'placeholder' => 'Усі',
         'true_label' => 'Активні',
         'false_label' => 'Завершені',
+        'repeat_offenders' => 'Повторні порушники',
     ],
     'unban' => [
         'label' => 'Розбанити',

@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Verlopen bans',
         'total_hits' => 'Totaal aantal hits',
         'recent_bans' => 'Bans (laatste :days dagen)',
+        'repeat_offenders' => 'Actieve herhaalde overtreders',
     ],
     'table' => [
         'ip_hash' => 'IP-hash',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Verbannen op',
         'expires_at' => 'Verloopt op',
         'is_active' => 'Actief',
+        'offense' => 'Overtreding',
     ],
     'reason' => [
         'scanner_path' => 'Scannerpad',
         'asn_blocklist' => 'ASN-blokkadelĳst',
+        'not_found_flood' => '404-vloed',
     ],
     'filter' => [
         'label' => 'Status',
         'placeholder' => 'Alle',
         'true_label' => 'Actief',
         'false_label' => 'Verlopen',
+        'repeat_offenders' => 'Herhaalde overtreders',
     ],
     'unban' => [
         'label' => 'Deblokkeer',

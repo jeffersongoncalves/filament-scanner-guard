@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Abgelaufene Sperren',
         'total_hits' => 'Treffer gesamt',
         'recent_bans' => 'Sperren (letzte :days Tage)',
+        'repeat_offenders' => 'Aktive Wiederholungstäter',
     ],
     'table' => [
         'ip_hash' => 'IP-Hash',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Gesperrt am',
         'expires_at' => 'Läuft ab am',
         'is_active' => 'Aktiv',
+        'offense' => 'Verstoß',
     ],
     'reason' => [
         'scanner_path' => 'Scanner-Pfad',
         'asn_blocklist' => 'ASN-Sperrliste',
+        'not_found_flood' => '404-Flut',
     ],
     'filter' => [
         'label' => 'Status',
         'placeholder' => 'Alle',
         'true_label' => 'Aktiv',
         'false_label' => 'Abgelaufen',
+        'repeat_offenders' => 'Wiederholungstäter',
     ],
     'unban' => [
         'label' => 'Entsperren',
