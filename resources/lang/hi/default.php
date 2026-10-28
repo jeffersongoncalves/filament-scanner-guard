@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'समाप्त प्रतिबंध',
         'total_hits' => 'कुल हिट्स',
         'recent_bans' => 'प्रतिबंध (पिछले :days दिन)',
+        'repeat_offenders' => 'सक्रिय बार-बार उल्लंघनकर्ता',
     ],
     'table' => [
         'ip_hash' => 'IP हैश',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'प्रतिबंधित तिथि',
         'expires_at' => 'समाप्ति तिथि',
         'is_active' => 'सक्रिय',
+        'offense' => 'उल्लंघन',
     ],
     'reason' => [
         'scanner_path' => 'स्कैनर पथ',
         'asn_blocklist' => 'ASN ब्लॉकलिस्ट',
+        'not_found_flood' => '404 बाढ़',
     ],
     'filter' => [
         'label' => 'स्थिति',
         'placeholder' => 'सभी',
         'true_label' => 'सक्रिय',
         'false_label' => 'समाप्त',
+        'repeat_offenders' => 'बार-बार उल्लंघनकर्ता',
     ],
     'unban' => [
         'label' => 'प्रतिबंध हटाएं',

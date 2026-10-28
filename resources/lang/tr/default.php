@@ -17,6 +17,7 @@ return [
         'expired_bans' => 'Süresi Dolmuş Yasak',
         'total_hits' => 'Toplam İsabet',
         'recent_bans' => 'Yasaklar (son :days gün)',
+        'repeat_offenders' => 'Aktif tekrarlayan ihlalciler',
     ],
     'table' => [
         'ip_hash' => 'IP Hash',
@@ -26,16 +27,19 @@ return [
         'banned_at' => 'Yasaklanma Tarihi',
         'expires_at' => 'Bitiş Tarihi',
         'is_active' => 'Aktif',
+        'offense' => 'İhlal',
     ],
     'reason' => [
         'scanner_path' => 'Tarayıcı Yolu',
         'asn_blocklist' => 'ASN Kara Listesi',
+        'not_found_flood' => '404 Seli',
     ],
     'filter' => [
         'label' => 'Durum',
         'placeholder' => 'Tümü',
         'true_label' => 'Aktif',
         'false_label' => 'Süresi Dolmuş',
+        'repeat_offenders' => 'Tekrarlayan ihlalciler',
     ],
     'unban' => [
         'label' => 'Yasağı Kaldır',

@@ -20,6 +20,11 @@ class ScannerGuardPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
+        // The cache/http drivers keep no ban rows: nothing to list or chart.
+        if (config('scanner-guard.driver', 'database') !== 'database') {
+            return;
+        }
+
         $panel
             ->resources([
                 ScannerGuardBanResource::class,
@@ -66,5 +71,20 @@ class ScannerGuardPlugin implements Plugin
     public function getChartDays(): int
     {
         return $this->chartDays;
+    }
+
+    /**
+     * Ban duration in seconds per offense, from scanner-guard.escalation (empty = escalation off).
+     *
+     * @return list<int>
+     */
+    public static function escalation(): array
+    {
+        return array_values(array_map(intval(...), (array) config('scanner-guard.escalation', [])));
+    }
+
+    public static function escalationEnabled(): bool
+    {
+        return static::escalation() !== [];
     }
 }

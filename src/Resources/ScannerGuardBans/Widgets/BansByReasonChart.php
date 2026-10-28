@@ -37,12 +37,14 @@ class BansByReasonChart extends ChartWidget
                     'data' => [
                         (int) ($counts[ScannerGuardBan::REASON_SCANNER_PATH] ?? 0),
                         (int) ($counts[ScannerGuardBan::REASON_ASN] ?? 0),
+                        (int) ($counts[ScannerGuardBan::REASON_NOT_FOUND_FLOOD] ?? 0),
                     ],
                 ],
             ],
             'labels' => [
                 __('filament-scanner-guard::default.reason.scanner_path'),
                 __('filament-scanner-guard::default.reason.asn_blocklist'),
+                __('filament-scanner-guard::default.reason.not_found_flood'),
             ],
         ];
     }
