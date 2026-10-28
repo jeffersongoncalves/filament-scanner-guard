@@ -92,7 +92,7 @@ it('groups bans by reason', function () {
     createBan(['reason' => ScannerGuardBan::REASON_SCANNER_PATH]);
     createBan(['reason' => ScannerGuardBan::REASON_ASN]);
 
-    expect(chartData(BansByReasonChart::class)['datasets'][0]['data'])->toBe([2, 1]);
+    expect(chartData(BansByReasonChart::class)['datasets'][0]['data'])->toBe([2, 1, 0]);
 });
 
 it('lists top matched values ordered by total hits', function () {
