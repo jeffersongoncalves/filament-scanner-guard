@@ -6,6 +6,7 @@ use Filament\Tables\Actions\BulkAction;
 use Illuminate\Database\Eloquent\Collection;
 use JeffersonGoncalves\Filament\ScannerGuard\Support\Denylist;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
+use Throwable;
 
 class UnbanBulkAction extends BulkAction
 {
@@ -24,8 +25,15 @@ class UnbanBulkAction extends BulkAction
             ->requiresConfirmation()
             ->action(function (Collection $records): void {
                 foreach ($records as $record) {
-                    if ($record instanceof ScannerGuardBan) {
+                    if (! $record instanceof ScannerGuardBan) {
+                        continue;
+                    }
+
+                    // One failing ban (e.g. cache store down) must not leave the rest of the selection banned.
+                    try {
                         Denylist::lift($record);
+                    } catch (Throwable $e) {
+                        report($e);
                     }
                 }
             })

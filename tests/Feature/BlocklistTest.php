@@ -122,6 +122,24 @@ it('still lifts every selected ban when queueing the export fails', function () 
     Log::shouldHaveReceived('error')->with('filament-scanner-guard: failed to queue nginx export', Mockery::any());
 });
 
+it('keeps lifting the other selected bans when one lift throws', function () {
+    ScannerGuard::ban('203.0.113.11', ScannerGuardBan::REASON_SCANNER_PATH, '.env', 3);
+    ScannerGuard::ban('203.0.113.12', ScannerGuardBan::REASON_SCANNER_PATH, '.env', 3);
+    $failing = ScannerGuard::hashIp('203.0.113.11');
+
+    ScannerGuardBan::deleting(function (ScannerGuardBan $ban) use ($failing): void {
+        if ($ban->ip_hash === $failing) {
+            throw new RuntimeException('cache down');
+        }
+    });
+
+    Livewire::test(ListScannerGuardBans::class)
+        ->callTableBulkAction('unban', ScannerGuardBan::query()->orderBy('id')->get());
+
+    expect(ScannerGuardBan::query()->pluck('ip_hash')->all())->toBe([$failing])
+        ->and(ScannerGuard::isBanned('203.0.113.12'))->toBeFalse();
+});
+
 it('re-merges the blocklist on each Octane request', function () {
     ScannerGuardBlocklistEntry::create(['type' => 'ip', 'value' => '7.7.7.7']);
     config()->set('scanner-guard.ip_blocklist', []);
