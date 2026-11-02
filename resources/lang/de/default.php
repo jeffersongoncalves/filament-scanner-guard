@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'Scanner-Pfad',
         'asn_blocklist' => 'ASN-Sperrliste',
         'not_found_flood' => '404-Flut',
+        'user_agent' => 'User-Agent',
+        'manual' => 'Manuell',
+    ],
+    'ban_ip' => [
+        'label' => 'IP sperren',
+        'success' => 'IP gesperrt',
+        'form' => [
+            'ip' => 'IP-Adresse',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'Sperrlisteneintrag',
+        'plural_label' => 'Sperrliste',
+        'type' => 'Typ',
+        'value' => 'Wert',
+        'note' => 'Notiz',
+        'created_at' => 'Hinzugefügt am',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'User-Agent-Muster',
+        ],
+        'help' => [
+            'ip' => 'Eine IPv4/IPv6-Adresse oder ein CIDR-Bereich, z. B. 185.177.72.0/24. Dauerhaft gesperrt.',
+            'user_agent' => 'fnmatch-Muster, ohne Beachtung der Groß-/Kleinschreibung, z. B. *zgrab*. Wird mit dem vollständigen User-Agent verglichen.',
+        ],
+        'invalid_ip' => 'Geben Sie eine gültige IP-Adresse oder einen gültigen CIDR-Bereich ein.',
     ],
     'filter' => [
         'label' => 'Status',
