@@ -34,8 +34,20 @@ class BanIpAction extends Action
                     ->ip(),
             ])
             ->action(function (array $data): void {
-                app(ScannerGuard::class)->ban((string) $data['ip'], self::REASON, 'panel', 0);
+                app(ScannerGuard::class)->ban(static::canonicalIp((string) $data['ip']), self::REASON, 'panel', 0);
             })
             ->successNotificationTitle(__('filament-scanner-guard::default.ban_ip.success'));
+    }
+
+    /**
+     * The core hashes the IP text as-is and the web server reports IPv6
+     * compressed ("2001:db8::1"), so "2001:0db8::0001" must be compressed too
+     * or the ban never matches. Input is already validated by ->ip().
+     */
+    public static function canonicalIp(string $ip): string
+    {
+        $packed = @inet_pton($ip);
+
+        return $packed === false ? $ip : (string) inet_ntop($packed);
     }
 }

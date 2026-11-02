@@ -23,17 +23,19 @@ class ScannerGuardServiceProvider extends PackageServiceProvider
     {
         static::applyBlocklist();
 
-        // A long-running worker booted before a panel change: refresh so the
-        // on-ban export doesn't drop the newer entries.
-        Event::listen(JobProcessing::class, fn () => static::applyBlocklist());
+        // Long-running workers (queue, Octane) booted before a panel change:
+        // re-merge per job/request so they never keep stale entries. The
+        // Octane event is a string, so Octane stays an optional dependency.
+        Event::listen([JobProcessing::class, 'Laravel\Octane\Events\RequestReceived'], fn () => static::applyBlocklist());
     }
 
     protected static function applyBlocklist(): void
     {
         try {
             Denylist::apply();
-        } catch (Throwable) {
-            // Table not migrated yet, or no database/cache during deploy: config lists still apply.
+        } catch (Throwable $e) {
+            // Table not migrated yet, or no database/cache: config lists still apply, but say so.
+            report($e);
         }
     }
 }
