@@ -4,6 +4,7 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Actions;
 
 use Filament\Actions\Action;
 use Filament\Support\Icons\Heroicon;
+use JeffersonGoncalves\Filament\ScannerGuard\Support\Denylist;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class UnbanAction extends Action
@@ -22,7 +23,7 @@ class UnbanAction extends Action
             ->color('success')
             ->requiresConfirmation()
             ->action(function (ScannerGuardBan $record): void {
-                $record->delete();
+                Denylist::lift($record);
             })
             ->successNotificationTitle(__('filament-scanner-guard::default.unban.success'));
     }
