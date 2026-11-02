@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'Skaner yoʻli',
         'asn_blocklist' => 'ASN qora roʻyxati',
         'not_found_flood' => '404 toshqini',
+        'user_agent' => 'User-Agent',
+        'manual' => 'Qo‘lda',
+    ],
+    'ban_ip' => [
+        'label' => 'IP ni bloklash',
+        'success' => 'IP bloklandi',
+        'form' => [
+            'ip' => 'IP manzil',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'Bloklash ro‘yxati yozuvi',
+        'plural_label' => 'Bloklash ro‘yxati',
+        'type' => 'Turi',
+        'value' => 'Qiymat',
+        'note' => 'Izoh',
+        'created_at' => 'Qo‘shilgan vaqt',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'User-Agent shabloni',
+        ],
+        'help' => [
+            'ip' => 'IPv4/IPv6 manzil yoki CIDR diapazoni, masalan 185.177.72.0/24. Doimiy bloklanadi.',
+            'user_agent' => 'fnmatch shabloni, katta-kichik harfni farqlamaydi, masalan *zgrab*. To‘liq User-Agent bilan solishtiriladi.',
+        ],
+        'invalid_ip' => 'To‘g‘ri IP manzil yoki CIDR diapazonini kiriting.',
     ],
     'filter' => [
         'label' => 'Holat',

@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'स्कैनर पथ',
         'asn_blocklist' => 'ASN ब्लॉकलिस्ट',
         'not_found_flood' => '404 बाढ़',
+        'user_agent' => 'User-Agent',
+        'manual' => 'मैनुअल',
+    ],
+    'ban_ip' => [
+        'label' => 'IP प्रतिबंधित करें',
+        'success' => 'IP प्रतिबंधित किया गया',
+        'form' => [
+            'ip' => 'IP पता',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'ब्लॉकलिस्ट प्रविष्टि',
+        'plural_label' => 'ब्लॉकलिस्ट',
+        'type' => 'प्रकार',
+        'value' => 'मान',
+        'note' => 'नोट',
+        'created_at' => 'जोड़ा गया',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'User-Agent पैटर्न',
+        ],
+        'help' => [
+            'ip' => 'IPv4/IPv6 पता या CIDR रेंज, जैसे 185.177.72.0/24. स्थायी रूप से ब्लॉक।',
+            'user_agent' => 'fnmatch पैटर्न, केस-असंवेदनशील, जैसे *zgrab*. पूरे User-Agent से मिलाया जाता है।',
+        ],
+        'invalid_ip' => 'मान्य IP पता या CIDR रेंज दर्ज करें।',
     ],
     'filter' => [
         'label' => 'स्थिति',
