@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.5.0 - 2026-11-02
+
+### What's Changed
+
+* refactor: use core 1.7 blocklist storage and unban() (2.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/45
+
+**Full Changelog**: https://github.com/jeffersongoncalves/filament-scanner-guard/compare/2.4.0...2.5.0
+
 ## 2.4.0 - 2026-11-02
 
 ### What's Changed
