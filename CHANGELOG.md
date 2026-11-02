@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.4.0 - 2026-11-02
+
+### What's Changed
+
+* Auto-assign issues and pull requests by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/36
+* build(deps): bump stefanzweifel/git-auto-commit-action from 7.2.0 to 7.2.1 in the actions-deps group by @dependabot[bot] in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/38
+* feat: manage static blocklist and bans from the panel (3.x) by @jeffersongoncalves in https://github.com/jeffersongoncalves/filament-scanner-guard/pull/41
+
+**Full Changelog**: https://github.com/jeffersongoncalves/filament-scanner-guard/compare/3.3.0...3.4.0
+
 ## 3.3.0 - 2026-10-28
 
 ### What's Changed
