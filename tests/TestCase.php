@@ -63,6 +63,6 @@ abstract class TestCase extends Orchestra
 
     protected function defineDatabaseMigrations(): void
     {
-        $this->loadPackageMigrations(LaravelScannerGuardServiceProvider::class, ScannerGuardServiceProvider::class);
+        $this->loadPackageMigrations(LaravelScannerGuardServiceProvider::class);
     }
 }

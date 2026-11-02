@@ -4,8 +4,8 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Actions;
 
 use Filament\Actions\Action;
 use Filament\Support\Icons\Heroicon;
-use JeffersonGoncalves\Filament\ScannerGuard\Support\Denylist;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
+use JeffersonGoncalves\ScannerGuard\ScannerGuard;
 
 class UnbanAction extends Action
 {
@@ -23,8 +23,19 @@ class UnbanAction extends Action
             ->color('success')
             ->requiresConfirmation()
             ->action(function (ScannerGuardBan $record): void {
-                Denylist::lift($record);
+                static::lift($record);
             })
             ->successNotificationTitle(__('filament-scanner-guard::default.unban.success'));
+    }
+
+    /**
+     * Deletes this row (active or expired), then lets the core lift the IP:
+     * its other active rows, the cached ban and the nginx export.
+     */
+    public static function lift(ScannerGuardBan $record): void
+    {
+        $record->delete();
+
+        app(ScannerGuard::class)->unban($record->ip_hash);
     }
 }
