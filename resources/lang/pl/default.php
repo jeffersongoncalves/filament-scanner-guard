@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'Ścieżka skanera',
         'asn_blocklist' => 'Czarna lista ASN',
         'not_found_flood' => 'Zalew 404',
+        'user_agent' => 'User-Agent',
+        'manual' => 'Ręczna',
+    ],
+    'ban_ip' => [
+        'label' => 'Zablokuj IP',
+        'success' => 'IP zablokowany',
+        'form' => [
+            'ip' => 'Adres IP',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'Wpis listy blokad',
+        'plural_label' => 'Lista blokad',
+        'type' => 'Typ',
+        'value' => 'Wartość',
+        'note' => 'Notatka',
+        'created_at' => 'Dodano',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'Wzorzec User-Agent',
+        ],
+        'help' => [
+            'ip' => 'Adres IPv4/IPv6 lub zakres CIDR, np. 185.177.72.0/24. Blokada stała.',
+            'user_agent' => 'Wzorzec fnmatch, bez rozróżniania wielkości liter, np. *zgrab*. Porównywany z pełnym User-Agent.',
+        ],
+        'invalid_ip' => 'Podaj prawidłowy adres IP lub zakres CIDR.',
     ],
     'filter' => [
         'label' => 'Status',

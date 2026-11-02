@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'スキャナーパス',
         'asn_blocklist' => 'ASN ブロックリスト',
         'not_found_flood' => '404 フラッド',
+        'user_agent' => 'User-Agent',
+        'manual' => '手動',
+    ],
+    'ban_ip' => [
+        'label' => 'IP を BAN',
+        'success' => 'IP を BAN しました',
+        'form' => [
+            'ip' => 'IP アドレス',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'ブロックリスト項目',
+        'plural_label' => 'ブロックリスト',
+        'type' => '種類',
+        'value' => '値',
+        'note' => 'メモ',
+        'created_at' => '追加日時',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'User-Agent パターン',
+        ],
+        'help' => [
+            'ip' => 'IPv4/IPv6 アドレスまたは CIDR 範囲（例: 185.177.72.0/24）。永続的にブロックされます。',
+            'user_agent' => 'fnmatch パターン、大文字小文字を区別しません（例: *zgrab*）。User-Agent 全体と照合されます。',
+        ],
+        'invalid_ip' => '有効な IP アドレスまたは CIDR 範囲を入力してください。',
     ],
     'filter' => [
         'label' => 'ステータス',

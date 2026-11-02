@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'Шлях сканера',
         'asn_blocklist' => 'Блок-лист ASN',
         'not_found_flood' => 'Флуд 404',
+        'user_agent' => 'User-Agent',
+        'manual' => 'Вручну',
+    ],
+    'ban_ip' => [
+        'label' => 'Забанити IP',
+        'success' => 'IP забанено',
+        'form' => [
+            'ip' => 'IP-адреса',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'Запис чорного списку',
+        'plural_label' => 'Чорний список',
+        'type' => 'Тип',
+        'value' => 'Значення',
+        'note' => 'Примітка',
+        'created_at' => 'Додано',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'Шаблон User-Agent',
+        ],
+        'help' => [
+            'ip' => 'Адреса IPv4/IPv6 або діапазон CIDR, наприклад 185.177.72.0/24. Блокується назавжди.',
+            'user_agent' => 'Шаблон fnmatch без урахування регістру, наприклад *zgrab*. Порівнюється з повним User-Agent.',
+        ],
+        'invalid_ip' => 'Введіть коректну IP-адресу або діапазон CIDR.',
     ],
     'filter' => [
         'label' => 'Статус',

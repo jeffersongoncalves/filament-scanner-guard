@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'مسار الفحص',
         'asn_blocklist' => 'قائمة حظر ASN',
         'not_found_flood' => 'فيض 404',
+        'user_agent' => 'User-Agent',
+        'manual' => 'يدوي',
+    ],
+    'ban_ip' => [
+        'label' => 'حظر IP',
+        'success' => 'تم حظر عنوان IP',
+        'form' => [
+            'ip' => 'عنوان IP',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'عنصر قائمة الحظر',
+        'plural_label' => 'قائمة الحظر',
+        'type' => 'النوع',
+        'value' => 'القيمة',
+        'note' => 'ملاحظة',
+        'created_at' => 'أُضيف في',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'نمط User-Agent',
+        ],
+        'help' => [
+            'ip' => 'عنوان IPv4/IPv6 أو نطاق CIDR، مثال: 185.177.72.0/24. حظر دائم.',
+            'user_agent' => 'نمط fnmatch، غير حساس لحالة الأحرف، مثال: *zgrab*. يُطابَق مع User-Agent الكامل.',
+        ],
+        'invalid_ip' => 'أدخل عنوان IP أو نطاق CIDR صالحًا.',
     ],
     'filter' => [
         'label' => 'الحالة',
