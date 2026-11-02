@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'Scannerpad',
         'asn_blocklist' => 'ASN-blokkadelĳst',
         'not_found_flood' => '404-vloed',
+        'user_agent' => 'User-Agent',
+        'manual' => 'Handmatig',
+    ],
+    'ban_ip' => [
+        'label' => 'IP bannen',
+        'success' => 'IP geband',
+        'form' => [
+            'ip' => 'IP-adres',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'Blokkeerlijstitem',
+        'plural_label' => 'Blokkeerlijst',
+        'type' => 'Type',
+        'value' => 'Waarde',
+        'note' => 'Notitie',
+        'created_at' => 'Toegevoegd op',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'User-Agent-patroon',
+        ],
+        'help' => [
+            'ip' => 'Een IPv4/IPv6-adres of CIDR-bereik, bijv. 185.177.72.0/24. Permanent geblokkeerd.',
+            'user_agent' => 'fnmatch-patroon, niet hoofdlettergevoelig, bijv. *zgrab*. Vergeleken met de volledige User-Agent.',
+        ],
+        'invalid_ip' => 'Voer een geldig IP-adres of CIDR-bereik in.',
     ],
     'filter' => [
         'label' => 'Status',

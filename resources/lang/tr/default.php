@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'Tarayıcı Yolu',
         'asn_blocklist' => 'ASN Kara Listesi',
         'not_found_flood' => '404 Seli',
+        'user_agent' => 'User-Agent',
+        'manual' => 'Manuel',
+    ],
+    'ban_ip' => [
+        'label' => 'IP yasakla',
+        'success' => 'IP yasaklandı',
+        'form' => [
+            'ip' => 'IP adresi',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'Engel listesi kaydı',
+        'plural_label' => 'Engel listesi',
+        'type' => 'Tür',
+        'value' => 'Değer',
+        'note' => 'Not',
+        'created_at' => 'Eklenme tarihi',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'User-Agent kalıbı',
+        ],
+        'help' => [
+            'ip' => 'Bir IPv4/IPv6 adresi veya CIDR aralığı, örn. 185.177.72.0/24. Kalıcı olarak engellenir.',
+            'user_agent' => 'fnmatch kalıbı, büyük/küçük harf duyarsız, örn. *zgrab*. Tam User-Agent ile karşılaştırılır.',
+        ],
+        'invalid_ip' => 'Geçerli bir IP adresi veya CIDR aralığı girin.',
     ],
     'filter' => [
         'label' => 'Durum',
