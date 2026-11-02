@@ -6,6 +6,8 @@ use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\ViewRecord;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanPageAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
+use JeffersonGoncalves\Filament\ScannerGuard\Support\Denylist;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ViewScannerGuardBan extends ViewRecord
 {
@@ -20,6 +22,11 @@ class ViewScannerGuardBan extends ViewRecord
                 ->label(__('filament-scanner-guard::default.unban.label'))
                 ->icon('heroicon-o-check-circle')
                 ->color('success')
+                ->using(function (ScannerGuardBan $record): bool {
+                    Denylist::lift($record);
+
+                    return true;
+                })
                 ->successNotificationTitle(__('filament-scanner-guard::default.unban.success')),
         ];
     }

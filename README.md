@@ -52,7 +52,7 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-This registers a **Scanner Guard Bans** resource (list only — rows are written by the `scanner-guard` middleware, not by admins) and a **Metrics** page, with:
+This registers a **Scanner Guard Bans** resource (rows are written by the `scanner-guard` middleware, or by the **Ban IP** action), a **Blocklist** resource and a **Metrics** page, with:
 
 - Columns: `ip_hash`, `reason` (badge), `matched_value`, `hit_count`, `offense` (escalation only), `banned_at`, `expires_at`, `is_active`
 - A **Status** filter (active vs expired)
@@ -72,7 +72,22 @@ ScannerGuardPlugin::make()
     ->chartDays(30);
 ```
 
-Reasons shown: scanner path, ASN blocklist and 404 flood (`not_found_flood`, core 1.4+).
+Reasons shown: scanner path, ASN blocklist, 404 flood (`not_found_flood`, core 1.4+), User-Agent (`user_agent`, core 1.6+) and manual (bans added from the panel).
+
+### Blocklist and manual bans (core 1.6+)
+
+Publish and run the plugin's migration (it creates `scanner_guard_blocklist`):
+
+```bash
+php artisan vendor:publish --tag="filament-scanner-guard-migrations"
+php artisan migrate
+```
+
+- A **Blocklist** resource: add, edit and remove permanent **IP / CIDR** entries and **User-Agent patterns** (fnmatch, case-insensitive), each with an optional note. They are merged into the core's `scanner-guard.ip_blocklist` and `scanner-guard.user_agent_blocklist.patterns` at boot, next to whatever your config already lists. A User-Agent pattern only acts the way `user_agent_blocklist.action` says (`ban` or `reject`).
+- A **Ban IP** header action on the bans list: bans a raw IP through the core, exactly like the middleware would (hashed row, raw IP cached for the nginx export, `ban_duration`).
+- **Unban** now also clears the core's cached ban, so the IP gets through right away instead of at the old expiry.
+
+With `scanner-guard.sync_to_nginx` on, every blocklist change and every unban queues the core's `ExportDenylist` job (plus your `nginx.reload_command`), so the change reaches nginx within seconds. Queue workers re-read the blocklist before each job; restart them after deploying this plugin.
 
 The resource and the Metrics page are only registered with the core's `database` driver (`scanner-guard.driver`). The `cache` and `http` drivers keep no ban rows, so on those apps the plugin registers nothing — install it on the central app instead.
 

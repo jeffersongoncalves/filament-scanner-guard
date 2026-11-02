@@ -3,6 +3,7 @@
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
+use JeffersonGoncalves\Filament\ScannerGuard\Actions\BanIpAction;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class BansByReasonChart extends ChartWidget
@@ -34,6 +35,8 @@ class BansByReasonChart extends ChartWidget
                         (int) ($counts[ScannerGuardBan::REASON_SCANNER_PATH] ?? 0),
                         (int) ($counts[ScannerGuardBan::REASON_ASN] ?? 0),
                         (int) ($counts[ScannerGuardBan::REASON_NOT_FOUND_FLOOD] ?? 0),
+                        (int) ($counts[ScannerGuardBan::REASON_USER_AGENT] ?? 0),
+                        (int) ($counts[BanIpAction::REASON] ?? 0),
                     ],
                 ],
             ],
@@ -41,6 +44,8 @@ class BansByReasonChart extends ChartWidget
                 __('filament-scanner-guard::default.reason.scanner_path'),
                 __('filament-scanner-guard::default.reason.asn_blocklist'),
                 __('filament-scanner-guard::default.reason.not_found_flood'),
+                __('filament-scanner-guard::default.reason.user_agent'),
+                __('filament-scanner-guard::default.reason.manual'),
             ],
         ];
     }

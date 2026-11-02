@@ -6,6 +6,7 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklistResource;
 
 class ScannerGuardPlugin implements Plugin
 {
@@ -28,6 +29,7 @@ class ScannerGuardPlugin implements Plugin
         $panel
             ->resources([
                 ScannerGuardBanResource::class,
+                ScannerGuardBlocklistResource::class,
             ])
             ->pages([
                 MetricsPage::class,
