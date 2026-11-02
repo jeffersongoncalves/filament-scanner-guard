@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'Skaner Yolu',
         'asn_blocklist' => 'ASN Qara Siyahısı',
         'not_found_flood' => '404 axını',
+        'user_agent' => 'User-Agent',
+        'manual' => 'Əl ilə',
+    ],
+    'ban_ip' => [
+        'label' => 'IP-ni banla',
+        'success' => 'IP banlandı',
+        'form' => [
+            'ip' => 'IP ünvanı',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'Bloklama siyahısı elementi',
+        'plural_label' => 'Bloklama siyahısı',
+        'type' => 'Növ',
+        'value' => 'Dəyər',
+        'note' => 'Qeyd',
+        'created_at' => 'Əlavə edilib',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'User-Agent şablonu',
+        ],
+        'help' => [
+            'ip' => 'IPv4/IPv6 ünvanı və ya CIDR aralığı, məs. 185.177.72.0/24. Daimi bloklanır.',
+            'user_agent' => 'fnmatch şablonu, böyük-kiçik hərfə həssas deyil, məs. *zgrab*. Tam User-Agent ilə müqayisə olunur.',
+        ],
+        'invalid_ip' => 'Düzgün IP ünvanı və ya CIDR aralığı daxil edin.',
     ],
     'filter' => [
         'label' => 'Status',

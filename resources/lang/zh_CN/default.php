@@ -33,6 +33,32 @@ return [
         'scanner_path' => '扫描器路径',
         'asn_blocklist' => 'ASN 黑名单',
         'not_found_flood' => '404 洪泛',
+        'user_agent' => 'User-Agent',
+        'manual' => '手动',
+    ],
+    'ban_ip' => [
+        'label' => '封禁 IP',
+        'success' => 'IP 已封禁',
+        'form' => [
+            'ip' => 'IP 地址',
+        ],
+    ],
+    'blocklist' => [
+        'label' => '黑名单条目',
+        'plural_label' => '黑名单',
+        'type' => '类型',
+        'value' => '值',
+        'note' => '备注',
+        'created_at' => '添加时间',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'User-Agent 模式',
+        ],
+        'help' => [
+            'ip' => 'IPv4/IPv6 地址或 CIDR 范围，例如 185.177.72.0/24。永久封禁。',
+            'user_agent' => 'fnmatch 模式，不区分大小写，例如 *zgrab*。与完整的 User-Agent 匹配。',
+        ],
+        'invalid_ip' => '请输入有效的 IP 地址或 CIDR 范围。',
     ],
     'filter' => [
         'label' => '状态',

@@ -10,6 +10,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use JeffersonGoncalves\Filament\ScannerGuard\Actions\BanIpAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
@@ -101,6 +102,8 @@ class ScannerGuardBansTable
         return match ($reason) {
             ScannerGuardBan::REASON_ASN => __('filament-scanner-guard::default.reason.asn_blocklist'),
             ScannerGuardBan::REASON_NOT_FOUND_FLOOD => __('filament-scanner-guard::default.reason.not_found_flood'),
+            ScannerGuardBan::REASON_USER_AGENT => __('filament-scanner-guard::default.reason.user_agent'),
+            BanIpAction::REASON => __('filament-scanner-guard::default.reason.manual'),
             default => __('filament-scanner-guard::default.reason.scanner_path'),
         };
     }
@@ -110,6 +113,8 @@ class ScannerGuardBansTable
         return match ($reason) {
             ScannerGuardBan::REASON_ASN => 'danger',
             ScannerGuardBan::REASON_NOT_FOUND_FLOOD => 'info',
+            ScannerGuardBan::REASON_USER_AGENT => 'primary',
+            BanIpAction::REASON => 'gray',
             default => 'warning',
         };
     }
