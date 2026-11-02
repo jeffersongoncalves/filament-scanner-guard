@@ -16,9 +16,8 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Validation\Rules\Unique;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
-use JeffersonGoncalves\Filament\ScannerGuard\Models\ScannerGuardBlocklistEntry;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklistResource\Pages\ManageScannerGuardBlocklist;
-use JeffersonGoncalves\Filament\ScannerGuard\Support\Denylist;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBlocklistEntry;
 
 class ScannerGuardBlocklistResource extends Resource
 {
@@ -48,7 +47,7 @@ class ScannerGuardBlocklistResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->rule(fn (Get $get): Closure => function (string $attribute, mixed $value, Closure $fail) use ($get): void {
-                        if ($get('type') === ScannerGuardBlocklistEntry::TYPE_IP && ! Denylist::isValidRange(trim((string) $value))) {
+                        if ($get('type') === ScannerGuardBlocklistEntry::TYPE_IP && ! static::isValidRange(trim((string) $value))) {
                             $fail(__('filament-scanner-guard::default.blocklist.invalid_ip'));
                         }
                     })
@@ -109,6 +108,22 @@ class ScannerGuardBlocklistResource extends Resource
             ScannerGuardBlocklistEntry::TYPE_IP => __('filament-scanner-guard::default.blocklist.types.ip'),
             ScannerGuardBlocklistEntry::TYPE_USER_AGENT => __('filament-scanner-guard::default.blocklist.types.user_agent'),
         ];
+    }
+
+    /**
+     * An IPv4/IPv6 address, optionally with a /prefix in range: what nginx
+     * accepts in `deny`. Same check the core export runs (it's protected there).
+     */
+    public static function isValidRange(string $entry): bool
+    {
+        [$address, $prefix] = array_pad(explode('/', $entry, 2), 2, null);
+
+        if (filter_var($address, FILTER_VALIDATE_IP) === false) {
+            return false;
+        }
+
+        return $prefix === null
+            || (ctype_digit($prefix) && (int) $prefix <= (str_contains((string) $address, ':') ? 128 : 32));
     }
 
     public static function getPages(): array

@@ -4,7 +4,6 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Actions;
 
 use Filament\Tables\Actions\BulkAction;
 use Illuminate\Database\Eloquent\Collection;
-use JeffersonGoncalves\Filament\ScannerGuard\Support\Denylist;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 use Throwable;
 
@@ -31,7 +30,7 @@ class UnbanBulkAction extends BulkAction
 
                     // One failing ban (e.g. cache store down) must not leave the rest of the selection banned.
                     try {
-                        Denylist::lift($record);
+                        UnbanAction::lift($record);
                     } catch (Throwable $e) {
                         report($e);
                     }
