@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\BanIpAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Models\ScannerGuardBlocklistEntry;
@@ -92,6 +93,42 @@ it('bans a raw IP from the bans list', function () {
         ->and($ban->ip_hash)->toBe(ScannerGuard::hashIp('203.0.113.7'))
         ->and(ScannerGuard::rawIpFor($ban->ip_hash))->toBe('203.0.113.7')
         ->and(ScannerGuard::isBanned('203.0.113.7'))->toBeTrue();
+});
+
+it('stores a manual IPv6 ban under the compressed form the server reports', function () {
+    Livewire::test(ListScannerGuardBans::class)
+        ->callAction('banIp', ['ip' => '2001:0DB8:0000:0000:0000:0000:0000:0001'])
+        ->assertHasNoActionErrors();
+
+    expect(ScannerGuard::isBanned('2001:db8::1'))->toBeTrue()
+        ->and(BanIpAction::canonicalIp('203.0.113.7'))->toBe('203.0.113.7');
+});
+
+it('still lifts every selected ban when queueing the export fails', function () {
+    config()->set('scanner-guard.sync_to_nginx', true);
+    Queue::shouldReceive('connection')->andThrow(new RuntimeException('queue down'));
+    Log::spy();
+
+    ScannerGuard::ban('203.0.113.9', ScannerGuardBan::REASON_SCANNER_PATH, '.env', 3);
+    ScannerGuard::ban('203.0.113.10', ScannerGuardBan::REASON_SCANNER_PATH, '.env', 3);
+
+    Livewire::test(ListScannerGuardBans::class)
+        ->callTableBulkAction('unban', ScannerGuardBan::all());
+
+    expect(ScannerGuardBan::query()->count())->toBe(0)
+        ->and(ScannerGuard::isBanned('203.0.113.9'))->toBeFalse()
+        ->and(ScannerGuard::isBanned('203.0.113.10'))->toBeFalse();
+
+    Log::shouldHaveReceived('error')->with('filament-scanner-guard: failed to queue nginx export', Mockery::any());
+});
+
+it('re-merges the blocklist on each Octane request', function () {
+    ScannerGuardBlocklistEntry::create(['type' => 'ip', 'value' => '7.7.7.7']);
+    config()->set('scanner-guard.ip_blocklist', []);
+
+    event('Laravel\Octane\Events\RequestReceived');
+
+    expect(config('scanner-guard.ip_blocklist'))->toContain('7.7.7.7');
 });
 
 it('lifts a ban at once, not when the cached ban expires', function () {

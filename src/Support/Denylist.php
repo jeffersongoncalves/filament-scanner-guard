@@ -2,10 +2,12 @@
 
 namespace JeffersonGoncalves\Filament\ScannerGuard\Support;
 
+use Illuminate\Support\Facades\Log;
 use JeffersonGoncalves\Filament\ScannerGuard\Models\ScannerGuardBlocklistEntry;
 use JeffersonGoncalves\ScannerGuard\Jobs\ExportDenylist;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 use JeffersonGoncalves\ScannerGuard\ScannerGuard;
+use Throwable;
 
 /**
  * Glue between the panel and the core package: merges the panel-managed
@@ -84,7 +86,12 @@ class Denylist
             return;
         }
 
-        ExportDenylist::dispatch();
+        // Like the core's on-ban export: a queue failure is logged, never undoes or breaks the change.
+        try {
+            ExportDenylist::dispatch();
+        } catch (Throwable $e) {
+            Log::error('filament-scanner-guard: failed to queue nginx export', ['exception' => $e->getMessage()]);
+        }
     }
 
     /**
