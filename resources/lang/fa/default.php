@@ -33,6 +33,32 @@ return [
         'scanner_path' => 'مسیر اسکنر',
         'asn_blocklist' => 'لیست سیاه ASN',
         'not_found_flood' => 'سیل 404',
+        'user_agent' => 'User-Agent',
+        'manual' => 'دستی',
+    ],
+    'ban_ip' => [
+        'label' => 'مسدود کردن IP',
+        'success' => 'IP مسدود شد',
+        'form' => [
+            'ip' => 'نشانی IP',
+        ],
+    ],
+    'blocklist' => [
+        'label' => 'مورد فهرست مسدودی',
+        'plural_label' => 'فهرست مسدودی',
+        'type' => 'نوع',
+        'value' => 'مقدار',
+        'note' => 'یادداشت',
+        'created_at' => 'افزوده‌شده در',
+        'types' => [
+            'ip' => 'IP / CIDR',
+            'user_agent' => 'الگوی User-Agent',
+        ],
+        'help' => [
+            'ip' => 'نشانی IPv4/IPv6 یا بازه CIDR، مثلاً 185.177.72.0/24. مسدودسازی دائمی.',
+            'user_agent' => 'الگوی fnmatch، بدون حساسیت به حروف کوچک و بزرگ، مثلاً *zgrab*. با User-Agent کامل مقایسه می‌شود.',
+        ],
+        'invalid_ip' => 'یک نشانی IP یا بازه CIDR معتبر وارد کنید.',
     ],
     'filter' => [
         'label' => 'وضعیت',

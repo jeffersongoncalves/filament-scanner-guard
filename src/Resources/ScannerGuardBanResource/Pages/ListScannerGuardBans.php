@@ -3,6 +3,7 @@
 namespace JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages;
 
 use Filament\Resources\Pages\ListRecords;
+use JeffersonGoncalves\Filament\ScannerGuard\Actions\BanIpAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\PurgeExpiredBansAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
 
@@ -13,6 +14,7 @@ class ListScannerGuardBans extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            BanIpAction::make(),
             PurgeExpiredBansAction::make(),
         ];
     }
