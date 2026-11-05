@@ -2,8 +2,13 @@
 
 namespace JeffersonGoncalves\Filament\ScannerGuard;
 
+use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Enums\ActionsPosition;
+use Filament\Tables\Table;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklistResource;
@@ -13,6 +18,10 @@ class ScannerGuardPlugin implements Plugin
     protected ?string $navigationGroup = null;
 
     protected int $chartDays = 14;
+
+    protected bool|Closure $groupRecordActions = false;
+
+    protected ActionsPosition|Closure|null $recordActionsPosition = null;
 
     public function getId(): string
     {
@@ -73,6 +82,36 @@ class ScannerGuardPlugin implements Plugin
     public function getChartDays(): int
     {
         return $this->chartDays;
+    }
+
+    public function groupRecordActions(bool|Closure $condition = true): static
+    {
+        $this->groupRecordActions = $condition;
+
+        return $this;
+    }
+
+    /**
+     * Null keeps the table's (or the global configureUsing) default.
+     */
+    public function recordActionsPosition(ActionsPosition|Closure|null $position): static
+    {
+        $this->recordActionsPosition = $position;
+
+        return $this;
+    }
+
+    /**
+     * Sets the plugin resources' record actions, grouped and positioned as configured.
+     *
+     * @param  array<Action|ActionGroup>  $actions
+     */
+    public function applyRecordActions(Table $table, array $actions): Table
+    {
+        return $table->actions(
+            $table->evaluate($this->groupRecordActions) ? ActionGroup::make($actions) : $actions,
+            position: $this->recordActionsPosition,
+        );
     }
 
     /**

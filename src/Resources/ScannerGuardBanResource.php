@@ -39,7 +39,11 @@ class ScannerGuardBanResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table
+        return ScannerGuardPlugin::get()->applyRecordActions($table, [
+            ViewAction::make(),
+            ExtendBanAction::make(),
+            UnbanAction::make(),
+        ])
             ->columns([
                 TextColumn::make('ip_hash')
                     ->label(__('filament-scanner-guard::default.table.ip_hash'))
@@ -100,11 +104,6 @@ class ScannerGuardBanResource extends Resource
             ->headerActions([
                 FilamentExportHeaderAction::make('export')
                     ->formatStates(static::exportFormatStates()),
-            ])
-            ->actions([
-                ViewAction::make(),
-                ExtendBanAction::make(),
-                UnbanAction::make(),
             ])
             ->bulkActions([
                 FilamentExportBulkAction::make('export')

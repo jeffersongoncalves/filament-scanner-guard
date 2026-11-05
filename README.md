@@ -72,6 +72,16 @@ ScannerGuardPlugin::make()
     ->chartDays(30);
 ```
 
+Record actions of both tables can be grouped in a dropdown and moved before the columns (`Table::configureUsing()` can't group them: it runs before the resource defines its actions). Defaults keep the table's behavior:
+
+```php
+use Filament\Tables\Enums\ActionsPosition;
+
+ScannerGuardPlugin::make()
+    ->groupRecordActions()                                 // wrap in ActionGroup::make([...])
+    ->recordActionsPosition(ActionsPosition::BeforeColumns); // null = table/global default
+```
+
 Reasons shown: scanner path, ASN blocklist, 404 flood (`not_found_flood`, core 1.4+), User-Agent (`user_agent`, core 1.6+) and manual (bans added from the panel).
 
 ### Blocklist and manual bans (core 1.7+)
