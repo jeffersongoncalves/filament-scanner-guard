@@ -110,7 +110,8 @@ class ScannerGuardPlugin implements Plugin
     {
         return $table->actions(
             $table->evaluate($this->groupRecordActions) ? ActionGroup::make($actions) : $actions,
-            position: $this->recordActionsPosition,
+            // Resolved here: a closure returning null must keep the table/global position.
+            position: $table->evaluate($this->recordActionsPosition),
         );
     }
 
