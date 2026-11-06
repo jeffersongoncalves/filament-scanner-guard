@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 use Illuminate\Validation\Rules\Unique;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklistResource\Pages\ManageScannerGuardBlocklist;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBlocklistEntry;
 
 class ScannerGuardBlocklistResource extends Resource
@@ -62,7 +63,10 @@ class ScannerGuardBlocklistResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table
+        return ScannerGuardPlugin::get()->applyRecordActions($table, [
+            EditAction::make(),
+            DeleteAction::make(),
+        ])
             ->columns([
                 TextColumn::make('type')
                     ->label(__('filament-scanner-guard::default.blocklist.type'))
@@ -89,10 +93,6 @@ class ScannerGuardBlocklistResource extends Resource
                 SelectFilter::make('type')
                     ->label(__('filament-scanner-guard::default.blocklist.type'))
                     ->options(static::typeOptions()),
-            ])
-            ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),
