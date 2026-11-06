@@ -2,8 +2,13 @@
 
 namespace JeffersonGoncalves\Filament\ScannerGuard;
 
+use Closure;
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Tables\Enums\RecordActionsPosition;
+use Filament\Tables\Table;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklist\ScannerGuardBlocklistResource;
@@ -13,6 +18,10 @@ class ScannerGuardPlugin implements Plugin
     protected ?string $navigationGroup = null;
 
     protected int $chartDays = 14;
+
+    protected bool|Closure $groupRecordActions = false;
+
+    protected RecordActionsPosition|Closure|null $recordActionsPosition = null;
 
     public function getId(): string
     {
@@ -73,6 +82,37 @@ class ScannerGuardPlugin implements Plugin
     public function getChartDays(): int
     {
         return $this->chartDays;
+    }
+
+    public function groupRecordActions(bool|Closure $condition = true): static
+    {
+        $this->groupRecordActions = $condition;
+
+        return $this;
+    }
+
+    /**
+     * Null keeps the table's (or the global configureUsing) default.
+     */
+    public function recordActionsPosition(RecordActionsPosition|Closure|null $position): static
+    {
+        $this->recordActionsPosition = $position;
+
+        return $this;
+    }
+
+    /**
+     * Sets the plugin resources' record actions, grouped and positioned as configured.
+     *
+     * @param  array<Action|ActionGroup>  $actions
+     */
+    public function applyRecordActions(Table $table, array $actions): Table
+    {
+        return $table->recordActions(
+            $table->evaluate($this->groupRecordActions) ? ActionGroup::make($actions) : $actions,
+            // Resolved here: a closure returning null must keep the table/global position.
+            position: $table->evaluate($this->recordActionsPosition),
+        );
     }
 
     /**
