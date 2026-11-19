@@ -7,6 +7,7 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,12 @@ use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ScannerGuardBansTable
 {
+    /** Filter value for locally banned rows (null source). */
+    public const LOCAL_SOURCE = 'local';
+
+    /** Satellite filter values carry this prefix, so no source name can collide with LOCAL_SOURCE. */
+    public const SOURCE_PREFIX = 'source:';
+
     public static function configure(Table $table): Table
     {
         return ScannerGuardPlugin::get()->applyRecordActions($table, [
@@ -55,6 +62,15 @@ class ScannerGuardBansTable
                     ->sortable()
                     ->toggleable()
                     ->visible(fn (): bool => ScannerGuardPlugin::escalationEnabled()),
+                TextColumn::make('source')
+                    ->label(__('filament-scanner-guard::default.table.source'))
+                    ->badge()
+                    ->color(fn (?string $state): string => $state === null ? 'gray' : 'info')
+                    ->placeholder(__('filament-scanner-guard::default.table.local'))
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->visible(fn (): bool => ScannerGuardPlugin::receivesForwardedBans()),
                 TextColumn::make('banned_at')
                     ->label(__('filament-scanner-guard::default.table.banned_at'))
                     ->dateTime()
@@ -84,6 +100,15 @@ class ScannerGuardBansTable
                     ->toggle()
                     ->query(fn (Builder $query): Builder => $query->where('offense', '>', 1))
                     ->visible(fn (): bool => ScannerGuardPlugin::escalationEnabled()),
+                SelectFilter::make('source')
+                    ->label(__('filament-scanner-guard::default.table.source'))
+                    ->options(fn (): array => static::sourceOptions())
+                    ->query(fn (Builder $query, array $data): Builder => match (true) {
+                        ($data['value'] ?? null) === static::LOCAL_SOURCE => $query->whereNull('source'),
+                        str_starts_with((string) ($data['value'] ?? ''), static::SOURCE_PREFIX) => $query->where('source', substr($data['value'], strlen(static::SOURCE_PREFIX))),
+                        default => $query,
+                    })
+                    ->visible(fn (): bool => ScannerGuardPlugin::receivesForwardedBans()),
             ])
             ->headerActions([
                 FilamentExportHeaderAction::make('export')
@@ -116,6 +141,28 @@ class ScannerGuardBansTable
             BanIpAction::REASON => 'gray',
             default => 'warning',
         };
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function sourceOptions(): array
+    {
+        /** @var list<string> $sources */
+        $sources = ScannerGuardBan::query()
+            ->whereNotNull('source')
+            ->distinct()
+            ->orderBy('source')
+            ->pluck('source')
+            ->all();
+
+        $options = [static::LOCAL_SOURCE => __('filament-scanner-guard::default.table.local')];
+
+        foreach ($sources as $source) {
+            $options[static::SOURCE_PREFIX.$source] = $source;
+        }
+
+        return $options;
     }
 
     /**

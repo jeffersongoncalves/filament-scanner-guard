@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Läuft ab am',
         'is_active' => 'Aktiv',
         'offense' => 'Verstoß',
+        'source' => 'Quelle',
+        'local' => 'Lokal',
     ],
     'reason' => [
         'scanner_path' => 'Scanner-Pfad',

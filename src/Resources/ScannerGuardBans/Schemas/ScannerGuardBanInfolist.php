@@ -40,6 +40,12 @@ class ScannerGuardBanInfolist
                             ->color(fn (int $state): string => $state > 1 ? 'danger' : 'gray')
                             ->placeholder('—')
                             ->visible(fn (): bool => ScannerGuardPlugin::escalationEnabled()),
+                        TextEntry::make('source')
+                            ->label(__('filament-scanner-guard::default.table.source'))
+                            ->badge()
+                            ->color(fn (?string $state): string => $state === null ? 'gray' : 'info')
+                            ->placeholder(__('filament-scanner-guard::default.table.local'))
+                            ->visible(fn (): bool => ScannerGuardPlugin::receivesForwardedBans()),
                         IconEntry::make('is_active')
                             ->label(__('filament-scanner-guard::default.table.is_active'))
                             ->boolean(),
