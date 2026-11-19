@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource as ScannerGuardBansTable;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ViewScannerGuardBan;
@@ -11,21 +13,44 @@ it('hides the source column and filter unless the app receives forwarded bans', 
         ->assertTableFilterHidden('source');
 });
 
+it('hides the source column on a central app until the add_source migration ran', function () {
+    config()->set('scanner-guard.http.server.enabled', true);
+    Schema::table('scanner_guard_bans', function (Blueprint $table): void {
+        $table->dropIndex(['source']);
+        $table->dropColumn('source');
+    });
+
+    Livewire::test(ListScannerGuardBans::class)
+        ->assertTableColumnHidden('source')
+        ->assertTableFilterHidden('source');
+});
+
 it('shows the source and filters by satellite or local bans on the central app', function () {
+    if (! Schema::hasColumn('scanner_guard_bans', 'source')) {
+        $this->markTestSkipped('The installed core has no add_source migration.');
+    }
+
     config()->set('scanner-guard.http.server.enabled', true);
 
     $local = createBan();
     $stats = createBan(['source' => 'stats']);
-    $shop = createBan(['source' => 'shop']);
+    // A satellite literally named like the local token must stay selectable.
+    $shop = createBan(['source' => 'local']);
 
-    expect(ScannerGuardBansTable::sourceOptions())
-        ->toBe([ScannerGuardBansTable::LOCAL_SOURCE => __('filament-scanner-guard::default.table.local'), 'shop' => 'shop', 'stats' => 'stats']);
+    expect(ScannerGuardBansTable::sourceOptions())->toBe([
+        ScannerGuardBansTable::LOCAL_SOURCE => __('filament-scanner-guard::default.table.local'),
+        'source:local' => 'local',
+        'source:stats' => 'stats',
+    ]);
 
     Livewire::test(ListScannerGuardBans::class)
         ->assertTableColumnVisible('source')
-        ->filterTable('source', 'stats')
+        ->filterTable('source', 'source:stats')
         ->assertCanSeeTableRecords([$stats])
         ->assertCanNotSeeTableRecords([$local, $shop])
+        ->filterTable('source', 'source:local')
+        ->assertCanSeeTableRecords([$shop])
+        ->assertCanNotSeeTableRecords([$local, $stats])
         ->filterTable('source', ScannerGuardBansTable::LOCAL_SOURCE)
         ->assertCanSeeTableRecords([$local])
         ->assertCanNotSeeTableRecords([$stats, $shop]);
