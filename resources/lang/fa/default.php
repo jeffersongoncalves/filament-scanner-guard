@@ -28,6 +28,8 @@ return [
         'expires_at' => 'منقضی می‌شود در',
         'is_active' => 'فعال',
         'offense' => 'تخلف',
+        'source' => 'منبع',
+        'local' => 'محلی',
     ],
     'reason' => [
         'scanner_path' => 'مسیر اسکنر',

@@ -28,6 +28,8 @@ return [
         'expires_at' => 'समाप्ति तिथि',
         'is_active' => 'सक्रिय',
         'offense' => 'उल्लंघन',
+        'source' => 'स्रोत',
+        'local' => 'स्थानीय',
     ],
     'reason' => [
         'scanner_path' => 'स्कैनर पथ',

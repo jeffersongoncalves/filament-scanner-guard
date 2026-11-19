@@ -28,6 +28,8 @@ return [
         'expires_at' => '到期时间',
         'is_active' => '生效中',
         'offense' => '违规次数',
+        'source' => '来源',
+        'local' => '本地',
     ],
     'reason' => [
         'scanner_path' => '扫描器路径',
