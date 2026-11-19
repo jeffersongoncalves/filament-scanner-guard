@@ -9,6 +9,7 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklist\ScannerGuardBlocklistResource;
@@ -132,10 +133,12 @@ class ScannerGuardPlugin implements Plugin
 
     /**
      * Central app of the http driver: rows carry the satellite's `source`
-     * (core 2.0 add_source migration; null = banned locally).
+     * (core 2.0 add_source migration; null = banned locally). Off until that
+     * migration ran, or filtering and sorting on the column would fail.
      */
     public static function receivesForwardedBans(): bool
     {
-        return (bool) config('scanner-guard.http.server.enabled', false);
+        return (bool) config('scanner-guard.http.server.enabled', false)
+            && once(fn (): bool => Schema::hasColumn(config('scanner-guard.table', 'scanner_guard_bans'), 'source'));
     }
 }

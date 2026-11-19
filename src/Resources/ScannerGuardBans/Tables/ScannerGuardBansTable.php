@@ -22,8 +22,11 @@ use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ScannerGuardBansTable
 {
-    /** Filter value for locally banned rows (null source); not a valid source name. */
-    public const LOCAL_SOURCE = '__local__';
+    /** Filter value for locally banned rows (null source). */
+    public const LOCAL_SOURCE = 'local';
+
+    /** Satellite filter values carry this prefix, so no source name can collide with LOCAL_SOURCE. */
+    public const SOURCE_PREFIX = 'source:';
 
     public static function configure(Table $table): Table
     {
@@ -100,10 +103,10 @@ class ScannerGuardBansTable
                 SelectFilter::make('source')
                     ->label(__('filament-scanner-guard::default.table.source'))
                     ->options(fn (): array => static::sourceOptions())
-                    ->query(fn (Builder $query, array $data): Builder => match ($data['value'] ?? null) {
-                        null, '' => $query,
-                        static::LOCAL_SOURCE => $query->whereNull('source'),
-                        default => $query->where('source', $data['value']),
+                    ->query(fn (Builder $query, array $data): Builder => match (true) {
+                        ($data['value'] ?? null) === static::LOCAL_SOURCE => $query->whereNull('source'),
+                        str_starts_with((string) ($data['value'] ?? ''), static::SOURCE_PREFIX) => $query->where('source', substr($data['value'], strlen(static::SOURCE_PREFIX))),
+                        default => $query,
                     })
                     ->visible(fn (): bool => ScannerGuardPlugin::receivesForwardedBans()),
             ])
@@ -145,15 +148,21 @@ class ScannerGuardBansTable
      */
     public static function sourceOptions(): array
     {
-        /** @var array<string, string> $sources */
+        /** @var list<string> $sources */
         $sources = ScannerGuardBan::query()
             ->whereNotNull('source')
             ->distinct()
             ->orderBy('source')
-            ->pluck('source', 'source')
+            ->pluck('source')
             ->all();
 
-        return [static::LOCAL_SOURCE => __('filament-scanner-guard::default.table.local')] + $sources;
+        $options = [static::LOCAL_SOURCE => __('filament-scanner-guard::default.table.local')];
+
+        foreach ($sources as $source) {
+            $options[static::SOURCE_PREFIX.$source] = $source;
+        }
+
+        return $options;
     }
 
     /**
