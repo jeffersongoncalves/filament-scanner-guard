@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Expires At',
         'is_active' => 'Active',
         'offense' => 'Offense',
+        'source' => 'Source',
+        'local' => 'Local',
     ],
     'reason' => [
         'scanner_path' => 'Scanner Path',

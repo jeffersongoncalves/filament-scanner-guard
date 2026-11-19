@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Expira el',
         'is_active' => 'Activo',
         'offense' => 'Reincidencia',
+        'source' => 'Origen',
+        'local' => 'Local',
     ],
     'reason' => [
         'scanner_path' => 'Ruta de escáner',

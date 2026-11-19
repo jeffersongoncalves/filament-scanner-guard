@@ -129,4 +129,13 @@ class ScannerGuardPlugin implements Plugin
     {
         return static::escalation() !== [];
     }
+
+    /**
+     * Central app of the http driver: rows carry the satellite's `source`
+     * (core 2.0 add_source migration; null = banned locally).
+     */
+    public static function receivesForwardedBans(): bool
+    {
+        return (bool) config('scanner-guard.http.server.enabled', false);
+    }
 }

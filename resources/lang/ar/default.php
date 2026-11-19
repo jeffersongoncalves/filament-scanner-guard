@@ -28,6 +28,8 @@ return [
         'expires_at' => 'تاريخ الانتهاء',
         'is_active' => 'نشط',
         'offense' => 'المخالفة',
+        'source' => 'المصدر',
+        'local' => 'محلي',
     ],
     'reason' => [
         'scanner_path' => 'مسار الفحص',

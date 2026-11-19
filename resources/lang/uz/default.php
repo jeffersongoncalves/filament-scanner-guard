@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Tugash sanasi',
         'is_active' => 'Faol',
         'offense' => 'Qoidabuzarlik',
+        'source' => 'Manba',
+        'local' => 'Mahalliy',
     ],
     'reason' => [
         'scanner_path' => 'Skaner yoʻli',

@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Истекает',
         'is_active' => 'Активен',
         'offense' => 'Нарушение',
+        'source' => 'Источник',
+        'local' => 'Локальный',
     ],
     'reason' => [
         'scanner_path' => 'Путь сканера',
