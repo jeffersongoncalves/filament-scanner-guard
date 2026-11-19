@@ -15,10 +15,13 @@ it('hides the source column and filter unless the app receives forwarded bans', 
 
 it('hides the source column on a central app until the add_source migration ran', function () {
     config()->set('scanner-guard.http.server.enabled', true);
-    Schema::table('scanner_guard_bans', function (Blueprint $table): void {
-        $table->dropIndex(['source']);
-        $table->dropColumn('source');
-    });
+    // Core 1.7 has no add_source migration: nothing to drop there.
+    if (Schema::hasColumn('scanner_guard_bans', 'source')) {
+        Schema::table('scanner_guard_bans', function (Blueprint $table): void {
+            $table->dropIndex(['source']);
+            $table->dropColumn('source');
+        });
+    }
 
     Livewire::test(ListScannerGuardBans::class)
         ->assertTableColumnHidden('source')
