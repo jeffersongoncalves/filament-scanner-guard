@@ -28,6 +28,8 @@ return [
         'expires_at' => '有効期限',
         'is_active' => '有効',
         'offense' => '違反回数',
+        'source' => '送信元',
+        'local' => 'ローカル',
     ],
     'reason' => [
         'scanner_path' => 'スキャナーパス',

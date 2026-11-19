@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Закінчується',
         'is_active' => 'Активно',
         'offense' => 'Порушення',
+        'source' => 'Джерело',
+        'local' => 'Локальний',
     ],
     'reason' => [
         'scanner_path' => 'Шлях сканера',
