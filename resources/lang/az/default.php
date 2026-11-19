@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Bitmə Tarixi',
         'is_active' => 'Aktiv',
         'offense' => 'Pozuntu',
+        'source' => 'Mənbə',
+        'local' => 'Yerli',
     ],
     'reason' => [
         'scanner_path' => 'Skaner Yolu',

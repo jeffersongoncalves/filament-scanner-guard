@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Wygasa',
         'is_active' => 'Aktywna',
         'offense' => 'Wykroczenie',
+        'source' => 'Źródło',
+        'local' => 'Lokalny',
     ],
     'reason' => [
         'scanner_path' => 'Ścieżka skanera',
