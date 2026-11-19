@@ -7,7 +7,7 @@ use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\P
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklistResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklistResource\Pages\ManageScannerGuardBlocklist;
 use JeffersonGoncalves\ScannerGuard\Facades\ScannerGuard;
-use JeffersonGoncalves\ScannerGuard\Jobs\ExportDenylist;
+use JeffersonGoncalves\ScannerGuard\Jobs\SyncDenylist;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBlocklistEntry;
 use Livewire\Livewire;
@@ -64,15 +64,15 @@ it('drops bulk-deleted entries from the core blocklist', function () {
     expect(ScannerGuard::ipBlocklist())->toBe([]);
 });
 
-it('queues the nginx export on a blocklist change when sync_to_nginx is on', function () {
+it('queues a denylist sync on a blocklist change when sinks are configured', function () {
     Queue::fake();
-    config()->set('scanner-guard.sync_to_nginx', true);
+    config()->set('scanner-guard.sinks', ['denylist-sink']);
 
     Livewire::test(ManageScannerGuardBlocklist::class)
         ->callAction('create', ['type' => 'ip', 'value' => '1.2.3.4'])
         ->assertHasNoActionErrors();
 
-    Queue::assertPushed(ExportDenylist::class);
+    Queue::assertPushed(SyncDenylist::class);
 });
 
 it('bans a raw IP from the bans list', function () {
@@ -117,8 +117,8 @@ it('unbans an expired row too', function () {
     expect(ScannerGuardBan::find($ban->getKey()))->toBeNull();
 });
 
-it('still lifts every selected ban when queueing the export fails', function () {
-    config()->set('scanner-guard.sync_to_nginx', true);
+it('still lifts every selected ban when queueing the denylist sync fails', function () {
+    config()->set('scanner-guard.sinks', ['denylist-sink']);
     Queue::shouldReceive('connection')->andThrow(new RuntimeException('queue down'));
     Log::spy();
 
@@ -132,7 +132,7 @@ it('still lifts every selected ban when queueing the export fails', function () 
         ->and(ScannerGuard::isBanned('203.0.113.9'))->toBeFalse()
         ->and(ScannerGuard::isBanned('203.0.113.10'))->toBeFalse();
 
-    Log::shouldHaveReceived('error')->with('scanner-guard: failed to queue nginx export', Mockery::any());
+    Log::shouldHaveReceived('error')->with('scanner-guard: failed to queue denylist sync', Mockery::any());
 });
 
 it('keeps lifting the other selected bans when one lift throws', function () {

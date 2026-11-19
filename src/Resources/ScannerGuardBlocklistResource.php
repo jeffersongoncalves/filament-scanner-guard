@@ -112,7 +112,7 @@ class ScannerGuardBlocklistResource extends Resource
 
     /**
      * An IPv4/IPv6 address, optionally with a /prefix in range: what nginx
-     * accepts in `deny`. Same check the core export runs (it's protected there).
+     * accepts in `deny`. Same check as the core's denylist (public there only since 2.0).
      */
     public static function isValidRange(string $entry): bool
     {

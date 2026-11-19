@@ -29,7 +29,7 @@ class UnbanAction extends Action
 
     /**
      * Deletes this row (active or expired), then lets the core lift the IP:
-     * its other active rows, the cached ban and the nginx export.
+     * its other active rows, the cached ban and the denylist sinks.
      */
     public static function lift(ScannerGuardBan $record): void
     {

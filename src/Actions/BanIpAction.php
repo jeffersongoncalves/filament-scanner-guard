@@ -8,7 +8,7 @@ use JeffersonGoncalves\ScannerGuard\ScannerGuard;
 
 /**
  * Bans a raw IP through the core, like the middleware would: hashed row,
- * raw IP in cache for the nginx export, ban_duration, export on ban.
+ * raw IP in cache for the denylist sinks, ban_duration, sync on ban.
  */
 class BanIpAction extends Action
 {
