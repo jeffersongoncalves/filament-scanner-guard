@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.7.0 - 2026-11-18
+
+Supports jeffersongoncalves/laravel-scanner-guard 2.0 (constraint ^1.7 or ^2.0). The plugin only uses the public ban and unban API of the core, so nothing changes in the panel. See the core UPGRADE.md to move the nginx export to laravel-scanner-guard-nginx.
+
 ## 3.5.0 - 2026-11-02
 
 ### What's Changed
