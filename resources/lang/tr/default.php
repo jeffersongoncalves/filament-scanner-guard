@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Bitiş Tarihi',
         'is_active' => 'Aktif',
         'offense' => 'İhlal',
+        'source' => 'Kaynak',
+        'local' => 'Yerel',
     ],
     'reason' => [
         'scanner_path' => 'Tarayıcı Yolu',

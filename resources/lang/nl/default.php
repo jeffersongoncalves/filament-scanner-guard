@@ -28,6 +28,8 @@ return [
         'expires_at' => 'Verloopt op',
         'is_active' => 'Actief',
         'offense' => 'Overtreding',
+        'source' => 'Bron',
+        'local' => 'Lokaal',
     ],
     'reason' => [
         'scanner_path' => 'Scannerpad',
