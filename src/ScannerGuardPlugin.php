@@ -11,8 +11,10 @@ use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgents\ScannerGuardAgentResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklist\ScannerGuardBlocklistResource;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgent;
 
 class ScannerGuardPlugin implements Plugin
 {
@@ -44,6 +46,11 @@ class ScannerGuardPlugin implements Plugin
             ->pages([
                 MetricsPage::class,
             ]);
+
+        // Core 2.1+: the resource itself stays hidden unless this app receives heartbeats.
+        if (class_exists(ScannerGuardAgent::class)) {
+            $panel->resources([ScannerGuardAgentResource::class]);
+        }
     }
 
     public function boot(Panel $panel): void {}
@@ -140,5 +147,16 @@ class ScannerGuardPlugin implements Plugin
     {
         return (bool) config('scanner-guard.http.server.enabled', false)
             && once(fn (): bool => Schema::hasColumn(config('scanner-guard.table', 'scanner_guard_bans'), 'source'));
+    }
+
+    /**
+     * Central app recording scanner-guard-agent heartbeats (core 2.1+, after
+     * its create_scanner_guard_agents migration ran).
+     */
+    public static function receivesHeartbeats(): bool
+    {
+        return (bool) config('scanner-guard.http.server.enabled', false)
+            && class_exists(ScannerGuardAgent::class)
+            && once(fn (): bool => Schema::hasTable((new ScannerGuardAgent)->getTable()));
     }
 }

@@ -101,4 +101,17 @@ return [
         'label' => 'Usuń wygasłe',
         'success' => 'Wygasłe blokady usunięte',
     ],
+    'agents' => [
+        'label' => 'Agent',
+        'plural_label' => 'Agenci',
+        'source' => 'Źródło',
+        'status' => 'Status',
+        'online' => 'Online',
+        'offline' => 'Offline',
+        'version' => 'Wersja',
+        'rules' => 'Reguły',
+        'active_bans' => 'Aktywne bany',
+        'started_at' => 'Uruchomiono',
+        'last_seen_at' => 'Ostatnio widziany',
+    ],
 ];
