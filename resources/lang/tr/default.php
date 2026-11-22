@@ -101,4 +101,17 @@ return [
         'label' => 'Süresi dolmuşları temizle',
         'success' => 'Süresi dolmuş yasaklar temizlendi',
     ],
+    'agents' => [
+        'label' => 'Ajan',
+        'plural_label' => 'Ajanlar',
+        'source' => 'Kaynak',
+        'status' => 'Durum',
+        'online' => 'Çevrimiçi',
+        'offline' => 'Çevrimdışı',
+        'version' => 'Sürüm',
+        'rules' => 'Kurallar',
+        'active_bans' => 'Aktif yasaklar',
+        'started_at' => 'Başlatıldı',
+        'last_seen_at' => 'Son görülme',
+    ],
 ];

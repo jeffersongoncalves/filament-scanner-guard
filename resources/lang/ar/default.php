@@ -101,4 +101,17 @@ return [
         'label' => 'حذف المنتهية',
         'success' => 'تم حذف الحظر المنتهي',
     ],
+    'agents' => [
+        'label' => 'وكيل',
+        'plural_label' => 'الوكلاء',
+        'source' => 'المصدر',
+        'status' => 'الحالة',
+        'online' => 'متصل',
+        'offline' => 'غير متصل',
+        'version' => 'الإصدار',
+        'rules' => 'القواعد',
+        'active_bans' => 'الحظر النشط',
+        'started_at' => 'بدأ',
+        'last_seen_at' => 'آخر ظهور',
+    ],
 ];

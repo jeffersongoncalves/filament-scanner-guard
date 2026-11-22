@@ -101,4 +101,17 @@ return [
         'label' => 'Limpar expirados',
         'success' => 'Bloqueios expirados removidos',
     ],
+    'agents' => [
+        'label' => 'Agente',
+        'plural_label' => 'Agentes',
+        'source' => 'Origem',
+        'status' => 'Estado',
+        'online' => 'Online',
+        'offline' => 'Offline',
+        'version' => 'Versão',
+        'rules' => 'Regras',
+        'active_bans' => 'Banimentos ativos',
+        'started_at' => 'Iniciado',
+        'last_seen_at' => 'Visto pela última vez',
+    ],
 ];

@@ -101,4 +101,17 @@ return [
         'label' => 'Elimina scaduti',
         'success' => 'Ban scaduti eliminati',
     ],
+    'agents' => [
+        'label' => 'Agente',
+        'plural_label' => 'Agenti',
+        'source' => 'Origine',
+        'status' => 'Stato',
+        'online' => 'Online',
+        'offline' => 'Offline',
+        'version' => 'Versione',
+        'rules' => 'Regole',
+        'active_bans' => 'Ban attivi',
+        'started_at' => 'Avviato',
+        'last_seen_at' => 'Ultima attività',
+    ],
 ];
