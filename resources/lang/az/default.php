@@ -101,4 +101,17 @@ return [
         'label' => 'Vaxtı bitmişləri təmizlə',
         'success' => 'Vaxtı bitmiş banlar təmizləndi',
     ],
+    'agents' => [
+        'label' => 'Agent',
+        'plural_label' => 'Agentlər',
+        'source' => 'Mənbə',
+        'status' => 'Status',
+        'online' => 'Onlayn',
+        'offline' => 'Oflayn',
+        'version' => 'Versiya',
+        'rules' => 'Qaydalar',
+        'active_bans' => 'Aktiv qadağalar',
+        'started_at' => 'Başladı',
+        'last_seen_at' => 'Son görülmə',
+    ],
 ];

@@ -121,6 +121,16 @@ When this app receives bans from satellites over the core's `http` driver (`scan
 - A **Source** column (badge, searchable, sortable, toggleable) and entry on the View page — the satellite's `http.source`, or **Local** for bans made by this app
 - A **Source** filter listing every satellite seen, plus **Local**
 
+### Agents (central app, core 2.1+)
+
+When the central app also records heartbeats from [scanner-guard-agent](https://github.com/jeffersongoncalves/scanner-guard-agent) (core 2.1+, run its `create_scanner_guard_agents` migration), an **Agents** resource lists one row per source:
+
+- Columns: `source`, **Status** (Online / Offline — offline after `ScannerGuardAgent::STALE_AFTER` seconds without a heartbeat), `version`, `rules`, `active_bans`, `started_at`, `last_seen_at`
+- A **Status** filter (Online / Offline); the table refreshes every 30 seconds
+- **Delete** forgets a decommissioned agent — a live one reappears on its next heartbeat
+
+Without `http.server.enabled` or the migration, the resource stays hidden.
+
 ### Using the actions standalone
 
 If you'd rather wire the table yourself:
