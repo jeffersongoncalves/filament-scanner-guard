@@ -101,4 +101,17 @@ return [
         'label' => 'Abgelaufene löschen',
         'success' => 'Abgelaufene Sperren gelöscht',
     ],
+    'agents' => [
+        'label' => 'Agent',
+        'plural_label' => 'Agenten',
+        'source' => 'Quelle',
+        'status' => 'Status',
+        'online' => 'Online',
+        'offline' => 'Offline',
+        'version' => 'Version',
+        'rules' => 'Regeln',
+        'active_bans' => 'Aktive Sperren',
+        'started_at' => 'Gestartet',
+        'last_seen_at' => 'Zuletzt gesehen',
+    ],
 ];

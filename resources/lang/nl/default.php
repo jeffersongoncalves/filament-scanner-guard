@@ -101,4 +101,17 @@ return [
         'label' => 'Verlopen opschonen',
         'success' => 'Verlopen bans opgeschoond',
     ],
+    'agents' => [
+        'label' => 'Agent',
+        'plural_label' => 'Agents',
+        'source' => 'Bron',
+        'status' => 'Status',
+        'online' => 'Online',
+        'offline' => 'Offline',
+        'version' => 'Versie',
+        'rules' => 'Regels',
+        'active_bans' => 'Actieve bans',
+        'started_at' => 'Gestart',
+        'last_seen_at' => 'Laatst gezien',
+    ],
 ];

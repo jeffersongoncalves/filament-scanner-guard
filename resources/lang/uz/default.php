@@ -101,4 +101,17 @@ return [
         'label' => 'Muddati tugaganlarni tozalash',
         'success' => 'Muddati tugagan blokirovkalar tozalandi',
     ],
+    'agents' => [
+        'label' => 'Agent',
+        'plural_label' => 'Agentlar',
+        'source' => 'Manba',
+        'status' => 'Holat',
+        'online' => 'Onlayn',
+        'offline' => 'Oflayn',
+        'version' => 'Versiya',
+        'rules' => 'Qoidalar',
+        'active_bans' => 'Faol bloklar',
+        'started_at' => 'Ishga tushgan',
+        'last_seen_at' => 'Oxirgi marta ko‘rilgan',
+    ],
 ];
