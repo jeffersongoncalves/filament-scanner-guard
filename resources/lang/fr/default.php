@@ -101,4 +101,17 @@ return [
         'label' => 'Purger les expirés',
         'success' => 'Bannissements expirés purgés',
     ],
+    'agents' => [
+        'label' => 'Agent',
+        'plural_label' => 'Agents',
+        'source' => 'Source',
+        'status' => 'Statut',
+        'online' => 'En ligne',
+        'offline' => 'Hors ligne',
+        'version' => 'Version',
+        'rules' => 'Règles',
+        'active_bans' => 'Bannissements actifs',
+        'started_at' => 'Démarré',
+        'last_seen_at' => 'Vu pour la dernière fois',
+    ],
 ];

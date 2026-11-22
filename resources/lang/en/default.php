@@ -101,4 +101,17 @@ return [
         'label' => 'Purge expired',
         'success' => 'Expired bans purged',
     ],
+    'agents' => [
+        'label' => 'Agent',
+        'plural_label' => 'Agents',
+        'source' => 'Source',
+        'status' => 'Status',
+        'online' => 'Online',
+        'offline' => 'Offline',
+        'version' => 'Version',
+        'rules' => 'Rules',
+        'active_bans' => 'Active bans',
+        'started_at' => 'Started',
+        'last_seen_at' => 'Last seen',
+    ],
 ];

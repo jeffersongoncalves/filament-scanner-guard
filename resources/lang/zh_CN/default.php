@@ -101,4 +101,17 @@ return [
         'label' => '清理过期',
         'success' => '过期封禁已清理',
     ],
+    'agents' => [
+        'label' => '代理',
+        'plural_label' => '代理',
+        'source' => '来源',
+        'status' => '状态',
+        'online' => '在线',
+        'offline' => '离线',
+        'version' => '版本',
+        'rules' => '规则',
+        'active_bans' => '生效封禁',
+        'started_at' => '启动于',
+        'last_seen_at' => '最后在线',
+    ],
 ];
