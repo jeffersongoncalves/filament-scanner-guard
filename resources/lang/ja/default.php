@@ -101,4 +101,17 @@ return [
         'label' => '期限切れを削除',
         'success' => '期限切れ BAN を削除しました',
     ],
+    'agents' => [
+        'label' => 'エージェント',
+        'plural_label' => 'エージェント',
+        'source' => 'ソース',
+        'status' => 'ステータス',
+        'online' => 'オンライン',
+        'offline' => 'オフライン',
+        'version' => 'バージョン',
+        'rules' => 'ルール',
+        'active_bans' => '有効なBAN',
+        'started_at' => '起動',
+        'last_seen_at' => '最終確認',
+    ],
 ];

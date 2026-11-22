@@ -101,4 +101,17 @@ return [
         'label' => 'Purgar expirados',
         'success' => 'Bloqueos expirados purgados',
     ],
+    'agents' => [
+        'label' => 'Agente',
+        'plural_label' => 'Agentes',
+        'source' => 'Origen',
+        'status' => 'Estado',
+        'online' => 'En línea',
+        'offline' => 'Desconectado',
+        'version' => 'Versión',
+        'rules' => 'Reglas',
+        'active_bans' => 'Bloqueos activos',
+        'started_at' => 'Iniciado',
+        'last_seen_at' => 'Visto por última vez',
+    ],
 ];
