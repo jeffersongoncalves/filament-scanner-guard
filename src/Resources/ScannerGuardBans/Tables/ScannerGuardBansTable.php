@@ -42,9 +42,10 @@ class ScannerGuardBansTable
                     ->label(__('filament-scanner-guard::default.table.ip_hash'))
                     ->fontFamily('mono')
                     // The stored IP is encrypted: an IP is looked up by its hash, details on or off.
+                    // As typed too: the core hashes a forwarded IP's text as the satellite sent it.
                     ->searchable(query: fn (Builder $query, string $search): Builder => filter_var($search, FILTER_VALIDATE_IP) === false
                         ? $query->where('ip_hash', 'like', '%'.strtolower($search).'%')
-                        : $query->where('ip_hash', app(ScannerGuard::class)->hashIp(BanIpAction::canonicalIp($search))))
+                        : $query->whereIn('ip_hash', array_map(app(ScannerGuard::class)->hashIp(...), [$search, BanIpAction::canonicalIp($search)])))
                     ->copyable(),
                 TextColumn::make('ip')
                     ->label(__('filament-scanner-guard::default.ban_ip.form.ip'))
