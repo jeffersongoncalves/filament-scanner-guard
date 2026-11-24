@@ -30,6 +30,7 @@ return [
         'offense' => 'Récidive',
         'source' => 'Source',
         'local' => 'Local',
+        'path' => 'Chemin',
     ],
     'reason' => [
         'scanner_path' => 'Chemin du scanner',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => 'Débannir la sélection',
         'success' => 'Débanni',
     ],
+    'delete_warning' => 'Les IP et chemins enregistrés sont supprimés avec les bannissements et ne peuvent pas être récupérés.',
     'charts' => [
         'bans_per_day' => 'Bannissements par jour (:days derniers jours)',
         'bans_by_reason' => 'Bannissements par raison',

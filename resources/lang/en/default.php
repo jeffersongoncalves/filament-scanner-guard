@@ -30,6 +30,7 @@ return [
         'offense' => 'Offense',
         'source' => 'Source',
         'local' => 'Local',
+        'path' => 'Path',
     ],
     'reason' => [
         'scanner_path' => 'Scanner Path',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => 'Unban selected',
         'success' => 'Unbanned',
     ],
+    'delete_warning' => 'The stored IPs and paths are deleted with the bans and cannot be recovered.',
     'charts' => [
         'bans_per_day' => 'Bans per day (last :days days)',
         'bans_by_reason' => 'Bans by reason',

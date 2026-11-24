@@ -30,6 +30,7 @@ return [
         'offense' => 'Verstoß',
         'source' => 'Quelle',
         'local' => 'Lokal',
+        'path' => 'Pfad',
     ],
     'reason' => [
         'scanner_path' => 'Scanner-Pfad',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => 'Ausgewählte entsperren',
         'success' => 'Entsperrt',
     ],
+    'delete_warning' => 'Die gespeicherten IPs und Pfade werden mit den Sperren gelöscht und können nicht wiederhergestellt werden.',
     'charts' => [
         'bans_per_day' => 'Sperren pro Tag (letzte :days Tage)',
         'bans_by_reason' => 'Sperren nach Grund',

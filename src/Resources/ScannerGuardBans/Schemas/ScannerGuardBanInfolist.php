@@ -8,6 +8,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Tables\ScannerGuardBansTable;
 use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ScannerGuardBanInfolist
 {
@@ -22,6 +23,13 @@ class ScannerGuardBanInfolist
                             ->label(__('filament-scanner-guard::default.table.ip_hash'))
                             ->copyable()
                             ->fontFamily('mono'),
+                        TextEntry::make('ip')
+                            ->label(__('filament-scanner-guard::default.ban_ip.form.ip'))
+                            ->getStateUsing(fn (ScannerGuardBan $record): ?string => ScannerGuardBansTable::storedIp($record))
+                            ->placeholder('—')
+                            ->copyable()
+                            ->fontFamily('mono')
+                            ->visible(fn (): bool => ScannerGuardPlugin::storesDetails()),
                         TextEntry::make('reason')
                             ->label(__('filament-scanner-guard::default.table.reason'))
                             ->badge()
@@ -31,6 +39,12 @@ class ScannerGuardBanInfolist
                             ->label(__('filament-scanner-guard::default.table.matched_value'))
                             ->copyable()
                             ->columnSpanFull(),
+                        TextEntry::make('path')
+                            ->label(__('filament-scanner-guard::default.table.path'))
+                            ->placeholder('—')
+                            ->copyable()
+                            ->columnSpanFull()
+                            ->visible(fn (): bool => ScannerGuardPlugin::storesDetails()),
                         TextEntry::make('hit_count')
                             ->label(__('filament-scanner-guard::default.table.hit_count'))
                             ->numeric(),

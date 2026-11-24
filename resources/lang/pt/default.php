@@ -30,6 +30,7 @@ return [
         'offense' => 'Reincidência',
         'source' => 'Origem',
         'local' => 'Local',
+        'path' => 'Caminho',
     ],
     'reason' => [
         'scanner_path' => 'Caminho de Scanner',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => 'Desbloquear selecionados',
         'success' => 'Desbloqueado',
     ],
+    'delete_warning' => 'Os IPs e caminhos armazenados são eliminados com os bloqueios e não podem ser recuperados.',
     'charts' => [
         'bans_per_day' => 'Bloqueios por dia (últimos :days dias)',
         'bans_by_reason' => 'Bloqueios por motivo',

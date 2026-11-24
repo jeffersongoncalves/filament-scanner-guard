@@ -54,8 +54,9 @@ public function panel(Panel $panel): Panel
 
 This registers a **Scanner Guard Bans** resource (rows are written by the `scanner-guard` middleware, or by the **Ban IP** action), a **Blocklist** resource and a **Metrics** page, with:
 
-- Columns: `ip_hash`, `reason` (badge), `matched_value`, `hit_count`, `offense` (escalation only), `source` (central app only), `banned_at`, `expires_at`, `is_active`
+- Columns: `ip_hash`, `ip` and `path` (stored details only), `reason` (badge), `matched_value`, `hit_count`, `offense` (escalation only), `source` (central app only), `banned_at`, `expires_at`, `is_active`
 - A **Status** filter (active vs expired)
+- Search by IP: type a full IPv4/IPv6 address to find every ban of it (matched by its hash, so it works without stored details)
 - An **Unban** row action and an **Unban selected** bulk action — both delete the ban row (this is an audit-trail model, not a flag on an arbitrary model)
 - An **Export** header action and an **Export** bulk action (CSV, XLSX, PDF with preview) via [`jeffersongoncalves/filament-action-export`](https://github.com/jeffersongoncalves/filament-action-export) — synchronous, no queue or migrations needed; `matched_value` is exported in full with spreadsheet formulas neutralised
 - A **View** page per ban and an **Extend** action (1 hour / 1 day / 1 week / 1 month, added to the current expiry)
@@ -120,6 +121,15 @@ When this app receives bans from satellites over the core's `http` driver (`scan
 
 - A **Source** column (badge, searchable, sortable, toggleable) and entry on the View page — the satellite's `http.source`, or **Local** for bans made by this app
 - A **Source** filter listing every satellite seen, plus **Local**
+
+### Stored details (core 2.2+)
+
+When the core's `scanner-guard.store_details` is on (`SCANNER_GUARD_STORE_DETAILS=true`, run its `add_details` migration first), the plugin also shows, in the table, on the View page and in exports:
+
+- An **IP address** column (toggleable, copyable) — a dash for bans made while it was off, or encrypted with a key missing from `APP_PREVIOUS_KEYS`
+- A **Path** column (searchable, toggleable) — the request path that triggered the ban, without its query string; exported in full with spreadsheet formulas neutralised
+
+With details off (the default) none of this is shown. Everyone who can open the bans resource sees the IPs, so restrict it with a policy on `ScannerGuardBan` if needed. Unbanning and **Purge expired** delete the rows, stored details included; their confirmation says so.
 
 ### Agents (central app, core 2.1+)
 
