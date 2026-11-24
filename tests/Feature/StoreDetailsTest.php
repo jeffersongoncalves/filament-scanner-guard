@@ -3,6 +3,9 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use JeffersonGoncalves\Filament\ScannerGuard\Actions\PurgeExpiredBansAction;
+use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
+use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ViewScannerGuardBan;
@@ -97,4 +100,23 @@ it('exports the full path and neutralises spreadsheet formulas', function () {
     expect($format(createBan(['path' => $long])))->toBe($long)
         ->and($format(createBan(['path' => '=1+1'])))->toBe("'=1+1")
         ->and($format(createBan()))->toBe('');
+});
+
+it('warns that deleting bans deletes their stored details', function () {
+    skipWithoutDetails();
+
+    $page = Livewire::test(ViewScannerGuardBan::class, ['record' => createBan()->getKey()])->instance();
+    $descriptions = fn (): array => array_map(strval(...), [
+        PurgeExpiredBansAction::make()->getModalDescription(),
+        UnbanAction::make()->getModalDescription(),
+        UnbanBulkAction::make()->getModalDescription(),
+        $page->getAction('unban')->getModalDescription(),
+    ]);
+
+    // Details off: Filament's default confirmation text.
+    expect(array_unique($descriptions()))->toBe([__('filament-actions::modal.confirmation')]);
+
+    config()->set('scanner-guard.store_details', true);
+
+    expect(array_unique($descriptions()))->toBe([__('filament-scanner-guard::default.delete_warning')]);
 });

@@ -4,6 +4,7 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Actions;
 
 use Filament\Actions\Action;
 use Illuminate\Support\Facades\Artisan;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class PurgeExpiredBansAction extends Action
@@ -21,6 +22,7 @@ class PurgeExpiredBansAction extends Action
             ->icon('heroicon-o-trash')
             ->color('danger')
             ->requiresConfirmation()
+            ->modalDescription(fn (): string => ScannerGuardPlugin::deleteWarning())
             ->action(function (): void {
                 // Reconcile daily stats from the remaining rows first, so bans
                 // recorded before ban-time counting still keep their day.

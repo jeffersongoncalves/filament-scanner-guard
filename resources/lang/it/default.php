@@ -75,6 +75,7 @@ return [
         'bulk_label' => 'Sbanna selezionati',
         'success' => 'Sbannato',
     ],
+    'delete_warning' => 'Gli IP e i percorsi memorizzati vengono eliminati insieme ai ban e non possono essere recuperati.',
     'charts' => [
         'bans_per_day' => 'Ban al giorno (ultimi :days giorni)',
         'bans_by_reason' => 'Ban per motivo',

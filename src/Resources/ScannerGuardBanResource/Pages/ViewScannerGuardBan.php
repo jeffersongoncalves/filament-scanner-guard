@@ -7,6 +7,7 @@ use Filament\Resources\Pages\ViewRecord;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanPageAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ViewScannerGuardBan extends ViewRecord
@@ -22,6 +23,7 @@ class ViewScannerGuardBan extends ViewRecord
                 ->label(__('filament-scanner-guard::default.unban.label'))
                 ->icon('heroicon-o-check-circle')
                 ->color('success')
+                ->modalDescription(fn (): string => ScannerGuardPlugin::deleteWarning())
                 ->using(function (ScannerGuardBan $record): bool {
                     UnbanAction::lift($record);
 
