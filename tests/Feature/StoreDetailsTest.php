@@ -9,6 +9,7 @@ use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanBulkAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ViewScannerGuardBan;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 use JeffersonGoncalves\ScannerGuard\ScannerGuard;
 use Livewire\Livewire;
 
@@ -30,6 +31,17 @@ it('finds the bans of an ip by its hash, without stored details', function () {
             ->assertCanSeeTableRecords([$ban])
             ->assertCanNotSeeTableRecords([$other]);
     }
+});
+
+it('finds a forwarded ban by the expanded ipv6 text its satellite sent', function () {
+    app(ScannerGuard::class)->recordForwardedBan('2001:0db8:0000:0000:0000:0000:0000:0001', ScannerGuardBan::REASON_SCANNER_PATH, 'wp-admin*', 3, now(), now()->addDay());
+    $ban = ScannerGuardBan::query()->sole();
+    $other = createBan();
+
+    Livewire::test(ListScannerGuardBans::class)
+        ->searchTable('2001:0db8:0000:0000:0000:0000:0000:0001')
+        ->assertCanSeeTableRecords([$ban])
+        ->assertCanNotSeeTableRecords([$other]);
 });
 
 it('hides the ip and path unless the app stores details', function () {
