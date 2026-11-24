@@ -30,6 +30,7 @@ return [
         'offense' => 'Recidiva',
         'source' => 'Origine',
         'local' => 'Locale',
+        'path' => 'Percorso',
     ],
     'reason' => [
         'scanner_path' => 'Percorso scanner',

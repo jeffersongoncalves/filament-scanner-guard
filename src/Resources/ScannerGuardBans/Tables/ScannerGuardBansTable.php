@@ -10,6 +10,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\Builder;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\BanIpAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanAction;
@@ -19,6 +20,7 @@ use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\FilamentExportAction\Actions\FilamentExportBulkAction;
 use JeffersonGoncalves\FilamentExportAction\Actions\FilamentExportHeaderAction;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
+use JeffersonGoncalves\ScannerGuard\ScannerGuard;
 
 class ScannerGuardBansTable
 {
@@ -39,8 +41,19 @@ class ScannerGuardBansTable
                 TextColumn::make('ip_hash')
                     ->label(__('filament-scanner-guard::default.table.ip_hash'))
                     ->fontFamily('mono')
-                    ->searchable()
+                    // The stored IP is encrypted: an IP is looked up by its hash, details on or off.
+                    ->searchable(query: fn (Builder $query, string $search): Builder => filter_var($search, FILTER_VALIDATE_IP) === false
+                        ? $query->where('ip_hash', 'like', '%'.strtolower($search).'%')
+                        : $query->where('ip_hash', app(ScannerGuard::class)->hashIp(BanIpAction::canonicalIp($search))))
                     ->copyable(),
+                TextColumn::make('ip')
+                    ->label(__('filament-scanner-guard::default.ban_ip.form.ip'))
+                    ->fontFamily('mono')
+                    ->getStateUsing(fn (ScannerGuardBan $record): ?string => static::storedIp($record))
+                    ->placeholder('—')
+                    ->copyable()
+                    ->toggleable()
+                    ->visible(fn (): bool => ScannerGuardPlugin::storesDetails()),
                 TextColumn::make('reason')
                     ->label(__('filament-scanner-guard::default.table.reason'))
                     ->badge()
@@ -50,6 +63,13 @@ class ScannerGuardBansTable
                     ->label(__('filament-scanner-guard::default.table.matched_value'))
                     ->searchable()
                     ->limit(40),
+                TextColumn::make('path')
+                    ->label(__('filament-scanner-guard::default.table.path'))
+                    ->placeholder('—')
+                    ->searchable()
+                    ->limit(40)
+                    ->toggleable()
+                    ->visible(fn (): bool => ScannerGuardPlugin::storesDetails()),
                 TextColumn::make('hit_count')
                     ->label(__('filament-scanner-guard::default.table.hit_count'))
                     ->numeric()
@@ -166,17 +186,38 @@ class ScannerGuardBansTable
     }
 
     /**
-     * Export the full matched value (the column is truncated in the table) and
-     * neutralise spreadsheet formulas: it comes straight from attacker request paths.
+     * Null when the row holds no IP, or one encrypted with a key this app no
+     * longer has (APP_KEY rotated without APP_PREVIOUS_KEYS): that must not
+     * take the whole page down.
+     */
+    public static function storedIp(ScannerGuardBan $record): ?string
+    {
+        try {
+            return $record->getAttribute('ip');
+        } catch (DecryptException) {
+            return null;
+        }
+    }
+
+    /**
+     * Neutralises spreadsheet formulas in values that come from attacker requests.
+     */
+    protected static function exportSafe(string $value): string
+    {
+        return preg_match('/^[=+\-@\t\r]/', $value) ? "'".$value : $value;
+    }
+
+    /**
+     * Export the full matched value and path (the columns are truncated in the
+     * table), neutralised: they come straight from attacker request paths.
      *
      * @return array<string, Closure>
      */
     public static function exportFormatStates(): array
     {
         return [
-            'matched_value' => fn (ScannerGuardBan $record): string => preg_match('/^[=+\-@\t\r]/', $record->matched_value)
-                ? "'".$record->matched_value
-                : $record->matched_value,
+            'matched_value' => fn (ScannerGuardBan $record): string => static::exportSafe($record->matched_value),
+            'path' => fn (ScannerGuardBan $record): string => static::exportSafe((string) $record->path),
             'is_active' => fn (ScannerGuardBan $record): string => $record->is_active
                 ? __('filament-scanner-guard::default.filter.true_label')
                 : __('filament-scanner-guard::default.filter.false_label'),

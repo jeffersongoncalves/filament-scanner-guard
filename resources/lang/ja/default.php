@@ -30,6 +30,7 @@ return [
         'offense' => '違反回数',
         'source' => '送信元',
         'local' => 'ローカル',
+        'path' => 'パス',
     ],
     'reason' => [
         'scanner_path' => 'スキャナーパス',

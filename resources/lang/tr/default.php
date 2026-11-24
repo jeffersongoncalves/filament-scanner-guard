@@ -30,6 +30,7 @@ return [
         'offense' => 'İhlal',
         'source' => 'Kaynak',
         'local' => 'Yerel',
+        'path' => 'Yol',
     ],
     'reason' => [
         'scanner_path' => 'Tarayıcı Yolu',
