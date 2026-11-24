@@ -75,6 +75,7 @@ return [
         'bulk_label' => 'Seçilənləri bandan çıxar',
         'success' => 'Bandan çıxarıldı',
     ],
+    'delete_warning' => 'Saxlanılan IP ünvanları və yollar banlarla birlikdə silinir və bərpa edilə bilməz.',
     'charts' => [
         'bans_per_day' => 'Günlük banlar (son :days gün)',
         'bans_by_reason' => 'Səbəbə görə banlar',

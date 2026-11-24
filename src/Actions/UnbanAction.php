@@ -4,6 +4,7 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Actions;
 
 use Filament\Actions\Action;
 use Filament\Support\Icons\Heroicon;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 use JeffersonGoncalves\ScannerGuard\ScannerGuard;
 
@@ -22,6 +23,7 @@ class UnbanAction extends Action
             ->icon(Heroicon::OutlinedCheckCircle)
             ->color('success')
             ->requiresConfirmation()
+            ->modalDescription(fn (): ?string => ScannerGuardPlugin::deleteWarning())
             ->action(function (ScannerGuardBan $record): void {
                 static::lift($record);
             })

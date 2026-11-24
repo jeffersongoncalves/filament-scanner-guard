@@ -129,7 +129,7 @@ When the core's `scanner-guard.store_details` is on (`SCANNER_GUARD_STORE_DETAIL
 - An **IP address** column (toggleable, copyable) — a dash for bans made while it was off, or encrypted with a key missing from `APP_PREVIOUS_KEYS`
 - A **Path** column (searchable, toggleable) — the request path that triggered the ban, without its query string; exported in full with spreadsheet formulas neutralised
 
-With details off (the default) none of this is shown. Everyone who can open the bans resource sees the IPs, so restrict it with a policy on `ScannerGuardBan` if needed. Unbanning and **Purge expired** delete the rows, stored details included.
+With details off (the default) none of this is shown. Everyone who can open the bans resource sees the IPs, so restrict it with a policy on `ScannerGuardBan` if needed. Unbanning and **Purge expired** delete the rows, stored details included; their confirmation says so.
 
 ### Agents (central app, core 2.1+)
 

@@ -75,6 +75,7 @@ return [
         'bulk_label' => 'Seçilenlerin yasağını kaldır',
         'success' => 'Yasak kaldırıldı',
     ],
+    'delete_warning' => 'Saklanan IP adresleri ve yollar yasaklarla birlikte silinir ve geri getirilemez.',
     'charts' => [
         'bans_per_day' => 'Günlük yasak (son :days gün)',
         'bans_by_reason' => 'Sebebe göre yasak',

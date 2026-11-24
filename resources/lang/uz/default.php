@@ -75,6 +75,7 @@ return [
         'bulk_label' => 'Tanlanganlarni blokdan chiqarish',
         'success' => 'Blokdan chiqarildi',
     ],
+    'delete_warning' => 'Saqlangan IP manzillar va yoʻllar bloklar bilan birga oʻchiriladi va ularni tiklab boʻlmaydi.',
     'charts' => [
         'bans_per_day' => 'Kunlik blokirovkalar (soʻnggi :days kun)',
         'bans_by_reason' => 'Sabab boʻyicha blokirovkalar',
