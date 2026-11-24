@@ -30,6 +30,7 @@ return [
         'offense' => '違反回数',
         'source' => '送信元',
         'local' => 'ローカル',
+        'path' => 'パス',
     ],
     'reason' => [
         'scanner_path' => 'スキャナーパス',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => '選択を BAN 解除',
         'success' => 'BAN を解除しました',
     ],
+    'delete_warning' => '保存された IP とパスは BAN とともに削除され、復元できません。',
     'charts' => [
         'bans_per_day' => '日別 BAN（直近:days日）',
         'bans_by_reason' => '理由別 BAN',

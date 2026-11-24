@@ -30,6 +30,7 @@ return [
         'offense' => 'Reincidencia',
         'source' => 'Origen',
         'local' => 'Local',
+        'path' => 'Ruta',
     ],
     'reason' => [
         'scanner_path' => 'Ruta de escáner',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => 'Desbloquear seleccionados',
         'success' => 'Desbloqueado',
     ],
+    'delete_warning' => 'Las IP y rutas almacenadas se eliminan junto con los bloqueos y no se pueden recuperar.',
     'charts' => [
         'bans_per_day' => 'Bloqueos por día (últimos :days días)',
         'bans_by_reason' => 'Bloqueos por motivo',

@@ -30,6 +30,7 @@ return [
         'offense' => 'Wykroczenie',
         'source' => 'Źródło',
         'local' => 'Lokalny',
+        'path' => 'Ścieżka',
     ],
     'reason' => [
         'scanner_path' => 'Ścieżka skanera',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => 'Odblokuj zaznaczone',
         'success' => 'Odblokowano',
     ],
+    'delete_warning' => 'Zapisane adresy IP i ścieżki są usuwane wraz z blokadami i nie można ich odzyskać.',
     'charts' => [
         'bans_per_day' => 'Blokady dziennie (ostatnie :days dni)',
         'bans_by_reason' => 'Blokady według powodu',

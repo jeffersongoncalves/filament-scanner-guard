@@ -5,6 +5,7 @@ namespace JeffersonGoncalves\Filament\ScannerGuard\Actions;
 use Filament\Actions\BulkAction;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Collection;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 use Throwable;
 
@@ -23,6 +24,7 @@ class UnbanBulkAction extends BulkAction
             ->icon(Heroicon::OutlinedCheckCircle)
             ->color('success')
             ->requiresConfirmation()
+            ->modalDescription(fn (): ?string => ScannerGuardPlugin::deleteWarning())
             ->action(function (Collection $records): void {
                 foreach ($records as $record) {
                     if (! $record instanceof ScannerGuardBan) {
