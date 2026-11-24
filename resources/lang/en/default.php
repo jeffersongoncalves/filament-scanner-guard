@@ -30,6 +30,7 @@ return [
         'offense' => 'Offense',
         'source' => 'Source',
         'local' => 'Local',
+        'path' => 'Path',
     ],
     'reason' => [
         'scanner_path' => 'Scanner Path',

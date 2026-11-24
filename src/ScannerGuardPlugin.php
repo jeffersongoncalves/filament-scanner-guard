@@ -150,6 +150,16 @@ class ScannerGuardPlugin implements Plugin
     }
 
     /**
+     * Ban rows carry the IP and request path (core 2.2+ store_details). Off
+     * until its add_details migration ran, or searching the path would fail.
+     */
+    public static function storesDetails(): bool
+    {
+        return (bool) config('scanner-guard.store_details', false)
+            && once(fn (): bool => Schema::hasColumns(config('scanner-guard.table', 'scanner_guard_bans'), ['ip', 'path']));
+    }
+
+    /**
      * Central app recording scanner-guard-agent heartbeats (core 2.1+, after
      * its create_scanner_guard_agents migration ran).
      */

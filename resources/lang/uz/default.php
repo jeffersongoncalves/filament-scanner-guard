@@ -30,6 +30,7 @@ return [
         'offense' => 'Qoidabuzarlik',
         'source' => 'Manba',
         'local' => 'Mahalliy',
+        'path' => 'Yoʻl',
     ],
     'reason' => [
         'scanner_path' => 'Skaner yoʻli',

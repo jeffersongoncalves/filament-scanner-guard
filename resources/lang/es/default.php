@@ -30,6 +30,7 @@ return [
         'offense' => 'Reincidencia',
         'source' => 'Origen',
         'local' => 'Local',
+        'path' => 'Ruta',
     ],
     'reason' => [
         'scanner_path' => 'Ruta de escáner',
