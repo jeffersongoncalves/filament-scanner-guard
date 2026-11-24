@@ -30,6 +30,7 @@ return [
         'offense' => 'Overtreding',
         'source' => 'Bron',
         'local' => 'Lokaal',
+        'path' => 'Pad',
     ],
     'reason' => [
         'scanner_path' => 'Scannerpad',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => 'Selectie deblokkeren',
         'success' => 'Gedeblokkeerd',
     ],
+    'delete_warning' => 'De opgeslagen IP\'s en paden worden samen met de bans verwijderd en kunnen niet worden hersteld.',
     'charts' => [
         'bans_per_day' => 'Bans per dag (laatste :days dagen)',
         'bans_by_reason' => 'Bans per reden',

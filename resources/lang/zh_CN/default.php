@@ -30,6 +30,7 @@ return [
         'offense' => '违规次数',
         'source' => '来源',
         'local' => '本地',
+        'path' => '路径',
     ],
     'reason' => [
         'scanner_path' => '扫描器路径',
@@ -74,6 +75,7 @@ return [
         'bulk_label' => '解禁所选',
         'success' => '已解禁',
     ],
+    'delete_warning' => '已存储的 IP 和路径将随封禁记录一起删除，且无法恢复。',
     'charts' => [
         'bans_per_day' => '每日封禁（最近:days天）',
         'bans_by_reason' => '按原因统计封禁',
