@@ -30,6 +30,7 @@ return [
         'offense' => '违规次数',
         'source' => '来源',
         'local' => '本地',
+        'path' => '路径',
     ],
     'reason' => [
         'scanner_path' => '扫描器路径',

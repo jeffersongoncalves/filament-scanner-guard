@@ -30,6 +30,7 @@ return [
         'offense' => 'Overtreding',
         'source' => 'Bron',
         'local' => 'Lokaal',
+        'path' => 'Pad',
     ],
     'reason' => [
         'scanner_path' => 'Scannerpad',

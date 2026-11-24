@@ -30,6 +30,7 @@ return [
         'offense' => 'Wykroczenie',
         'source' => 'Źródło',
         'local' => 'Lokalny',
+        'path' => 'Ścieżka',
     ],
     'reason' => [
         'scanner_path' => 'Ścieżka skanera',

@@ -30,6 +30,7 @@ return [
         'offense' => 'Pozuntu',
         'source' => 'Mənbə',
         'local' => 'Yerli',
+        'path' => 'Yol',
     ],
     'reason' => [
         'scanner_path' => 'Skaner Yolu',

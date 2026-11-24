@@ -30,6 +30,7 @@ return [
         'offense' => 'المخالفة',
         'source' => 'المصدر',
         'local' => 'محلي',
+        'path' => 'المسار',
     ],
     'reason' => [
         'scanner_path' => 'مسار الفحص',
