@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.12.0 - 2026-11-25
+
+- **Bans by source** chart on the Metrics page: one slice per server or service that forwards bans (the satellite or agent `source`), plus **Local** for this app's own bans. Shown only on a central app that receives forwarded bans (http server enabled and the `add_source` migration ran).
+- **Fix:** the **Bans by reason** chart was empty for bans forwarded by agents: it only counted five fixed reasons. It now charts every stored reason (`ssh_bruteforce`, `web_attack`, ...), ordered by total.
+- **Fix:** an unknown reason showed the "Scanner path" badge in the table, view page and export. It now shows the reason as stored.
+- New label translated in all 19 languages.
+
 ## 3.11.0 - 2026-11-25
 
 - **Set up an agent** header action on the agents list: the steps to install and configure a [scanner-guard-agent](https://github.com/jeffersongoncalves/scanner-guard-agent), with copyable commands (this app's URL and your IP filled in).
@@ -10,6 +17,7 @@ All notable changes to this project will be documented in this file.
   
   ```php
   ScannerGuardPlugin::make()->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+  
   
   ```
   The user types their password (5 attempts a minute). The secret travels in a browser event only, never in the page, the Livewire state or the log, and each reveal is logged with the user and source. Allow only people you would give the `.env` to.
