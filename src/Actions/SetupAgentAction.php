@@ -45,7 +45,8 @@ class SetupAgentAction extends Action
             ->modalSubmitAction(fn (StaticAction $action): StaticAction|bool => static::canReveal() ? $action : false)
             ->modalSubmitActionLabel(__('filament-scanner-guard::default.agents.setup.reveal'))
             ->action(function (array $data, Component $livewire, ?Form $form): void {
-                abort_unless(static::canReveal(), 403);
+                // The password too: without its field (permission granted mid-request) it was never checked.
+                abort_unless(static::canReveal() && filled($data['password'] ?? null), 403);
 
                 $source = filled($data['source'] ?? null) ? (string) $data['source'] : null;
                 $secret = app(ScannerGuard::class)->secretFor($source);
@@ -133,8 +134,8 @@ class SetupAgentAction extends Action
                 ['install', 'curl -fsSL https://raw.githubusercontent.com/jeffersongoncalves/scanner-guard-agent/main/install.sh | sudo sh'],
                 ['config', "source: vps-01\ncentral:\n  url: {$url}\n  secret_file: /etc/scanner-guard/secret\nignore: [{$ip}]"],
                 ['secret', "sudo sh -c 'umask 077; cat > /etc/scanner-guard/secret'"],
-                ['test', 'journalctl -u ssh -u sshd --since -1d -o cat | sudo scanner-guard-agent test -'],
-                ['start', "sudo systemctl enable --now scanner-guard-agent\njournalctl -u scanner-guard-agent -f"],
+                ['test', 'sudo journalctl -u ssh -u sshd --since -1d -o cat | sudo scanner-guard-agent test -'],
+                ['start', "sudo systemctl enable --now scanner-guard-agent\nsudo journalctl -u scanner-guard-agent -f"],
             ],
         );
     }

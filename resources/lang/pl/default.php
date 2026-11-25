@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'Adres IPv4/IPv6 lub zakres CIDR, np. 185.177.72.0/24. Blokada stała.',
             'user_agent' => 'Wzorzec fnmatch, bez rozróżniania wielkości liter, np. *zgrab*. Porównywany z pełnym User-Agent.',
-            'ignore' => 'Adres IPv4/IPv6 lub zakres CIDR, który nigdy nie jest blokowany, np. własny.',
+            'ignore' => 'Adres IPv4/IPv6 lub zakres CIDR, który nigdy nie jest blokowany, np. własny. Zablokowany zakres, który go zawiera, nadal obowiązuje w sinkach (nginx, Cloudflare...): usuń lub podziel ten zakres.',
         ],
         'invalid_ip' => 'Podaj prawidłowy adres IP lub zakres CIDR.',
         'too_broad' => 'Zakres zbyt szeroki: użyj co najmniej /8 (IPv4) lub /16 (IPv6).',
