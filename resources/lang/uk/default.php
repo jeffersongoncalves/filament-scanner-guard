@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Заборони за днями (останні :days днів)',
         'bans_by_reason' => 'Заборони за причиною',
+        'bans_by_source' => 'Заборони за джерелом',
         'top_matched_values' => 'Топ збіглих значень',
     ],
     'infolist' => [

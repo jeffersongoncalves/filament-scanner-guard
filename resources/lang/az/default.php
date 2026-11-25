@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Günlük banlar (son :days gün)',
         'bans_by_reason' => 'Səbəbə görə banlar',
+        'bans_by_source' => 'Mənbəyə görə banlar',
         'top_matched_values' => 'Top uyğun dəyərlər',
     ],
     'infolist' => [

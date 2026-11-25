@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Bannissements par jour (:days derniers jours)',
         'bans_by_reason' => 'Bannissements par raison',
+        'bans_by_source' => 'Bannissements par source',
         'top_matched_values' => 'Principales valeurs correspondantes',
     ],
     'infolist' => [
