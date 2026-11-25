@@ -149,7 +149,9 @@ class ScannerGuardBansTable
             ScannerGuardBan::REASON_NOT_FOUND_FLOOD => __('filament-scanner-guard::default.reason.not_found_flood'),
             ScannerGuardBan::REASON_USER_AGENT => __('filament-scanner-guard::default.reason.user_agent'),
             BanIpAction::REASON => __('filament-scanner-guard::default.reason.manual'),
-            default => __('filament-scanner-guard::default.reason.scanner_path'),
+            ScannerGuardBan::REASON_SCANNER_PATH => __('filament-scanner-guard::default.reason.scanner_path'),
+            // Forwarded agent bans store their rule name (ssh_bruteforce, web_attack, ...): show it raw.
+            default => $reason,
         };
     }
 
