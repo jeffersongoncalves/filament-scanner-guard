@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'Wzorzec User-Agent',
+            'ignore' => 'Nigdy nie blokuj',
         ],
         'help' => [
             'ip' => 'Adres IPv4/IPv6 lub zakres CIDR, np. 185.177.72.0/24. Blokada stała.',
             'user_agent' => 'Wzorzec fnmatch, bez rozróżniania wielkości liter, np. *zgrab*. Porównywany z pełnym User-Agent.',
+            'ignore' => 'Adres IPv4/IPv6 lub zakres CIDR, który nigdy nie jest blokowany, np. własny.',
         ],
         'invalid_ip' => 'Podaj prawidłowy adres IP lub zakres CIDR.',
+        'too_broad' => 'Zakres zbyt szeroki: użyj co najmniej /8 (IPv4) lub /16 (IPv6).',
     ],
     'filter' => [
         'label' => 'Status',
@@ -115,5 +118,20 @@ return [
         'active_bans' => 'Aktywne bany',
         'started_at' => 'Uruchomiono',
         'last_seen_at' => 'Ostatnio widziany',
+        'setup' => [
+            'label' => 'Skonfiguruj agenta',
+            'install' => 'Zainstaluj agenta',
+            'config' => 'Edytuj /etc/scanner-guard/agent.yaml: nazwę tego serwera i własne adresy IP',
+            'secret' => 'Zapisz sekret: uruchom, wklej, naciśnij Enter, a potem Ctrl+D',
+            'test' => 'Sprawdź, co zostałoby zablokowane',
+            'start' => 'Uruchom go. Pojawi się tutaj w ciągu minuty',
+            'copy' => 'Kopiuj',
+            'copied' => 'Skopiowano',
+            'reveal' => 'Pokaż sekret',
+            'password' => 'Twoje hasło',
+            'secret_of' => 'Sekret dla',
+            'shared' => 'Wspólny sekret',
+            'missing' => 'Nie skonfigurowano sekretu.',
+        ],
     ],
 ];
