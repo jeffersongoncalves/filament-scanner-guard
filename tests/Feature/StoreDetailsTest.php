@@ -46,8 +46,35 @@ it('finds a forwarded ban by the expanded ipv6 text its satellite sent', functio
 
 it('hides the ip and path unless the app stores details', function () {
     Livewire::test(ListScannerGuardBans::class)
+        ->assertTableColumnVisible('ip_hash')
         ->assertTableColumnHidden('ip')
         ->assertTableColumnHidden('path');
+});
+
+it('shows the ip instead of its hash and still finds bans by ip or hash', function () {
+    skipWithoutDetails();
+    config()->set('scanner-guard.store_details', true);
+
+    $hash = app(ScannerGuard::class)->hashIp('203.0.113.5');
+    $ban = createBan(['ip_hash' => $hash, 'ip' => '203.0.113.5']);
+    $old = createBan(['ip_hash' => str_repeat('b', 64)]);
+
+    foreach (['203.0.113.5', substr($hash, 0, 20)] as $search) {
+        Livewire::test(ListScannerGuardBans::class)
+            ->assertTableColumnHidden('ip_hash')
+            ->assertTableColumnVisible('ip')
+            ->searchTable($search)
+            ->assertCanSeeTableRecords([$ban])
+            ->assertCanNotSeeTableRecords([$old]);
+    }
+
+    Livewire::test(ViewScannerGuardBan::class, ['record' => $ban->getKey()])
+        ->assertSee('203.0.113.5')
+        ->assertDontSee($hash);
+
+    // A ban stored before details were on has no ip: its view keeps the hash.
+    Livewire::test(ViewScannerGuardBan::class, ['record' => $old->getKey()])
+        ->assertSee(str_repeat('b', 64));
 });
 
 it('hides the ip and path until the add_details migration ran', function () {

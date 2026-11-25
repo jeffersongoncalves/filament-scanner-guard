@@ -16,7 +16,9 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\BanIpAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
@@ -57,17 +59,16 @@ class ScannerGuardBanResource extends Resource
                 TextColumn::make('ip_hash')
                     ->label(__('filament-scanner-guard::default.table.ip_hash'))
                     ->fontFamily('mono')
-                    // The stored IP is encrypted: an IP is looked up by its hash, details on or off.
-                    // As typed too: the core hashes a forwarded IP's text as the satellite sent it.
-                    ->searchable(query: fn (Builder $query, string $search): Builder => filter_var($search, FILTER_VALIDATE_IP) === false
-                        ? $query->where('ip_hash', 'like', '%'.strtolower($search).'%')
-                        : $query->whereIn('ip_hash', array_map(app(ScannerGuard::class)->hashIp(...), [$search, BanIpAction::canonicalIp($search)])))
-                    ->copyable(),
+                    ->searchable(query: static::searchIp(...))
+                    ->copyable()
+                    // The readable IP replaces the hash when the app stores details.
+                    ->visible(fn (): bool => ! ScannerGuardPlugin::storesDetails()),
                 TextColumn::make('ip')
                     ->label(__('filament-scanner-guard::default.ban_ip.form.ip'))
                     ->fontFamily('mono')
                     ->getStateUsing(fn (ScannerGuardBan $record): ?string => static::storedIp($record))
                     ->placeholder('—')
+                    ->searchable(query: static::searchIp(...))
                     ->copyable()
                     ->toggleable()
                     ->visible(fn (): bool => ScannerGuardPlugin::storesDetails()),
@@ -156,6 +157,27 @@ class ScannerGuardBanResource extends Resource
                     ->formatStates(static::exportFormatStates()),
                 UnbanBulkAction::make(),
             ]);
+    }
+
+    /**
+     * The stored IP is encrypted: an IP is looked up by its hash, details on or off.
+     * As typed too: the core hashes a forwarded IP's text as the satellite sent it.
+     */
+    public static function searchIp(Builder $query, string $search): Builder
+    {
+        return filter_var($search, FILTER_VALIDATE_IP) === false
+            ? $query->where('ip_hash', 'like', '%'.strtolower($search).'%')
+            : $query->whereIn('ip_hash', array_map(app(ScannerGuard::class)->hashIp(...), [$search, BanIpAction::canonicalIp($search)]));
+    }
+
+    /** The readable IP replaces the hash in titles when the app stores details. */
+    public static function getRecordTitle(?Model $record): string|Htmlable|null
+    {
+        $ip = $record instanceof ScannerGuardBan && ScannerGuardPlugin::storesDetails()
+            ? static::storedIp($record)
+            : null;
+
+        return $ip ?? parent::getRecordTitle($record);
     }
 
     public static function reasonLabel(string $reason): string
@@ -253,7 +275,9 @@ class ScannerGuardBanResource extends Resource
                         TextEntry::make('ip_hash')
                             ->label(__('filament-scanner-guard::default.table.ip_hash'))
                             ->copyable()
-                            ->fontFamily('mono'),
+                            ->fontFamily('mono')
+                            // Hidden behind the readable IP, unless this ban has none to show.
+                            ->visible(fn (ScannerGuardBan $record): bool => ! ScannerGuardPlugin::storesDetails() || static::storedIp($record) === null),
                         TextEntry::make('ip')
                             ->label(__('filament-scanner-guard::default.ban_ip.form.ip'))
                             ->getStateUsing(fn (ScannerGuardBan $record): ?string => static::storedIp($record))
