@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'An IPv4/IPv6 address or CIDR range, e.g. 185.177.72.0/24. Blocked permanently.',
             'user_agent' => 'fnmatch pattern, case-insensitive, e.g. *zgrab*. Matched against the full User-Agent.',
-            'ignore' => 'An IPv4/IPv6 address or CIDR range that is never blocked or banned, e.g. your own.',
+            'ignore' => 'An IPv4/IPv6 address or CIDR range that is never blocked or banned, e.g. your own. A blocked range that contains it still applies in the sinks (nginx, Cloudflare, ...): remove or split that range.',
         ],
         'invalid_ip' => 'Enter a valid IP address or CIDR range.',
         'too_broad' => 'Too wide: use at least /8 (IPv4) or /16 (IPv6).',

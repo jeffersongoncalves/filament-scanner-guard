@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'Eine IPv4/IPv6-Adresse oder ein CIDR-Bereich, z. B. 185.177.72.0/24. Dauerhaft gesperrt.',
             'user_agent' => 'fnmatch-Muster, ohne Beachtung der Groß-/Kleinschreibung, z. B. *zgrab*. Wird mit dem vollständigen User-Agent verglichen.',
-            'ignore' => 'IPv4-/IPv6-Adresse oder CIDR-Bereich, der nie gesperrt wird, z. B. Ihre eigene.',
+            'ignore' => 'IPv4-/IPv6-Adresse oder CIDR-Bereich, der nie gesperrt wird, z. B. Ihre eigene. Ein gesperrter Bereich, der sie enthält, gilt in den Sinks (nginx, Cloudflare ...) weiterhin: entfernen oder teilen Sie ihn.',
         ],
         'invalid_ip' => 'Geben Sie eine gültige IP-Adresse oder einen gültigen CIDR-Bereich ein.',
         'too_broad' => 'Bereich zu groß: mindestens /8 (IPv4) oder /16 (IPv6).',

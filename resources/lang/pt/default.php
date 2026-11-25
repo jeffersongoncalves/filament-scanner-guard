@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'Endereço IPv4/IPv6 ou faixa CIDR, ex.: 185.177.72.0/24. Bloqueio permanente.',
             'user_agent' => 'Padrão fnmatch, sem diferenciar maiúsculas, ex.: *zgrab*. Comparado com o User-Agent completo.',
-            'ignore' => 'Endereço IPv4/IPv6 ou intervalo CIDR que nunca é bloqueado, ex.: o seu.',
+            'ignore' => 'Endereço IPv4/IPv6 ou intervalo CIDR que nunca é bloqueado, ex.: o seu. Um intervalo bloqueado que o contenha continua a aplicar-se nos sinks (nginx, Cloudflare...): remova ou divida esse intervalo.',
         ],
         'invalid_ip' => 'Informe um endereço IP ou faixa CIDR válido.',
         'too_broad' => 'Intervalo demasiado amplo: use no mínimo /8 (IPv4) ou /16 (IPv6).',

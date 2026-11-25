@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'IPv4/IPv6 ünvanı və ya CIDR aralığı, məs. 185.177.72.0/24. Daimi bloklanır.',
             'user_agent' => 'fnmatch şablonu, böyük-kiçik hərfə həssas deyil, məs. *zgrab*. Tam User-Agent ilə müqayisə olunur.',
-            'ignore' => 'Heç vaxt bloklanmayan IPv4/IPv6 ünvanı və ya CIDR aralığı, məs. öz ünvanınız.',
+            'ignore' => 'Heç vaxt bloklanmayan IPv4/IPv6 ünvanı və ya CIDR aralığı, məs. öz ünvanınız. Onu əhatə edən bloklanmış aralıq sink-lərdə (nginx, Cloudflare...) qüvvədə qalır: həmin aralığı silin və ya bölün.',
         ],
         'invalid_ip' => 'Düzgün IP ünvanı və ya CIDR aralığı daxil edin.',
         'too_broad' => 'Aralıq çox genişdir: ən azı /8 (IPv4) və ya /16 (IPv6) istifadə edin.',

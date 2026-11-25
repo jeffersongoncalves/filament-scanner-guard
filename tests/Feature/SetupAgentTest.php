@@ -8,6 +8,7 @@ use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgents\Pages\
 use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgent;
 use Livewire\Livewire;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 beforeEach(function () {
     if (! class_exists(ScannerGuardAgent::class)) {
@@ -136,4 +137,22 @@ it('says so when no secret is configured', function () {
     setupPage()->callAction('setupAgent', ['password' => 'right'])
         ->assertNotified(__('filament-scanner-guard::default.agents.setup.missing'))
         ->assertNotDispatched(SetupAgentAction::SECRET_EVENT);
+});
+
+it('never reveals without a checked password, even if allowed mid-request', function () {
+    // Denied while the modal's fields are built, allowed once the action runs.
+    $checks = 0;
+    ScannerGuardPlugin::get()->revealAgentSecret(function () use (&$checks, &$allowed): bool {
+        $checks++;
+
+        return $allowed ?? false;
+    });
+
+    $page = setupPage()->mountAction('setupAgent');
+    $action = $page->instance()->getMountedAction();
+    $allowed = true;
+
+    expect(fn () => $action->evaluate($action->getActionFunction(), ['data' => [], 'form' => null, 'schema' => null, 'livewire' => $page->instance()]))
+        ->toThrow(HttpException::class)
+        ->and($checks)->toBeGreaterThan(0);
 });
