@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Баны по дням (последние :days дней)',
         'bans_by_reason' => 'Баны по причине',
+        'bans_by_source' => 'Баны по источнику',
         'top_matched_values' => 'Топ совпавших значений',
     ],
     'infolist' => [

@@ -2,9 +2,11 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource as ScannerGuardBansTable;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ViewScannerGuardBan;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Widgets\BansBySourceChart;
 use Livewire\Livewire;
 
 it('hides the source column and filter unless the app receives forwarded bans', function () {
@@ -26,6 +28,27 @@ it('hides the source column on a central app until the add_source migration ran'
     Livewire::test(ListScannerGuardBans::class)
         ->assertTableColumnHidden('source')
         ->assertTableFilterHidden('source');
+});
+
+it('charts bans per source on the central app only', function () {
+    Livewire::test(MetricsPage::class)->assertDontSeeLivewire(BansBySourceChart::class);
+
+    if (! Schema::hasColumn('scanner_guard_bans', 'source')) {
+        $this->markTestSkipped('The installed core has no add_source migration.');
+    }
+
+    config()->set('scanner-guard.http.server.enabled', true);
+
+    createBan();
+    createBan(['source' => 'web-01']);
+    createBan(['source' => 'web-01']);
+
+    Livewire::test(MetricsPage::class)->assertSeeLivewire(BansBySourceChart::class);
+
+    $data = chartData(BansBySourceChart::class);
+
+    expect($data['labels'])->toBe(['web-01', __('filament-scanner-guard::default.table.local')])
+        ->and($data['datasets'][0]['data'])->toBe([2, 1]);
 });
 
 it('shows the source and filters by satellite or local bans on the central app', function () {
