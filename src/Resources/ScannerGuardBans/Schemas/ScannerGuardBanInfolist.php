@@ -22,7 +22,9 @@ class ScannerGuardBanInfolist
                         TextEntry::make('ip_hash')
                             ->label(__('filament-scanner-guard::default.table.ip_hash'))
                             ->copyable()
-                            ->fontFamily('mono'),
+                            ->fontFamily('mono')
+                            // Hidden behind the readable IP, unless this ban has none to show.
+                            ->visible(fn (ScannerGuardBan $record): bool => ! ScannerGuardPlugin::storesDetails() || ScannerGuardBansTable::storedIp($record) === null),
                         TextEntry::make('ip')
                             ->label(__('filament-scanner-guard::default.ban_ip.form.ip'))
                             ->getStateUsing(fn (ScannerGuardBan $record): ?string => ScannerGuardBansTable::storedIp($record))

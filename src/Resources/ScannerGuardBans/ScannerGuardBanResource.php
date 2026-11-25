@@ -6,11 +6,14 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Pages\ViewScannerGuardBan;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Schemas\ScannerGuardBanInfolist;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\Tables\ScannerGuardBansTable;
+use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardBan;
 
 class ScannerGuardBanResource extends Resource
@@ -22,6 +25,16 @@ class ScannerGuardBanResource extends Resource
     protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedShieldExclamation;
 
     protected static ?string $recordTitleAttribute = 'ip_hash';
+
+    /** The readable IP replaces the hash in titles when the app stores details. */
+    public static function getRecordTitle(?Model $record): string|Htmlable|null
+    {
+        $ip = $record instanceof ScannerGuardBan && ScannerGuardPlugin::storesDetails()
+            ? ScannerGuardBansTable::storedIp($record)
+            : null;
+
+        return $ip ?? parent::getRecordTitle($record);
+    }
 
     public static function table(Table $table): Table
     {
