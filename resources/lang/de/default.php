@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Sperren pro Tag (letzte :days Tage)',
         'bans_by_reason' => 'Sperren nach Grund',
+        'bans_by_source' => 'Sperren nach Quelle',
         'top_matched_values' => 'Top übereinstimmende Werte',
     ],
     'infolist' => [

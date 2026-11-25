@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'प्रतिदिन प्रतिबंध (पिछले :days दिन)',
         'bans_by_reason' => 'कारण अनुसार प्रतिबंध',
+        'bans_by_source' => 'स्रोत अनुसार प्रतिबंध',
         'top_matched_values' => 'शीर्ष मिलान मान',
     ],
     'infolist' => [

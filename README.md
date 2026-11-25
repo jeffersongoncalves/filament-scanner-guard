@@ -61,7 +61,7 @@ This registers a **Scanner Guard Bans** resource (rows are written by the `scann
 - An **Export** header action and an **Export** bulk action (CSV, XLSX, PDF with preview) via [`jeffersongoncalves/filament-action-export`](https://github.com/jeffersongoncalves/filament-action-export) — synchronous, no queue or migrations needed; `matched_value` is exported in full with spreadsheet formulas neutralised
 - A **View** page per ban and an **Extend** action (1 hour / 1 day / 1 week / 1 month, added to the current expiry)
 - A **Purge expired** header action that reconciles the daily stats (`scanner-guard:aggregate-and-prune`), then deletes every expired ban
-- A **Metrics** page with total, active, expired, hit-count and recent-bans stats, plus charts: bans per day (last 14 days), bans by reason and top matched values
+- A **Metrics** page with total, active, expired, hit-count and recent-bans stats, plus charts: bans per day (last 14 days), bans by reason, bans by source (central app receiving forwarded bans) and top matched values
 
 The bans-per-day chart and the recent-bans stat read `scanner_guard_ban_daily_stats` (counted at ban time by the core package), so purging or unbanning never erases past days. Publish and run the core's daily stats migration for them to have data.
 
