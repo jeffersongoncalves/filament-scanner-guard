@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'مسدودیت روزانه (:days روز اخیر)',
         'bans_by_reason' => 'مسدودیت بر اساس دلیل',
+        'bans_by_source' => 'مسدودیت بر اساس منبع',
         'top_matched_values' => 'برترین مقادیر منطبق',
     ],
     'infolist' => [

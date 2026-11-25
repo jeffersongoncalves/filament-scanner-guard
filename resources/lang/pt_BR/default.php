@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Bloqueios por dia (últimos :days dias)',
         'bans_by_reason' => 'Bloqueios por motivo',
+        'bans_by_source' => 'Bloqueios por origem',
         'top_matched_values' => 'Principais valores correspondidos',
     ],
     'infolist' => [

@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'الحظر اليومي (آخر :days يومًا)',
         'bans_by_reason' => 'الحظر حسب السبب',
+        'bans_by_source' => 'الحظر حسب المصدر',
         'top_matched_values' => 'أعلى القيم المطابقة',
     ],
     'infolist' => [

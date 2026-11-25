@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Kunlik blokirovkalar (soʻnggi :days kun)',
         'bans_by_reason' => 'Sabab boʻyicha blokirovkalar',
+        'bans_by_source' => 'Manba boʻyicha blokirovkalar',
         'top_matched_values' => 'Eng koʻp mos kelgan qiymatlar',
     ],
     'infolist' => [
