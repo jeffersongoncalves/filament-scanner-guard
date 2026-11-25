@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'User-Agent shabloni',
+            'ignore' => 'Hech qachon bloklanmasin',
         ],
         'help' => [
             'ip' => 'IPv4/IPv6 manzil yoki CIDR diapazoni, masalan 185.177.72.0/24. Doimiy bloklanadi.',
             'user_agent' => 'fnmatch shabloni, katta-kichik harfni farqlamaydi, masalan *zgrab*. To‘liq User-Agent bilan solishtiriladi.',
+            'ignore' => 'Hech qachon bloklanmaydigan IPv4/IPv6 manzil yoki CIDR oralig‘i, masalan, o‘zingizniki. Uni o‘z ichiga olgan bloklangan oraliq sink’larda (nginx, Cloudflare...) amal qilaveradi: o‘sha oraliqni o‘chiring yoki bo‘ling.',
         ],
         'invalid_ip' => 'To‘g‘ri IP manzil yoki CIDR diapazonini kiriting.',
+        'too_broad' => 'Oraliq juda keng: kamida /8 (IPv4) yoki /16 (IPv6) bo‘lsin.',
     ],
     'filter' => [
         'label' => 'Holat',
@@ -115,5 +118,20 @@ return [
         'active_bans' => 'Faol bloklar',
         'started_at' => 'Ishga tushgan',
         'last_seen_at' => 'Oxirgi marta ko‘rilgan',
+        'setup' => [
+            'label' => 'Agentni sozlash',
+            'install' => 'Agentni o‘rnating',
+            'config' => '/etc/scanner-guard/agent.yaml faylini tahrirlang: ushbu server nomi va o‘z IP manzillaringiz',
+            'secret' => 'Maxfiy kalitni saqlang: buyruqni ishga tushiring, joylashtiring, Enter, keyin Ctrl+D bosing',
+            'test' => 'Nima bloklanishini ko‘ring',
+            'start' => 'Ishga tushiring. Bir daqiqa ichida shu yerda paydo bo‘ladi',
+            'copy' => 'Nusxalash',
+            'copied' => 'Nusxalandi',
+            'reveal' => 'Maxfiy kalitni ko‘rsatish',
+            'password' => 'Parolingiz',
+            'secret_of' => 'Maxfiy kalit egasi',
+            'shared' => 'Umumiy maxfiy kalit',
+            'missing' => 'Maxfiy kalit sozlanmagan.',
+        ],
     ],
 ];

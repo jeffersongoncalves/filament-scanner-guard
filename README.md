@@ -97,6 +97,7 @@ php artisan migrate
 Upgrading from 1.4.0 / 2.4.0 / 3.4.0, which shipped this migration in the plugin? The core migration is a no-op when the table already exists, so your entries stay.
 
 - A **Blocklist** resource over the core's `ScannerGuardBlocklistEntry`: add, edit and remove permanent **IP / CIDR** entries and **User-Agent patterns** (fnmatch, case-insensitive), each with an optional note. The core applies them on top of `scanner-guard.ip_blocklist` and `scanner-guard.user_agent_blocklist.patterns`. A User-Agent pattern only acts the way `user_agent_blocklist.action` says (`ban` or `reject`).
+- **Never block** entries (core 2.3+): IPs and ranges no app, satellite or agent blocks or bans. Ranges wider than /8 (IPv4) or /16 (IPv6) are refused, as the core would drop them. A blocked range that contains the IP still reaches the denylist sinks whole: remove or split it.
 - A **Ban IP** header action on the bans list: bans a raw IP through the core, exactly like the middleware would (hashed row, raw IP cached for the denylist sinks, `ban_duration`).
 - **Unban** goes through the core's `ScannerGuard::unban()`, so the IP gets through right away instead of at the old expiry.
 
@@ -140,6 +141,17 @@ When the central app also records heartbeats from [scanner-guard-agent](https://
 - **Delete** forgets a decommissioned agent — a live one reappears on its next heartbeat
 
 Without `http.server.enabled` or the migration, the resource stays hidden.
+
+A **Set up an agent** header action lists the steps to install and configure one, with copyable commands (this app's URL and your IP filled in). It can also show the secret, so nobody has to open the server's `.env`. That is off by default:
+
+```php
+ScannerGuardPlugin::make()
+    ->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+```
+
+- The user types their password (5 attempts per minute), and each reveal is logged with the user and source, never the value. Accounts without a password (e.g. social login only) can't reveal it.
+- The secret is sent to the browser on request, never in the page or in the Livewire state. Copying needs `https` or `localhost`.
+- With `http.secrets`, pick the source. Otherwise it is the shared `http.secret`: whoever has it can forward bans as any server sharing it and sign denylist responses, so allow only people you would give the `.env` to.
 
 ### Using the actions standalone
 

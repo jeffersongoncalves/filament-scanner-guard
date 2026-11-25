@@ -26,6 +26,8 @@ class ScannerGuardPlugin implements Plugin
 
     protected RecordActionsPosition|Closure|null $recordActionsPosition = null;
 
+    protected bool|Closure $revealAgentSecret = false;
+
     public function getId(): string
     {
         return 'filament-scanner-guard';
@@ -121,6 +123,23 @@ class ScannerGuardPlugin implements Plugin
             // Resolved here: a closure returning null must keep the table/global position.
             position: $table->evaluate($this->recordActionsPosition),
         );
+    }
+
+    /**
+     * Lets the panel show the agents' signing secret (after the user's
+     * password). Off by default: whoever has it can forward bans as any
+     * server sharing it, and sign denylist responses.
+     */
+    public function revealAgentSecret(bool|Closure $condition = true): static
+    {
+        $this->revealAgentSecret = $condition;
+
+        return $this;
+    }
+
+    public function canRevealAgentSecret(): bool
+    {
+        return filament()->auth()->check() && (bool) value($this->revealAgentSecret);
     }
 
     /**

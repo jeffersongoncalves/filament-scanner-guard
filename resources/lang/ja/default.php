@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'User-Agent パターン',
+            'ignore' => 'ブロックしない',
         ],
         'help' => [
             'ip' => 'IPv4/IPv6 アドレスまたは CIDR 範囲（例: 185.177.72.0/24）。永続的にブロックされます。',
             'user_agent' => 'fnmatch パターン、大文字小文字を区別しません（例: *zgrab*）。User-Agent 全体と照合されます。',
+            'ignore' => '決してブロックしない IPv4/IPv6 アドレスまたは CIDR 範囲（例：自分のアドレス）。これを含むブロック範囲はシンク（nginx、Cloudflare など）では引き続き有効です。その範囲を削除または分割してください。',
         ],
         'invalid_ip' => '有効な IP アドレスまたは CIDR 範囲を入力してください。',
+        'too_broad' => '範囲が広すぎます。/8（IPv4）または /16（IPv6）以上を指定してください。',
     ],
     'filter' => [
         'label' => 'ステータス',
@@ -115,5 +118,20 @@ return [
         'active_bans' => '有効なBAN',
         'started_at' => '起動',
         'last_seen_at' => '最終確認',
+        'setup' => [
+            'label' => 'エージェントを設定',
+            'install' => 'エージェントをインストール',
+            'config' => '/etc/scanner-guard/agent.yaml を編集：このサーバーの名前と自分の IP',
+            'secret' => 'シークレットを保存：実行して貼り付け、Enter の後に Ctrl+D を押す',
+            'test' => 'ブロック対象を確認',
+            'start' => '起動します。1 分以内にここに表示されます',
+            'copy' => 'コピー',
+            'copied' => 'コピーしました',
+            'reveal' => 'シークレットを表示',
+            'password' => 'あなたのパスワード',
+            'secret_of' => 'シークレットの対象',
+            'shared' => '共有シークレット',
+            'missing' => 'シークレットが設定されていません。',
+        ],
     ],
 ];
