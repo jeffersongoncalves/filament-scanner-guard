@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'User-Agent 模式',
+            'ignore' => '永不封禁',
         ],
         'help' => [
             'ip' => 'IPv4/IPv6 地址或 CIDR 范围，例如 185.177.72.0/24。永久封禁。',
             'user_agent' => 'fnmatch 模式，不区分大小写，例如 *zgrab*。与完整的 User-Agent 匹配。',
+            'ignore' => '永不封禁的 IPv4/IPv6 地址或 CIDR 范围，例如您自己的地址。包含它的封禁范围在 sink（nginx、Cloudflare 等）中仍然有效：请删除或拆分该范围。',
         ],
         'invalid_ip' => '请输入有效的 IP 地址或 CIDR 范围。',
+        'too_broad' => '范围过大：至少使用 /8（IPv4）或 /16（IPv6）。',
     ],
     'filter' => [
         'label' => '状态',
@@ -115,5 +118,20 @@ return [
         'active_bans' => '生效封禁',
         'started_at' => '启动于',
         'last_seen_at' => '最后在线',
+        'setup' => [
+            'label' => '配置代理',
+            'install' => '安装代理',
+            'config' => '编辑 /etc/scanner-guard/agent.yaml：此服务器的名称和您自己的 IP',
+            'secret' => '保存密钥：运行命令，粘贴密钥，按 Enter，然后按 Ctrl+D',
+            'test' => '查看哪些会被封禁',
+            'start' => '启动代理。一分钟内会显示在此处',
+            'copy' => '复制',
+            'copied' => '已复制',
+            'reveal' => '显示密钥',
+            'password' => '您的密码',
+            'secret_of' => '密钥所属',
+            'shared' => '共享密钥',
+            'missing' => '未配置密钥。',
+        ],
     ],
 ];

@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'Motif User-Agent',
+            'ignore' => 'Ne jamais bloquer',
         ],
         'help' => [
             'ip' => 'Une adresse IPv4/IPv6 ou une plage CIDR, p. ex. 185.177.72.0/24. Bloquée de façon permanente.',
             'user_agent' => 'Motif fnmatch, insensible à la casse, p. ex. *zgrab*. Comparé au User-Agent complet.',
+            'ignore' => 'Adresse IPv4/IPv6 ou plage CIDR qui n\'est jamais bloquée, par ex. la vôtre. Une plage bloquée qui la contient s\'applique toujours dans les sinks (nginx, Cloudflare...) : supprimez ou divisez cette plage.',
         ],
         'invalid_ip' => 'Saisissez une adresse IP ou une plage CIDR valide.',
+        'too_broad' => 'Plage trop large : utilisez au moins /8 (IPv4) ou /16 (IPv6).',
     ],
     'filter' => [
         'label' => 'Statut',
@@ -115,5 +118,20 @@ return [
         'active_bans' => 'Bannissements actifs',
         'started_at' => 'Démarré',
         'last_seen_at' => 'Vu pour la dernière fois',
+        'setup' => [
+            'label' => 'Configurer un agent',
+            'install' => 'Installez l\'agent',
+            'config' => 'Modifiez /etc/scanner-guard/agent.yaml : le nom de ce serveur et vos propres IP',
+            'secret' => 'Enregistrez le secret : exécutez ceci, collez-le, appuyez sur Entrée puis Ctrl+D',
+            'test' => 'Voyez ce qui serait bloqué',
+            'start' => 'Démarrez-le. Il apparaît ici en moins d\'une minute',
+            'copy' => 'Copier',
+            'copied' => 'Copié',
+            'reveal' => 'Afficher le secret',
+            'password' => 'Votre mot de passe',
+            'secret_of' => 'Secret de',
+            'shared' => 'Secret partagé',
+            'missing' => 'Aucun secret configuré.',
+        ],
     ],
 ];

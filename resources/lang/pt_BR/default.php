@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'Padrão de User-Agent',
+            'ignore' => 'Nunca bloquear',
         ],
         'help' => [
             'ip' => 'Endereço IPv4/IPv6 ou faixa CIDR, ex.: 185.177.72.0/24. Bloqueio permanente.',
             'user_agent' => 'Padrão fnmatch, sem diferenciar maiúsculas, ex.: *zgrab*. Comparado com o User-Agent completo.',
+            'ignore' => 'Endereço IPv4/IPv6 ou faixa CIDR que nunca é bloqueado, ex.: o seu. Uma faixa bloqueada que o contenha continua valendo nos sinks (nginx, Cloudflare...): remova ou divida essa faixa.',
         ],
         'invalid_ip' => 'Informe um endereço IP ou faixa CIDR válido.',
+        'too_broad' => 'Faixa ampla demais: use no mínimo /8 (IPv4) ou /16 (IPv6).',
     ],
     'filter' => [
         'label' => 'Status',
@@ -115,5 +118,20 @@ return [
         'active_bans' => 'Bans ativos',
         'started_at' => 'Iniciado',
         'last_seen_at' => 'Visto por último',
+        'setup' => [
+            'label' => 'Configurar agente',
+            'install' => 'Instale o agente',
+            'config' => 'Edite /etc/scanner-guard/agent.yaml: o nome deste servidor e os seus IPs',
+            'secret' => 'Salve o secret: execute, cole, pressione Enter e depois Ctrl+D',
+            'test' => 'Veja o que seria bloqueado',
+            'start' => 'Inicie. Ele aparece aqui em até um minuto',
+            'copy' => 'Copiar',
+            'copied' => 'Copiado',
+            'reveal' => 'Mostrar o secret',
+            'password' => 'Sua senha',
+            'secret_of' => 'Secret de',
+            'shared' => 'Secret compartilhado',
+            'missing' => 'Nenhum secret configurado.',
+        ],
     ],
 ];

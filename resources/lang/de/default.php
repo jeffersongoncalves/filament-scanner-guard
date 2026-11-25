@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'User-Agent-Muster',
+            'ignore' => 'Nie sperren',
         ],
         'help' => [
             'ip' => 'Eine IPv4/IPv6-Adresse oder ein CIDR-Bereich, z. B. 185.177.72.0/24. Dauerhaft gesperrt.',
             'user_agent' => 'fnmatch-Muster, ohne Beachtung der Groß-/Kleinschreibung, z. B. *zgrab*. Wird mit dem vollständigen User-Agent verglichen.',
+            'ignore' => 'IPv4-/IPv6-Adresse oder CIDR-Bereich, der nie gesperrt wird, z. B. Ihre eigene. Ein gesperrter Bereich, der sie enthält, gilt in den Sinks (nginx, Cloudflare ...) weiterhin: entfernen oder teilen Sie ihn.',
         ],
         'invalid_ip' => 'Geben Sie eine gültige IP-Adresse oder einen gültigen CIDR-Bereich ein.',
+        'too_broad' => 'Bereich zu groß: mindestens /8 (IPv4) oder /16 (IPv6).',
     ],
     'filter' => [
         'label' => 'Status',
@@ -115,5 +118,20 @@ return [
         'active_bans' => 'Aktive Sperren',
         'started_at' => 'Gestartet',
         'last_seen_at' => 'Zuletzt gesehen',
+        'setup' => [
+            'label' => 'Agent einrichten',
+            'install' => 'Agent installieren',
+            'config' => '/etc/scanner-guard/agent.yaml bearbeiten: Name dieses Servers und Ihre eigenen IPs',
+            'secret' => 'Secret speichern: ausführen, einfügen, Enter und dann Strg+D drücken',
+            'test' => 'Ansehen, was gesperrt würde',
+            'start' => 'Starten. Er erscheint hier innerhalb einer Minute',
+            'copy' => 'Kopieren',
+            'copied' => 'Kopiert',
+            'reveal' => 'Secret anzeigen',
+            'password' => 'Ihr Passwort',
+            'secret_of' => 'Secret von',
+            'shared' => 'Gemeinsames Secret',
+            'missing' => 'Kein Secret konfiguriert.',
+        ],
     ],
 ];
