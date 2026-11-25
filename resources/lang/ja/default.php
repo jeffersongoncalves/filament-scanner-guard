@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => '日別 BAN（直近:days日）',
         'bans_by_reason' => '理由別 BAN',
+        'bans_by_source' => 'ソース別 BAN',
         'top_matched_values' => '一致値トップ',
     ],
     'infolist' => [

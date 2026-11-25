@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Bans per day (last :days days)',
         'bans_by_reason' => 'Bans by reason',
+        'bans_by_source' => 'Bans by source',
         'top_matched_values' => 'Top matched values',
     ],
     'infolist' => [

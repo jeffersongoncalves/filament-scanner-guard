@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => '每日封禁（最近:days天）',
         'bans_by_reason' => '按原因统计封禁',
+        'bans_by_source' => '按来源统计封禁',
         'top_matched_values' => '匹配值 TOP',
     ],
     'infolist' => [
