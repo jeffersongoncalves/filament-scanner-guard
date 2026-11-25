@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'User-Agent pattern',
+            'ignore' => 'Never block',
         ],
         'help' => [
             'ip' => 'An IPv4/IPv6 address or CIDR range, e.g. 185.177.72.0/24. Blocked permanently.',
             'user_agent' => 'fnmatch pattern, case-insensitive, e.g. *zgrab*. Matched against the full User-Agent.',
+            'ignore' => 'An IPv4/IPv6 address or CIDR range that is never blocked or banned, e.g. your own. A blocked range that contains it still applies in the sinks (nginx, Cloudflare, ...): remove or split that range.',
         ],
         'invalid_ip' => 'Enter a valid IP address or CIDR range.',
+        'too_broad' => 'Too wide: use at least /8 (IPv4) or /16 (IPv6).',
     ],
     'filter' => [
         'label' => 'Status',
@@ -115,5 +118,20 @@ return [
         'active_bans' => 'Active bans',
         'started_at' => 'Started',
         'last_seen_at' => 'Last seen',
+        'setup' => [
+            'label' => 'Set up an agent',
+            'install' => 'Install the agent',
+            'config' => 'Edit /etc/scanner-guard/agent.yaml: the name of this server and your own IPs',
+            'secret' => 'Save the secret: run this, paste it, press Enter and then Ctrl+D',
+            'test' => 'See what it would ban',
+            'start' => 'Start it. It shows up here within a minute',
+            'copy' => 'Copy',
+            'copied' => 'Copied',
+            'reveal' => 'Show the secret',
+            'password' => 'Your password',
+            'secret_of' => 'Secret of',
+            'shared' => 'Shared secret',
+            'missing' => 'No secret is configured.',
+        ],
     ],
 ];

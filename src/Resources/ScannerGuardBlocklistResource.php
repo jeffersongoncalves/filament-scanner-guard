@@ -24,6 +24,9 @@ class ScannerGuardBlocklistResource extends Resource
 {
     use HasPluginNavigationGroup;
 
+    /** ScannerGuardBlocklistEntry::TYPE_IGNORE, missing from a core older than 2.3. */
+    public const TYPE_IGNORE = 'ignore';
+
     protected static ?string $model = ScannerGuardBlocklistEntry::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-no-symbol';
@@ -42,14 +45,20 @@ class ScannerGuardBlocklistResource extends Resource
                     ->live(),
                 TextInput::make('value')
                     ->label(__('filament-scanner-guard::default.blocklist.value'))
-                    ->helperText(fn (Get $get): string => $get('type') === ScannerGuardBlocklistEntry::TYPE_USER_AGENT
-                        ? __('filament-scanner-guard::default.blocklist.help.user_agent')
-                        : __('filament-scanner-guard::default.blocklist.help.ip'))
+                    ->helperText(fn (Get $get): string => match ($get('type')) {
+                        ScannerGuardBlocklistEntry::TYPE_USER_AGENT => __('filament-scanner-guard::default.blocklist.help.user_agent'),
+                        self::TYPE_IGNORE => __('filament-scanner-guard::default.blocklist.help.ignore'),
+                        default => __('filament-scanner-guard::default.blocklist.help.ip'),
+                    })
                     ->required()
                     ->maxLength(255)
                     ->rule(fn (Get $get): Closure => function (string $attribute, mixed $value, Closure $fail) use ($get): void {
-                        if ($get('type') === ScannerGuardBlocklistEntry::TYPE_IP && ! static::isValidRange(trim((string) $value))) {
+                        $entry = trim((string) $value);
+
+                        if (in_array($get('type'), [ScannerGuardBlocklistEntry::TYPE_IP, self::TYPE_IGNORE], true) && ! static::isValidRange($entry)) {
                             $fail(__('filament-scanner-guard::default.blocklist.invalid_ip'));
+                        } elseif ($get('type') === self::TYPE_IGNORE && static::isTooBroad($entry)) {
+                            $fail(__('filament-scanner-guard::default.blocklist.too_broad'));
                         }
                     })
                     ->unique(ignoreRecord: true, modifyRuleUsing: fn (Unique $rule, Get $get): Unique => $rule->where('type', $get('type')))
@@ -72,7 +81,11 @@ class ScannerGuardBlocklistResource extends Resource
                     ->label(__('filament-scanner-guard::default.blocklist.type'))
                     ->badge()
                     ->formatStateUsing(fn (string $state): string => static::typeOptions()[$state] ?? $state)
-                    ->color(fn (string $state): string => $state === ScannerGuardBlocklistEntry::TYPE_IP ? 'danger' : 'warning'),
+                    ->color(fn (string $state): string => match ($state) {
+                        ScannerGuardBlocklistEntry::TYPE_IP => 'danger',
+                        self::TYPE_IGNORE => 'success',
+                        default => 'warning',
+                    }),
                 TextColumn::make('value')
                     ->label(__('filament-scanner-guard::default.blocklist.value'))
                     ->fontFamily('mono')
@@ -107,7 +120,26 @@ class ScannerGuardBlocklistResource extends Resource
         return [
             ScannerGuardBlocklistEntry::TYPE_IP => __('filament-scanner-guard::default.blocklist.types.ip'),
             ScannerGuardBlocklistEntry::TYPE_USER_AGENT => __('filament-scanner-guard::default.blocklist.types.user_agent'),
+            ...(static::supportsIgnore() ? [self::TYPE_IGNORE => __('filament-scanner-guard::default.blocklist.types.ignore')] : []),
         ];
+    }
+
+    /**
+     * Core 2.3+: an older one would store the entry and never apply it.
+     */
+    public static function supportsIgnore(): bool
+    {
+        return defined(ScannerGuardBlocklistEntry::class.'::TYPE_IGNORE');
+    }
+
+    /**
+     * Same limit as the core's ipIgnore(), which drops such ranges.
+     */
+    public static function isTooBroad(string $entry): bool
+    {
+        $prefix = explode('/', $entry, 2)[1] ?? null;
+
+        return $prefix !== null && (int) $prefix < (str_contains($entry, ':') ? 16 : 8);
     }
 
     /**

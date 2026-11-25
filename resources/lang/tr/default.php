@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'User-Agent kalıbı',
+            'ignore' => 'Asla engelleme',
         ],
         'help' => [
             'ip' => 'Bir IPv4/IPv6 adresi veya CIDR aralığı, örn. 185.177.72.0/24. Kalıcı olarak engellenir.',
             'user_agent' => 'fnmatch kalıbı, büyük/küçük harf duyarsız, örn. *zgrab*. Tam User-Agent ile karşılaştırılır.',
+            'ignore' => 'Asla engellenmeyen IPv4/IPv6 adresi veya CIDR aralığı, ör. kendi adresiniz. Onu içeren engelli bir aralık sink\'lerde (nginx, Cloudflare...) geçerli kalır: o aralığı kaldırın veya bölün.',
         ],
         'invalid_ip' => 'Geçerli bir IP adresi veya CIDR aralığı girin.',
+        'too_broad' => 'Aralık çok geniş: en az /8 (IPv4) veya /16 (IPv6) kullanın.',
     ],
     'filter' => [
         'label' => 'Durum',
@@ -115,5 +118,20 @@ return [
         'active_bans' => 'Aktif yasaklar',
         'started_at' => 'Başlatıldı',
         'last_seen_at' => 'Son görülme',
+        'setup' => [
+            'label' => 'Aracı kur',
+            'install' => 'Aracıyı yükleyin',
+            'config' => '/etc/scanner-guard/agent.yaml dosyasını düzenleyin: bu sunucunun adı ve kendi IP adresleriniz',
+            'secret' => 'Gizli anahtarı kaydedin: çalıştırın, yapıştırın, Enter ve ardından Ctrl+D tuşlarına basın',
+            'test' => 'Neyin engelleneceğini görün',
+            'start' => 'Başlatın. Bir dakika içinde burada görünür',
+            'copy' => 'Kopyala',
+            'copied' => 'Kopyalandı',
+            'reveal' => 'Gizli anahtarı göster',
+            'password' => 'Parolanız',
+            'secret_of' => 'Gizli anahtarın sahibi',
+            'shared' => 'Paylaşılan gizli anahtar',
+            'missing' => 'Yapılandırılmış gizli anahtar yok.',
+        ],
     ],
 ];
