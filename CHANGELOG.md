@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.11.0 - 2026-11-25
+
+- **Set up an agent** header action on the agents list: the steps to install and configure a [scanner-guard-agent](https://github.com/jeffersongoncalves/scanner-guard-agent), with copyable commands (this app's URL and your IP filled in).
+  
+- The same modal can show the signing secret, so nobody has to open the server's `.env`. Off by default:
+  
+  ```php
+  ScannerGuardPlugin::make()->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+  
+  ```
+  The user types their password (5 attempts a minute). The secret travels in a browser event only, never in the page, the Livewire state or the log, and each reveal is logged with the user and source. Allow only people you would give the `.env` to.
+  
+- **Never block** type in the blocklist: IPs and ranges no app, satellite or agent blocks or bans. Needs laravel-scanner-guard [2.3.0](https://github.com/jeffersongoncalves/laravel-scanner-guard/releases/tag/2.3.0), hidden with an older core. A blocked range that contains the IP still reaches the denylist sinks whole.
+  
+- New labels translated in all 19 languages.
+  
+
 ## 1.8.0 - 2026-11-19
 
 Show the **source** of forwarded bans on a central app of the core's http driver (`scanner-guard.http.server.enabled`, core 2.0 `add_source` migration): Source column and View page entry (null = Local), plus a Source filter listing every satellite seen and Local. Hidden until the migration ran. (#56)
