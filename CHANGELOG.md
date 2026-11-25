@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.13.0 - 2026-11-25
+
+- With `store_details` on, the readable IP replaces the IP hash:
+  - **Bans table:** the IP hash column is hidden. The IP column takes over the search, still by IP or by a part of the hash.
+  - **View page:** shows the IP and hides the hash. A ban stored before details were on (or whose IP can no longer be decrypted) keeps showing its hash.
+  - **Page title and breadcrumb:** show the IP instead of the hash, with the same fallback.
+  
+- Without `store_details` nothing changes.
+
 ## 1.12.0 - 2026-11-25
 
 - **Bans by source** chart on the Metrics page: one slice per server or service that forwards bans (the satellite or agent `source`), plus **Local** for this app's own bans. Shown only on a central app that receives forwarded bans (http server enabled and the `add_source` migration ran).
@@ -17,6 +26,7 @@ All notable changes to this project will be documented in this file.
   
   ```php
   ScannerGuardPlugin::make()->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+  
   
   
   ```
