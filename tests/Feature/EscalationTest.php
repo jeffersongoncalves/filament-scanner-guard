@@ -22,7 +22,10 @@ it('labels and charts 404 flood bans', function () {
     Livewire::test(ViewScannerGuardBan::class, ['record' => $ban->getKey()])
         ->assertSee(__('filament-scanner-guard::default.reason.not_found_flood'));
 
-    expect(chartData(BansByReasonChart::class)['datasets'][0]['data'])->toBe([0, 1, 1, 0, 0]);
+    $data = chartData(BansByReasonChart::class);
+
+    expect($data['datasets'][0]['data'])->toBe([1, 1])
+        ->and($data['labels'])->toContain(__('filament-scanner-guard::default.reason.not_found_flood'));
 });
 
 it('hides offense column, filter and stat while escalation is off', function () {

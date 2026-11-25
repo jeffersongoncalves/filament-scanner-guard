@@ -1,6 +1,7 @@
 <?php
 
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ListScannerGuardBans;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Pages\ViewScannerGuardBan;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBanResource\Widgets\BansByReasonChart;
@@ -92,7 +93,28 @@ it('groups bans by reason', function () {
     createBan(['reason' => ScannerGuardBan::REASON_SCANNER_PATH]);
     createBan(['reason' => ScannerGuardBan::REASON_ASN]);
 
-    expect(chartData(BansByReasonChart::class)['datasets'][0]['data'])->toBe([2, 1, 0, 0, 0]);
+    $data = chartData(BansByReasonChart::class);
+
+    expect($data['datasets'][0]['data'])->toBe([2, 1])
+        ->and($data['labels'])->toBe([
+            __('filament-scanner-guard::default.reason.scanner_path'),
+            __('filament-scanner-guard::default.reason.asn_blocklist'),
+        ]);
+});
+
+it('charts reasons forwarded by agents', function () {
+    createBan(['reason' => 'ssh_bruteforce']);
+
+    $data = chartData(BansByReasonChart::class);
+
+    expect($data['labels'])->toBe(['ssh_bruteforce'])
+        ->and($data['datasets'][0]['data'])->toBe([1]);
+});
+
+it('labels unknown reasons with their raw value', function () {
+    expect(ScannerGuardBanResource::reasonLabel('ssh_bruteforce'))->toBe('ssh_bruteforce')
+        ->and(ScannerGuardBanResource::reasonLabel(ScannerGuardBan::REASON_SCANNER_PATH))
+        ->toBe(__('filament-scanner-guard::default.reason.scanner_path'));
 });
 
 it('lists top matched values ordered by total hits', function () {
