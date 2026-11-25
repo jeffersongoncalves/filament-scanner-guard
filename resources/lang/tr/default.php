@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'Bir IPv4/IPv6 adresi veya CIDR aralığı, örn. 185.177.72.0/24. Kalıcı olarak engellenir.',
             'user_agent' => 'fnmatch kalıbı, büyük/küçük harf duyarsız, örn. *zgrab*. Tam User-Agent ile karşılaştırılır.',
-            'ignore' => 'Asla engellenmeyen IPv4/IPv6 adresi veya CIDR aralığı, ör. kendi adresiniz.',
+            'ignore' => 'Asla engellenmeyen IPv4/IPv6 adresi veya CIDR aralığı, ör. kendi adresiniz. Onu içeren engelli bir aralık sink\'lerde (nginx, Cloudflare...) geçerli kalır: o aralığı kaldırın veya bölün.',
         ],
         'invalid_ip' => 'Geçerli bir IP adresi veya CIDR aralığı girin.',
         'too_broad' => 'Aralık çok geniş: en az /8 (IPv4) veya /16 (IPv6) kullanın.',

@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'IPv4/IPv6 地址或 CIDR 范围，例如 185.177.72.0/24。永久封禁。',
             'user_agent' => 'fnmatch 模式，不区分大小写，例如 *zgrab*。与完整的 User-Agent 匹配。',
-            'ignore' => '永不封禁的 IPv4/IPv6 地址或 CIDR 范围，例如您自己的地址。',
+            'ignore' => '永不封禁的 IPv4/IPv6 地址或 CIDR 范围，例如您自己的地址。包含它的封禁范围在 sink（nginx、Cloudflare 等）中仍然有效：请删除或拆分该范围。',
         ],
         'invalid_ip' => '请输入有效的 IP 地址或 CIDR 范围。',
         'too_broad' => '范围过大：至少使用 /8（IPv4）或 /16（IPv6）。',

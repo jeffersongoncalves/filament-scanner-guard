@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'Een IPv4/IPv6-adres of CIDR-bereik, bijv. 185.177.72.0/24. Permanent geblokkeerd.',
             'user_agent' => 'fnmatch-patroon, niet hoofdlettergevoelig, bijv. *zgrab*. Vergeleken met de volledige User-Agent.',
-            'ignore' => 'IPv4-/IPv6-adres of CIDR-bereik dat nooit wordt geblokkeerd, bijv. dat van uzelf.',
+            'ignore' => 'IPv4-/IPv6-adres of CIDR-bereik dat nooit wordt geblokkeerd, bijv. dat van uzelf. Een geblokkeerd bereik waar het in valt, blijft gelden in de sinks (nginx, Cloudflare...): verwijder of splits dat bereik.',
         ],
         'invalid_ip' => 'Voer een geldig IP-adres of CIDR-bereik in.',
         'too_broad' => 'Bereik te groot: gebruik minstens /8 (IPv4) of /16 (IPv6).',

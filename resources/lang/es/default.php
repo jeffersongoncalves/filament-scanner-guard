@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'Una dirección IPv4/IPv6 o un rango CIDR, p. ej. 185.177.72.0/24. Bloqueo permanente.',
             'user_agent' => 'Patrón fnmatch, sin distinguir mayúsculas, p. ej. *zgrab*. Se compara con el User-Agent completo.',
-            'ignore' => 'Dirección IPv4/IPv6 o rango CIDR que nunca se bloquea, p. ej. la suya.',
+            'ignore' => 'Dirección IPv4/IPv6 o rango CIDR que nunca se bloquea, p. ej. la suya. Un rango bloqueado que la contenga sigue aplicándose en los sinks (nginx, Cloudflare...): elimine o divida ese rango.',
         ],
         'invalid_ip' => 'Introduce una dirección IP o un rango CIDR válido.',
         'too_broad' => 'Rango demasiado amplio: use al menos /8 (IPv4) o /16 (IPv6).',

@@ -61,7 +61,7 @@ return [
         'help' => [
             'ip' => 'Une adresse IPv4/IPv6 ou une plage CIDR, p. ex. 185.177.72.0/24. Bloquée de façon permanente.',
             'user_agent' => 'Motif fnmatch, insensible à la casse, p. ex. *zgrab*. Comparé au User-Agent complet.',
-            'ignore' => 'Adresse IPv4/IPv6 ou plage CIDR qui n\'est jamais bloquée, par ex. la vôtre.',
+            'ignore' => 'Adresse IPv4/IPv6 ou plage CIDR qui n\'est jamais bloquée, par ex. la vôtre. Une plage bloquée qui la contient s\'applique toujours dans les sinks (nginx, Cloudflare...) : supprimez ou divisez cette plage.',
         ],
         'invalid_ip' => 'Saisissez une adresse IP ou une plage CIDR valide.',
         'too_broad' => 'Plage trop large : utilisez au moins /8 (IPv4) ou /16 (IPv6).',
