@@ -82,6 +82,7 @@ return [
     'charts' => [
         'bans_per_day' => 'Blokady dziennie (ostatnie :days dni)',
         'bans_by_reason' => 'Blokady według powodu',
+        'bans_by_source' => 'Blokady według źródła',
         'top_matched_values' => 'Najczęstsze dopasowane wartości',
     ],
     'infolist' => [
