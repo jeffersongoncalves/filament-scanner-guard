@@ -56,12 +56,15 @@ return [
         'types' => [
             'ip' => 'IP / CIDR',
             'user_agent' => 'User-Agent-patroon',
+            'ignore' => 'Nooit blokkeren',
         ],
         'help' => [
             'ip' => 'Een IPv4/IPv6-adres of CIDR-bereik, bijv. 185.177.72.0/24. Permanent geblokkeerd.',
             'user_agent' => 'fnmatch-patroon, niet hoofdlettergevoelig, bijv. *zgrab*. Vergeleken met de volledige User-Agent.',
+            'ignore' => 'IPv4-/IPv6-adres of CIDR-bereik dat nooit wordt geblokkeerd, bijv. dat van uzelf.',
         ],
         'invalid_ip' => 'Voer een geldig IP-adres of CIDR-bereik in.',
+        'too_broad' => 'Bereik te groot: gebruik minstens /8 (IPv4) of /16 (IPv6).',
     ],
     'filter' => [
         'label' => 'Status',
@@ -115,5 +118,20 @@ return [
         'active_bans' => 'Actieve bans',
         'started_at' => 'Gestart',
         'last_seen_at' => 'Laatst gezien',
+        'setup' => [
+            'label' => 'Agent instellen',
+            'install' => 'Installeer de agent',
+            'config' => 'Bewerk /etc/scanner-guard/agent.yaml: de naam van deze server en uw eigen IP\'s',
+            'secret' => 'Sla het geheim op: voer dit uit, plak het, druk op Enter en daarna Ctrl+D',
+            'test' => 'Bekijk wat geblokkeerd zou worden',
+            'start' => 'Start de agent. Hij verschijnt hier binnen een minuut',
+            'copy' => 'Kopiëren',
+            'copied' => 'Gekopieerd',
+            'reveal' => 'Geheim tonen',
+            'password' => 'Uw wachtwoord',
+            'secret_of' => 'Geheim van',
+            'shared' => 'Gedeeld geheim',
+            'missing' => 'Er is geen geheim ingesteld.',
+        ],
     ],
 ];
