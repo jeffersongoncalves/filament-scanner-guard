@@ -41,17 +41,16 @@ class ScannerGuardBansTable
                 TextColumn::make('ip_hash')
                     ->label(__('filament-scanner-guard::default.table.ip_hash'))
                     ->fontFamily('mono')
-                    // The stored IP is encrypted: an IP is looked up by its hash, details on or off.
-                    // As typed too: the core hashes a forwarded IP's text as the satellite sent it.
-                    ->searchable(query: fn (Builder $query, string $search): Builder => filter_var($search, FILTER_VALIDATE_IP) === false
-                        ? $query->where('ip_hash', 'like', '%'.strtolower($search).'%')
-                        : $query->whereIn('ip_hash', array_map(app(ScannerGuard::class)->hashIp(...), [$search, BanIpAction::canonicalIp($search)])))
-                    ->copyable(),
+                    ->searchable(query: static::searchIp(...))
+                    ->copyable()
+                    // The readable IP replaces the hash when the app stores details.
+                    ->visible(fn (): bool => ! ScannerGuardPlugin::storesDetails()),
                 TextColumn::make('ip')
                     ->label(__('filament-scanner-guard::default.ban_ip.form.ip'))
                     ->fontFamily('mono')
                     ->getStateUsing(fn (ScannerGuardBan $record): ?string => static::storedIp($record))
                     ->placeholder('—')
+                    ->searchable(query: static::searchIp(...))
                     ->copyable()
                     ->toggleable()
                     ->visible(fn (): bool => ScannerGuardPlugin::storesDetails()),
@@ -140,6 +139,17 @@ class ScannerGuardBansTable
                     ->formatStates(static::exportFormatStates()),
                 UnbanBulkAction::make(),
             ]);
+    }
+
+    /**
+     * The stored IP is encrypted: an IP is looked up by its hash, details on or off.
+     * As typed too: the core hashes a forwarded IP's text as the satellite sent it.
+     */
+    public static function searchIp(Builder $query, string $search): Builder
+    {
+        return filter_var($search, FILTER_VALIDATE_IP) === false
+            ? $query->where('ip_hash', 'like', '%'.strtolower($search).'%')
+            : $query->whereIn('ip_hash', array_map(app(ScannerGuard::class)->hashIp(...), [$search, BanIpAction::canonicalIp($search)]));
     }
 
     public static function reasonLabel(string $reason): string
