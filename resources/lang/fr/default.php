@@ -136,4 +136,21 @@ return [
             'missing' => 'Aucun secret configuré.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Règle d\'agent',
+        'plural_label' => 'Règles des agents',
+        'name' => 'Règle',
+        'threshold' => 'Seuil',
+        'window' => 'Fenêtre',
+        'ban' => 'Paliers de bannissement',
+        'updated_at' => 'Mis à jour',
+        'help' => [
+            'name' => 'Le nom de la règle dans l\'agent.yaml des agents. Ses motifs et son journal restent sur chaque serveur.',
+            'threshold' => 'Correspondances dans la fenêtre qui bannissent l\'IP.',
+            'window' => 'Un nombre et s, m, h ou d, ex. 10m. 30 jours au plus.',
+            'ban' => 'Une durée par récidive, séparées par des virgules, ex. 1d, 7d, 30d. La dernière se répète. Chacune 365 jours au plus, 10 paliers au plus.',
+        ],
+        'invalid_window' => 'Utilisez un nombre et s, m, h ou d (ex. 10m), 30 jours au plus.',
+        'invalid_ban' => 'Utilisez des durées comme 1d, 7d, 30d : chacune 365 jours au plus, 10 paliers au plus.',
+    ],
 ];

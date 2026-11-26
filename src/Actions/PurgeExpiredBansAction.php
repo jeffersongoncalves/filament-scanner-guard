@@ -22,6 +22,7 @@ class PurgeExpiredBansAction extends Action
         $this->label(__('filament-scanner-guard::default.purge.label'))
             ->icon(Heroicon::OutlinedTrash)
             ->color('danger')
+            ->visible(fn (): bool => ScannerGuardPlugin::get()->canPurgeExpiredBans())
             ->requiresConfirmation()
             ->modalDescription(fn (): ?string => ScannerGuardPlugin::deleteWarning())
             ->action(function (): void {

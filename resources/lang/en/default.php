@@ -136,4 +136,21 @@ return [
             'missing' => 'No secret is configured.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Agent rule',
+        'plural_label' => 'Agent rules',
+        'name' => 'Rule',
+        'threshold' => 'Threshold',
+        'window' => 'Window',
+        'ban' => 'Ban steps',
+        'updated_at' => 'Updated',
+        'help' => [
+            'name' => 'The rule name in the agents\' agent.yaml. Its patterns and log stay on each server.',
+            'threshold' => 'Matches within the window that ban the IP.',
+            'window' => 'A number and s, m, h or d, e.g. 10m. At most 30 days.',
+            'ban' => 'One duration per offense, comma-separated, e.g. 1d, 7d, 30d. The last one repeats. Each at most 365 days, up to 10 steps.',
+        ],
+        'invalid_window' => 'Use a number and s, m, h or d (e.g. 10m), at most 30 days.',
+        'invalid_ban' => 'Use durations like 1d, 7d, 30d: each at most 365 days, up to 10 steps.',
+    ],
 ];

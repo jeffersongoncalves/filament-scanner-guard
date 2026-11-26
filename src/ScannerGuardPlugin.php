@@ -11,10 +11,12 @@ use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentRules\ScannerGuardAgentRuleResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgents\ScannerGuardAgentResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklist\ScannerGuardBlocklistResource;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgent;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgentRule;
 
 class ScannerGuardPlugin implements Plugin
 {
@@ -27,6 +29,8 @@ class ScannerGuardPlugin implements Plugin
     protected RecordActionsPosition|Closure|null $recordActionsPosition = null;
 
     protected bool|Closure $revealAgentSecret = false;
+
+    protected bool|Closure $purgeExpiredBans = true;
 
     public function getId(): string
     {
@@ -52,6 +56,11 @@ class ScannerGuardPlugin implements Plugin
         // Core 2.1+: the resource itself stays hidden unless this app receives heartbeats.
         if (class_exists(ScannerGuardAgent::class)) {
             $panel->resources([ScannerGuardAgentResource::class]);
+        }
+
+        // Core 2.5+, hidden the same way until its migration ran.
+        if (class_exists(ScannerGuardAgentRule::class)) {
+            $panel->resources([ScannerGuardAgentRuleResource::class]);
         }
     }
 
@@ -143,6 +152,22 @@ class ScannerGuardPlugin implements Plugin
     }
 
     /**
+     * Shows the "Purge expired" action on the bans list. On by default; turn
+     * it off to keep expired bans until the scheduled prune removes them.
+     */
+    public function purgeExpiredBans(bool|Closure $condition = true): static
+    {
+        $this->purgeExpiredBans = $condition;
+
+        return $this;
+    }
+
+    public function canPurgeExpiredBans(): bool
+    {
+        return (bool) value($this->purgeExpiredBans);
+    }
+
+    /**
      * Ban duration in seconds per offense, from scanner-guard.escalation (empty = escalation off).
      *
      * @return list<int>
@@ -194,6 +219,17 @@ class ScannerGuardPlugin implements Plugin
     public static function deleteWarning(): ?string
     {
         return static::storesDetails() ? __('filament-scanner-guard::default.delete_warning') : null;
+    }
+
+    /**
+     * Central app serving scanner-guard-agent rule settings (core 2.5+, after
+     * its create_scanner_guard_agent_rules migration ran).
+     */
+    public static function servesAgentRules(): bool
+    {
+        return (bool) config('scanner-guard.http.server.enabled', false)
+            && class_exists(ScannerGuardAgentRule::class)
+            && once(fn (): bool => Schema::hasTable((new ScannerGuardAgentRule)->getTable()));
     }
 
     /**
