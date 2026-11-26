@@ -31,6 +31,7 @@ return [
         'source' => 'Źródło',
         'local' => 'Lokalny',
         'path' => 'Ścieżka',
+        'evidence' => 'Wiersze logu',
     ],
     'reason' => [
         'scanner_path' => 'Ścieżka skanera',

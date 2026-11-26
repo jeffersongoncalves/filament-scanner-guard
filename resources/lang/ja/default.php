@@ -31,6 +31,7 @@ return [
         'source' => '送信元',
         'local' => 'ローカル',
         'path' => 'パス',
+        'evidence' => 'ログ行',
     ],
     'reason' => [
         'scanner_path' => 'スキャナーパス',
