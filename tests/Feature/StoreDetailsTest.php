@@ -166,6 +166,9 @@ it('hides the log lines when there are none to show', function (bool $details, m
     $ban = createBan();
     if ($lines !== null) {
         storeEvidence($ban, $lines);
+    } elseif (Schema::hasColumn('scanner_guard_bans', 'evidence')) {
+        // A core older than 2.4: no add_evidence migration.
+        Schema::table('scanner_guard_bans', fn (Blueprint $table) => $table->dropColumn('evidence'));
     }
 
     Livewire::test(ViewScannerGuardBan::class, ['record' => $ban->getKey()])

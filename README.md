@@ -129,7 +129,7 @@ When the core's `scanner-guard.store_details` is on (`SCANNER_GUARD_STORE_DETAIL
 
 - An **IP address** column (toggleable, copyable) — a dash for bans made while it was off, or encrypted with a key missing from `APP_PREVIOUS_KEYS`
 - A **Path** column (searchable, toggleable) — the request path that triggered the ban, without its query string; exported in full with spreadsheet formulas neutralised
-- **Log Lines** on the View page — the log lines a [scanner-guard-agent](https://github.com/jeffersongoncalves/scanner-guard-agent) banned on, its IP replaced by `<ip>` (core `add_evidence` migration; shown only for bans that carry them)
+- **Log Lines** on the View page — the log lines a [scanner-guard-agent](https://github.com/jeffersongoncalves/scanner-guard-agent) banned on, its IP replaced by `<ip>` (core 2.4+, run its `add_evidence` migration; shown only for bans that carry them)
 
 With details off (the default) none of this is shown. Everyone who can open the bans resource sees the IPs, so restrict it with a policy on `ScannerGuardBan` if needed. Unbanning and **Purge expired** delete the rows, stored details included; their confirmation says so.
 
