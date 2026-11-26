@@ -60,7 +60,7 @@ This registers a **Scanner Guard Bans** resource (rows are written by the `scann
 - An **Unban** row action and an **Unban selected** bulk action — both delete the ban row (this is an audit-trail model, not a flag on an arbitrary model)
 - An **Export** header action and an **Export** bulk action (CSV, XLSX, PDF with preview) via [`jeffersongoncalves/filament-action-export`](https://github.com/jeffersongoncalves/filament-action-export) — synchronous, no queue or migrations needed; `matched_value` is exported in full with spreadsheet formulas neutralised
 - A **View** page per ban and an **Extend** action (1 hour / 1 day / 1 week / 1 month, added to the current expiry)
-- A **Purge expired** header action that reconciles the daily stats (`scanner-guard:aggregate-and-prune`), then deletes every expired ban
+- A **Purge expired** header action that reconciles the daily stats (`scanner-guard:aggregate-and-prune`), then deletes every expired ban. Hide it with `->purgeExpiredBans(false)` (also takes a closure) to keep expired bans until the scheduled prune
 - A **Metrics** page with total, active, expired, hit-count and recent-bans stats, plus charts: bans per day (last 14 days), bans by reason, bans by source (central app receiving forwarded bans) and top matched values
 
 The bans-per-day chart and the recent-bans stat read `scanner_guard_ban_daily_stats` (counted at ban time by the core package), so purging or unbanning never erases past days. Publish and run the core's daily stats migration for them to have data.
@@ -153,6 +153,16 @@ ScannerGuardPlugin::make()
 - The user types their password (5 attempts per minute), and each reveal is logged with the user and source, never the value. Accounts without a password (e.g. social login only) can't reveal it.
 - The secret is sent to the browser on request, never in the page or in the Livewire state. Copying needs `https` or `localhost`.
 - With `http.secrets`, pick the source. Otherwise it is the shared `http.secret`: whoever has it can forward bans as any server sharing it and sign denylist responses, so allow only people you would give the `.env` to.
+
+### Agent rules (central app, core 2.5+)
+
+An **Agent rules** resource sets the threshold, window and ban steps of an agent rule once, for every server. Run the core's `create_scanner_guard_agent_rules` migration; with `http.server.enabled` the resource shows up.
+
+- **Rule**: the rule name in the agents' `agent.yaml` (suggested from the rules the agents report). Patterns and log sources stay on each server.
+- **Threshold** and **Window** (`10m`, `1h`, `1d`): that many matches within the window ban the IP.
+- **Ban steps** (`1d, 7d, 30d`): one duration per offense, the last one repeats.
+
+The agents (2.5.0+) apply a change on their next pull, within a minute. Deleting the row puts the agents back on their own `agent.yaml` values. Out-of-range values are refused, as the core would leave them out: a threshold over 10000, a window over 30 days, a step over 365 days or more than 10 steps.
 
 ### Using the actions standalone
 

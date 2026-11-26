@@ -136,4 +136,21 @@ return [
             'missing' => 'Nessun segreto configurato.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Regola dell\'agente',
+        'plural_label' => 'Regole degli agenti',
+        'name' => 'Regola',
+        'threshold' => 'Soglia',
+        'window' => 'Finestra',
+        'ban' => 'Livelli di ban',
+        'updated_at' => 'Aggiornato',
+        'help' => [
+            'name' => 'Il nome della regola nell\'agent.yaml degli agenti. Pattern e log restano su ogni server.',
+            'threshold' => 'Corrispondenze nella finestra che bannano l\'IP.',
+            'window' => 'Un numero e s, m, h o d, es. 10m. Al massimo 30 giorni.',
+            'ban' => 'Una durata per recidiva, separate da virgole, es. 1d, 7d, 30d. L\'ultima si ripete. Ognuna al massimo 365 giorni, fino a 10 livelli.',
+        ],
+        'invalid_window' => 'Usa un numero e s, m, h o d (es. 10m), al massimo 30 giorni.',
+        'invalid_ban' => 'Usa durate come 1d, 7d, 30d: ognuna al massimo 365 giorni, fino a 10 livelli.',
+    ],
 ];
