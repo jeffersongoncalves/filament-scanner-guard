@@ -31,6 +31,7 @@ return [
         'source' => 'स्रोत',
         'local' => 'स्थानीय',
         'path' => 'पथ',
+        'evidence' => 'लॉग पंक्तियाँ',
     ],
     'reason' => [
         'scanner_path' => 'स्कैनर पथ',
