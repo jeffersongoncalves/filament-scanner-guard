@@ -2,14 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.14.0 - 2026-11-25
+
+Same as 3.14.0, for Filament 4.
+
+- **Log Lines** on the ban View page: the log lines a [scanner-guard-agent](https://github.com/jeffersongoncalves/scanner-guard-agent) sent with the ban, its IP replaced by `<ip>`. Escaped, monospace, copyable.
+- Shown with `store_details` on, after the core's `add_evidence` migration ran, and only for bans that carry lines.
+- Requires `jeffersongoncalves/laravel-scanner-guard` ^1.7 or ^2.4. On core 1.x nothing changes.
+- `table.evidence` in all 19 languages.
+
 ## 2.13.0 - 2026-11-25
 
 - With `store_details` on, the readable IP replaces the IP hash:
+  
   - **Bans table:** the IP hash column is hidden. The IP column takes over the search, still by IP or by a part of the hash.
   - **View page:** shows the IP and hides the hash. A ban stored before details were on (or whose IP can no longer be decrypted) keeps showing its hash.
   - **Page title and breadcrumb:** show the IP instead of the hash, with the same fallback.
   
 - Without `store_details` nothing changes.
+  
 
 ## 2.12.0 - 2026-11-25
 
@@ -26,6 +37,7 @@ All notable changes to this project will be documented in this file.
   
   ```php
   ScannerGuardPlugin::make()->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+  
   
   
   
