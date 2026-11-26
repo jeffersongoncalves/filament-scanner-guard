@@ -136,4 +136,21 @@ return [
             'missing' => 'Kein Secret konfiguriert.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Agent-Regel',
+        'plural_label' => 'Agent-Regeln',
+        'name' => 'Regel',
+        'threshold' => 'Schwelle',
+        'window' => 'Zeitfenster',
+        'ban' => 'Sperrstufen',
+        'updated_at' => 'Aktualisiert',
+        'help' => [
+            'name' => 'Der Regelname in der agent.yaml der Agents. Muster und Log bleiben auf jedem Server.',
+            'threshold' => 'Treffer im Zeitfenster, die die IP sperren.',
+            'window' => 'Eine Zahl und s, m, h oder d, z. B. 10m. Höchstens 30 Tage.',
+            'ban' => 'Eine Dauer pro Verstoß, durch Kommas getrennt, z. B. 1d, 7d, 30d. Die letzte wiederholt sich. Jede höchstens 365 Tage, bis zu 10 Stufen.',
+        ],
+        'invalid_window' => 'Verwenden Sie eine Zahl und s, m, h oder d (z. B. 10m), höchstens 30 Tage.',
+        'invalid_ban' => 'Verwenden Sie Dauern wie 1d, 7d, 30d: jede höchstens 365 Tage, bis zu 10 Stufen.',
+    ],
 ];

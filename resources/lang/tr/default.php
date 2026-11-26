@@ -136,4 +136,21 @@ return [
             'missing' => 'Yapılandırılmış gizli anahtar yok.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Ajan kuralı',
+        'plural_label' => 'Ajan kuralları',
+        'name' => 'Kural',
+        'threshold' => 'Eşik',
+        'window' => 'Pencere',
+        'ban' => 'Engelleme adımları',
+        'updated_at' => 'Güncellendi',
+        'help' => [
+            'name' => 'Ajanların agent.yaml dosyasındaki kural adı. Desenleri ve logu her sunucuda kalır.',
+            'threshold' => 'Pencere içinde IP\'yi engelleyen eşleşmeler.',
+            'window' => 'Bir sayı ve s, m, h veya d, ör. 10m. En fazla 30 gün.',
+            'ban' => 'Her ihlal için bir süre, virgülle ayrılmış, ör. 1d, 7d, 30d. Sonuncusu tekrarlanır. Her biri en fazla 365 gün, en fazla 10 adım.',
+        ],
+        'invalid_window' => 'Bir sayı ve s, m, h veya d kullanın (ör. 10m), en fazla 30 gün.',
+        'invalid_ban' => '1d, 7d, 30d gibi süreler kullanın: her biri en fazla 365 gün, en fazla 10 adım.',
+    ],
 ];

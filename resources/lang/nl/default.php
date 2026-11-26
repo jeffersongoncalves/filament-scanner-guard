@@ -136,4 +136,21 @@ return [
             'missing' => 'Er is geen geheim ingesteld.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Agentregel',
+        'plural_label' => 'Agentregels',
+        'name' => 'Regel',
+        'threshold' => 'Drempel',
+        'window' => 'Venster',
+        'ban' => 'Banstappen',
+        'updated_at' => 'Bijgewerkt',
+        'help' => [
+            'name' => 'De regelnaam in de agent.yaml van de agents. Patronen en log blijven op elke server.',
+            'threshold' => 'Treffers binnen het venster die het IP bannen.',
+            'window' => 'Een getal en s, m, h of d, bijv. 10m. Hoogstens 30 dagen.',
+            'ban' => 'Eén duur per overtreding, gescheiden door komma\'s, bijv. 1d, 7d, 30d. De laatste herhaalt zich. Elk hoogstens 365 dagen, tot 10 stappen.',
+        ],
+        'invalid_window' => 'Gebruik een getal en s, m, h of d (bijv. 10m), hoogstens 30 dagen.',
+        'invalid_ban' => 'Gebruik duren zoals 1d, 7d, 30d: elk hoogstens 365 dagen, tot 10 stappen.',
+    ],
 ];
