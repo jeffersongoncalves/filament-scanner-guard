@@ -31,6 +31,7 @@ return [
         'source' => 'Mənbə',
         'local' => 'Yerli',
         'path' => 'Yol',
+        'evidence' => 'Jurnal sətirləri',
     ],
     'reason' => [
         'scanner_path' => 'Skaner Yolu',

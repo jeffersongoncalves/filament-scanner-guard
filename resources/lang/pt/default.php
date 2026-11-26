@@ -31,6 +31,7 @@ return [
         'source' => 'Origem',
         'local' => 'Local',
         'path' => 'Caminho',
+        'evidence' => 'Linhas de Log',
     ],
     'reason' => [
         'scanner_path' => 'Caminho de Scanner',

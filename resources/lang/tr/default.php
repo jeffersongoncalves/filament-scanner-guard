@@ -31,6 +31,7 @@ return [
         'source' => 'Kaynak',
         'local' => 'Yerel',
         'path' => 'Yol',
+        'evidence' => 'Günlük satırları',
     ],
     'reason' => [
         'scanner_path' => 'Tarayıcı Yolu',

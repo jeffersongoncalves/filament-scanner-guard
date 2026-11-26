@@ -31,6 +31,7 @@ return [
         'source' => '来源',
         'local' => '本地',
         'path' => '路径',
+        'evidence' => '日志行',
     ],
     'reason' => [
         'scanner_path' => '扫描器路径',

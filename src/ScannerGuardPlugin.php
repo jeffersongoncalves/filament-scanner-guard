@@ -179,6 +179,16 @@ class ScannerGuardPlugin implements Plugin
     }
 
     /**
+     * Ban rows carry the log lines a scanner-guard-agent banned on (core
+     * add_evidence migration), stored like the other details.
+     */
+    public static function storesEvidence(): bool
+    {
+        return static::storesDetails()
+            && once(fn (): bool => Schema::hasColumn(config('scanner-guard.table', 'scanner_guard_bans'), 'evidence'));
+    }
+
+    /**
      * Confirmation text of the actions deleting ban rows; null keeps Filament's default.
      */
     public static function deleteWarning(): ?string
