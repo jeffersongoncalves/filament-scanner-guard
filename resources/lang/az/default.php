@@ -136,4 +136,21 @@ return [
             'missing' => 'Gizli açar təyin edilməyib.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Agent qaydası',
+        'plural_label' => 'Agent qaydaları',
+        'name' => 'Qayda',
+        'threshold' => 'Hədd',
+        'window' => 'Pəncərə',
+        'ban' => 'Bloklama mərhələləri',
+        'updated_at' => 'Yeniləndi',
+        'help' => [
+            'name' => 'Agentlərin agent.yaml faylındakı qayda adı. Şablonları və logu hər serverdə qalır.',
+            'threshold' => 'Pəncərə daxilində IP-ni bloklayan uyğunluqlar.',
+            'window' => 'Rəqəm və s, m, h və ya d, məs. 10m. Ən çox 30 gün.',
+            'ban' => 'Hər pozuntu üçün bir müddət, vergüllə ayrılmış, məs. 1d, 7d, 30d. Sonuncu təkrarlanır. Hər biri ən çox 365 gün, 10 mərhələyə qədər.',
+        ],
+        'invalid_window' => 'Rəqəm və s, m, h və ya d istifadə edin (məs. 10m), ən çox 30 gün.',
+        'invalid_ban' => '1d, 7d, 30d kimi müddətlər istifadə edin: hər biri ən çox 365 gün, 10 mərhələyə qədər.',
+    ],
 ];
