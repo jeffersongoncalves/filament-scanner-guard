@@ -31,6 +31,7 @@ return [
         'source' => 'Manba',
         'local' => 'Mahalliy',
         'path' => 'Yoʻl',
+        'evidence' => 'Jurnal qatorlari',
     ],
     'reason' => [
         'scanner_path' => 'Skaner yoʻli',

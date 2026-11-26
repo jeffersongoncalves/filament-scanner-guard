@@ -31,6 +31,7 @@ return [
         'source' => 'منبع',
         'local' => 'محلی',
         'path' => 'مسیر',
+        'evidence' => 'خطوط لاگ',
     ],
     'reason' => [
         'scanner_path' => 'مسیر اسکنر',
