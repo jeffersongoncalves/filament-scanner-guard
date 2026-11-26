@@ -31,6 +31,7 @@ return [
         'source' => 'Quelle',
         'local' => 'Lokal',
         'path' => 'Pfad',
+        'evidence' => 'Logzeilen',
     ],
     'reason' => [
         'scanner_path' => 'Scanner-Pfad',

@@ -47,6 +47,16 @@ class ScannerGuardBanInfolist
                             ->copyable()
                             ->columnSpanFull()
                             ->visible(fn (): bool => ScannerGuardPlugin::storesDetails()),
+                        // What a scanner-guard-agent saw before banning; attacker-controlled, escaped by TextEntry.
+                        TextEntry::make('evidence')
+                            ->label(__('filament-scanner-guard::default.table.evidence'))
+                            ->getStateUsing(fn (ScannerGuardBan $record): ?array => ScannerGuardBansTable::storedEvidence($record))
+                            ->listWithLineBreaks()
+                            ->fontFamily('mono')
+                            ->size('sm')
+                            ->copyable()
+                            ->columnSpanFull()
+                            ->visible(fn (ScannerGuardBan $record): bool => ScannerGuardPlugin::storesEvidence() && ScannerGuardBansTable::storedEvidence($record) !== null),
                         TextEntry::make('hit_count')
                             ->label(__('filament-scanner-guard::default.table.hit_count'))
                             ->numeric(),

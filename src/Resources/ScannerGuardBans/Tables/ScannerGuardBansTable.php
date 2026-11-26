@@ -12,6 +12,7 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Crypt;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\BanIpAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
@@ -210,6 +211,29 @@ class ScannerGuardBansTable
         } catch (DecryptException) {
             return null;
         }
+    }
+
+    /**
+     * The log lines a scanner-guard-agent banned on, null for other bans. Read
+     * from the raw column, so it works whether or not the installed core casts it.
+     *
+     * @return list<string>|null
+     */
+    public static function storedEvidence(ScannerGuardBan $record): ?array
+    {
+        $raw = $record->getRawOriginal('evidence');
+
+        if (! is_string($raw) || $raw === '') {
+            return null;
+        }
+
+        try {
+            $lines = json_decode(Crypt::decryptString($raw), true);
+        } catch (DecryptException) {
+            return null;
+        }
+
+        return is_array($lines) && $lines !== [] ? array_values(array_map(strval(...), $lines)) : null;
     }
 
     /**

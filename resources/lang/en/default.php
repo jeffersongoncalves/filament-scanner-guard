@@ -31,6 +31,7 @@ return [
         'source' => 'Source',
         'local' => 'Local',
         'path' => 'Path',
+        'evidence' => 'Log Lines',
     ],
     'reason' => [
         'scanner_path' => 'Scanner Path',

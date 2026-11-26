@@ -31,6 +31,7 @@ return [
         'source' => 'Источник',
         'local' => 'Локальный',
         'path' => 'Путь',
+        'evidence' => 'Строки журнала',
     ],
     'reason' => [
         'scanner_path' => 'Путь сканера',

@@ -31,6 +31,7 @@ return [
         'source' => 'المصدر',
         'local' => 'محلي',
         'path' => 'المسار',
+        'evidence' => 'سطور السجل',
     ],
     'reason' => [
         'scanner_path' => 'مسار الفحص',
