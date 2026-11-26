@@ -136,4 +136,21 @@ return [
             'missing' => 'Maxfiy kalit sozlanmagan.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Agent qoidasi',
+        'plural_label' => 'Agent qoidalari',
+        'name' => 'Qoida',
+        'threshold' => 'Chegara',
+        'window' => 'Oyna',
+        'ban' => 'Bloklash bosqichlari',
+        'updated_at' => 'Yangilandi',
+        'help' => [
+            'name' => 'Agentlarning agent.yaml faylidagi qoida nomi. Shablonlari va logi har bir serverda qoladi.',
+            'threshold' => 'Oyna ichida IP ni bloklaydigan mosliklar.',
+            'window' => 'Son va s, m, h yoki d, masalan 10m. Ko\'pi bilan 30 kun.',
+            'ban' => 'Har bir qoidabuzarlik uchun bitta muddat, vergul bilan, masalan 1d, 7d, 30d. Oxirgisi takrorlanadi. Har biri ko\'pi bilan 365 kun, 10 bosqichgacha.',
+        ],
+        'invalid_window' => 'Son va s, m, h yoki d ishlating (masalan 10m), ko\'pi bilan 30 kun.',
+        'invalid_ban' => '1d, 7d, 30d kabi muddatlarni ishlating: har biri ko\'pi bilan 365 kun, 10 bosqichgacha.',
+    ],
 ];

@@ -136,4 +136,21 @@ return [
             'missing' => 'No hay ningún secreto configurado.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Regla del agente',
+        'plural_label' => 'Reglas de los agentes',
+        'name' => 'Regla',
+        'threshold' => 'Umbral',
+        'window' => 'Ventana',
+        'ban' => 'Escalas de bloqueo',
+        'updated_at' => 'Actualizado',
+        'help' => [
+            'name' => 'El nombre de la regla en el agent.yaml de los agentes. Sus patrones y su log siguen en cada servidor.',
+            'threshold' => 'Coincidencias dentro de la ventana que bloquean la IP.',
+            'window' => 'Un número y s, m, h o d, p. ej. 10m. Como máximo 30 días.',
+            'ban' => 'Una duración por reincidencia, separadas por comas, p. ej. 1d, 7d, 30d. La última se repite. Cada una como máximo 365 días, hasta 10 pasos.',
+        ],
+        'invalid_window' => 'Use un número y s, m, h o d (p. ej. 10m), como máximo 30 días.',
+        'invalid_ban' => 'Use duraciones como 1d, 7d, 30d: cada una como máximo 365 días, hasta 10 pasos.',
+    ],
 ];

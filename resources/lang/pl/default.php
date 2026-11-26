@@ -136,4 +136,21 @@ return [
             'missing' => 'Nie skonfigurowano sekretu.',
         ],
     ],
+    'agent_rules' => [
+        'label' => 'Reguła agenta',
+        'plural_label' => 'Reguły agentów',
+        'name' => 'Reguła',
+        'threshold' => 'Próg',
+        'window' => 'Okno',
+        'ban' => 'Stopnie blokady',
+        'updated_at' => 'Zaktualizowano',
+        'help' => [
+            'name' => 'Nazwa reguły w agent.yaml agentów. Wzorce i log pozostają na każdym serwerze.',
+            'threshold' => 'Dopasowania w oknie, które blokują IP.',
+            'window' => 'Liczba i s, m, h lub d, np. 10m. Maksymalnie 30 dni.',
+            'ban' => 'Jeden czas na każde przewinienie, rozdzielone przecinkami, np. 1d, 7d, 30d. Ostatni się powtarza. Każdy maksymalnie 365 dni, do 10 stopni.',
+        ],
+        'invalid_window' => 'Użyj liczby i s, m, h lub d (np. 10m), maksymalnie 30 dni.',
+        'invalid_ban' => 'Użyj czasów jak 1d, 7d, 30d: każdy maksymalnie 365 dni, do 10 stopni.',
+    ],
 ];
