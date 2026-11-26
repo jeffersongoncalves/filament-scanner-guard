@@ -19,6 +19,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\BanIpAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\ExtendBanAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\UnbanAction;
@@ -241,6 +242,29 @@ class ScannerGuardBanResource extends Resource
     }
 
     /**
+     * The log lines a scanner-guard-agent banned on, null for other bans. Read
+     * from the raw column, so it works whether or not the installed core casts it.
+     *
+     * @return list<string>|null
+     */
+    public static function storedEvidence(ScannerGuardBan $record): ?array
+    {
+        $raw = $record->getRawOriginal('evidence');
+
+        if (! is_string($raw) || $raw === '') {
+            return null;
+        }
+
+        try {
+            $lines = json_decode(Crypt::decryptString($raw), true);
+        } catch (DecryptException) {
+            return null;
+        }
+
+        return is_array($lines) && $lines !== [] ? array_values(array_map(strval(...), $lines)) : null;
+    }
+
+    /**
      * Neutralises spreadsheet formulas in values that come from attacker requests.
      */
     protected static function exportSafe(string $value): string
@@ -300,6 +324,16 @@ class ScannerGuardBanResource extends Resource
                             ->copyable()
                             ->columnSpanFull()
                             ->visible(fn (): bool => ScannerGuardPlugin::storesDetails()),
+                        // What a scanner-guard-agent saw before banning; attacker-controlled, escaped by TextEntry.
+                        TextEntry::make('evidence')
+                            ->label(__('filament-scanner-guard::default.table.evidence'))
+                            ->getStateUsing(fn (ScannerGuardBan $record): ?array => static::storedEvidence($record))
+                            ->listWithLineBreaks()
+                            ->fontFamily('mono')
+                            ->size('sm')
+                            ->copyable()
+                            ->columnSpanFull()
+                            ->visible(fn (ScannerGuardBan $record): bool => ScannerGuardPlugin::storesEvidence() && static::storedEvidence($record) !== null),
                         TextEntry::make('hit_count')
                             ->label(__('filament-scanner-guard::default.table.hit_count'))
                             ->numeric(),

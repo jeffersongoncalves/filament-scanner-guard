@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\PurgeExpiredBansAction;
@@ -129,6 +130,56 @@ it('still renders when a stored ip can no longer be decrypted', function () {
         ->callAction('extend', ['duration' => 3600])
         ->assertHasNoActionErrors();
 });
+
+/**
+ * Stores the evidence of $ban as the core does (encrypted json), adding the
+ * column when the installed core has no add_evidence migration yet.
+ */
+function storeEvidence(ScannerGuardBan $ban, mixed $lines): void
+{
+    if (! Schema::hasColumn('scanner_guard_bans', 'evidence')) {
+        Schema::table('scanner_guard_bans', fn (Blueprint $table) => $table->text('evidence')->nullable());
+    }
+
+    DB::table('scanner_guard_bans')->where('id', $ban->getKey())->update([
+        'evidence' => is_string($lines) ? $lines : Crypt::encryptString(json_encode($lines)),
+    ]);
+}
+
+it('shows the log lines an agent banned on, escaped', function () {
+    skipWithoutDetails();
+    config()->set('scanner-guard.store_details', true);
+
+    $ban = createBan(['ip' => '203.0.113.5']);
+    storeEvidence($ban, ['<ip> - "GET /.env.staging HTTP/2.0" 403 rule=dotfile', '<ip> - "GET /<b>x</b> HTTP/2.0" 403 rule=xss']);
+
+    Livewire::test(ViewScannerGuardBan::class, ['record' => $ban->getKey()])
+        ->assertSee(__('filament-scanner-guard::default.table.evidence'))
+        ->assertSee(['<ip> - "GET /.env.staging HTTP/2.0" 403 rule=dotfile', '<ip> - "GET /<b>x</b> HTTP/2.0" 403 rule=xss'])
+        ->assertDontSeeHtml('<b>x</b>');
+});
+
+it('hides the log lines when there are none to show', function (bool $details, mixed $lines) {
+    skipWithoutDetails();
+    config()->set('scanner-guard.store_details', $details);
+
+    $ban = createBan();
+    if ($lines !== null) {
+        storeEvidence($ban, $lines);
+    } elseif (Schema::hasColumn('scanner_guard_bans', 'evidence')) {
+        // A core older than 2.4: no add_evidence migration.
+        Schema::table('scanner_guard_bans', fn (Blueprint $table) => $table->dropColumn('evidence'));
+    }
+
+    Livewire::test(ViewScannerGuardBan::class, ['record' => $ban->getKey()])
+        ->assertOk()
+        ->assertDontSee(__('filament-scanner-guard::default.table.evidence'));
+})->with([
+    'details off' => [false, ['GET /.env']],
+    'no column (older core)' => [true, null],
+    'ban without evidence' => [true, []],
+    'lost key' => [true, 'encrypted-with-a-lost-key'],
+]);
 
 it('exports the full path and neutralises spreadsheet formulas', function () {
     skipWithoutDetails();

@@ -31,6 +31,7 @@ return [
         'source' => 'Bron',
         'local' => 'Lokaal',
         'path' => 'Pad',
+        'evidence' => 'Logregels',
     ],
     'reason' => [
         'scanner_path' => 'Scannerpad',
