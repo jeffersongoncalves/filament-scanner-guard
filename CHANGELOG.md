@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.15.0 - 2026-11-26
+
+### Added
+
+- **Agent rules** resource (core 2.5+): set the threshold, window and ban steps of a scanner-guard-agent rule once, for every server. Hidden without `http.server.enabled` or the core's `create_scanner_guard_agent_rules` migration.
+- `->purgeExpiredBans(false)` hides the **Purge expired** action.
+
+### Upgrading
+
+Update `jeffersongoncalves/laravel-scanner-guard` to 2.5, re-publish its migrations and run `php artisan migrate`. Agents 2.5.0+ apply the rules.
+
 ## 2.14.0 - 2026-11-25
 
 Same as 3.14.0, for Filament 4.
@@ -37,6 +48,7 @@ Same as 3.14.0, for Filament 4.
   
   ```php
   ScannerGuardPlugin::make()->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+  
   
   
   
