@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.16.0 - 2026-11-26
+
+- **Agent events page:** lists the events of report rules (e.g. every accepted SSH login) with server, rule, user, method, key and IP (with `store_details`), badges for new and ignored, filters, and the log line in the view modal.
+- **Public status page** (off by default): `->publicStatusPage()` serves `/{panel}/scanner-guard-status` without login: servers online, blocked IPs, attacks and bans in the last 24 hours, one card per server with an hourly chart and its top rules. Counts only, cached for 60 seconds.
+
+Requires laravel-scanner-guard 2.6.0 and its two new migrations.
+
 ## 1.15.0 - 2026-11-26
 
 ### Added
@@ -48,6 +55,7 @@ Same as 3.14.0, for Filament 3.
   
   ```php
   ScannerGuardPlugin::make()->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+  
   
   
   
