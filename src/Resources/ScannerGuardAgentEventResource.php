@@ -13,6 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Encryption\DecryptException;
 use JeffersonGoncalves\Filament\ScannerGuard\Concerns\HasPluginNavigationGroup;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentEventResource\Pages\ListScannerGuardAgentEvents;
 use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardPlugin;
@@ -54,6 +55,7 @@ class ScannerGuardAgentEventResource extends Resource
                     ->badge(),
                 TextEntry::make('ip')
                     ->label(__('filament-scanner-guard::default.agent_events.ip'))
+                    ->getStateUsing(fn (ScannerGuardAgentEvent $record): ?string => static::decrypted($record, 'ip'))
                     ->placeholder('—'),
                 TextEntry::make('pattern')
                     ->label(__('filament-scanner-guard::default.agent_events.pattern'))
@@ -64,6 +66,7 @@ class ScannerGuardAgentEventResource extends Resource
                 // Attacker-controlled: TextEntry escapes it.
                 TextEntry::make('line')
                     ->label(__('filament-scanner-guard::default.agent_events.line'))
+                    ->getStateUsing(fn (ScannerGuardAgentEvent $record): ?string => static::decrypted($record, 'line'))
                     ->fontFamily('mono')
                     ->placeholder('—'),
             ])
@@ -99,6 +102,7 @@ class ScannerGuardAgentEventResource extends Resource
                     ->placeholder('—'),
                 TextColumn::make('ip')
                     ->label(__('filament-scanner-guard::default.agent_events.ip'))
+                    ->state(fn (ScannerGuardAgentEvent $record): ?string => static::decrypted($record, 'ip'))
                     ->placeholder('—'),
                 TextColumn::make('first_seen')
                     ->label(__('filament-scanner-guard::default.agent_events.first_seen'))
@@ -140,6 +144,19 @@ class ScannerGuardAgentEventResource extends Resource
             ->only(['user', 'method', 'key'])
             ->map(fn (mixed $value, string $key): string => "{$key}={$value}")
             ->implode(' ');
+    }
+
+    /**
+     * Null when not stored, or encrypted with a key this app no longer has
+     * (APP_KEY rotated): that must not take the whole page down.
+     */
+    public static function decrypted(ScannerGuardAgentEvent $record, string $attribute): ?string
+    {
+        try {
+            return $record->getAttribute($attribute);
+        } catch (DecryptException) {
+            return null;
+        }
     }
 
     /**

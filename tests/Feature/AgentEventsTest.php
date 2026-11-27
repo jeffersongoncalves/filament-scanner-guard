@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentEventResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentEventResource\Pages\ListScannerGuardAgentEvents;
@@ -53,6 +54,16 @@ it('lists agent events with their fields, the stored ip and badges', function ()
         ->assertTableColumnStateSet('first_seen', 'New', $new)
         ->assertTableColumnStateSet('first_seen', null, $ignored)
         ->assertTableColumnStateSet('ignored', 'Ignored', $ignored);
+});
+
+it('still lists an event whose ip can no longer be decrypted', function () {
+    config()->set('scanner-guard.http.server.enabled', true);
+
+    $event = createAgentEvent(['ip' => '203.0.113.9']);
+    DB::table('scanner_guard_agent_events')->update(['ip' => 'encrypted-with-a-lost-key']);
+
+    Livewire::test(ListScannerGuardAgentEvents::class)
+        ->assertTableColumnStateSet('ip', null, $event->fresh());
 });
 
 it('filters agent events by source, rule, first seen and ignored', function () {
