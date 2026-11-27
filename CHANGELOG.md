@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.17.0 - 2026-11-27
+
+- **Optional nginx rules page:** turns `cms`, `rfi`, `encoded` or `empty-agent` on for every server running scanner-guard-agent 2.8.0+, with exceptions per server (e.g. one running WordPress). Only users who may edit a rule can toggle it.
+- **Diagnoses page and Diagnose an IP action** (also on the Agents page): asks the chosen servers whether anything on them blocks an IP, with an optional packet capture of up to 120 seconds, and lists each server's status and verdict side by side, refreshed every 10 seconds. The full report opens in the view modal.
+
+Requires laravel-scanner-guard 2.8.0 and its two new migrations; with an older core both pages stay hidden.
+
 ## 3.16.0 - 2026-11-26
 
 - **Agent events page:** lists the events of report rules (e.g. every accepted SSH login) with server, rule, user, method, key and IP (with `store_details`), badges for new and ignored, filters, and the log line in the view modal.
@@ -53,6 +60,7 @@ Update `jeffersongoncalves/laravel-scanner-guard` to 2.5, re-publish its migrati
   
   ```php
   ScannerGuardPlugin::make()->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+  
   
   
   
