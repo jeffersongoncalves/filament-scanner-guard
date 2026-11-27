@@ -13,13 +13,17 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\PublicStatusPage;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentDiagnoses\ScannerGuardAgentDiagnosisResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentEvents\ScannerGuardAgentEventResource;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentNginxRules\ScannerGuardAgentNginxRuleResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentRules\ScannerGuardAgentRuleResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgents\ScannerGuardAgentResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklist\ScannerGuardBlocklistResource;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgent;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgentDiagnosis;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgentEvent;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgentNginxRule;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgentRule;
 
 class ScannerGuardPlugin implements Plugin
@@ -74,6 +78,15 @@ class ScannerGuardPlugin implements Plugin
         // Core 2.6+, hidden the same way until its migration ran.
         if (class_exists(ScannerGuardAgentEvent::class)) {
             $panel->resources([ScannerGuardAgentEventResource::class]);
+        }
+
+        // Core 2.8+, hidden the same way until their migrations ran.
+        if (class_exists(ScannerGuardAgentNginxRule::class)) {
+            $panel->resources([ScannerGuardAgentNginxRuleResource::class]);
+        }
+
+        if (class_exists(ScannerGuardAgentDiagnosis::class)) {
+            $panel->resources([ScannerGuardAgentDiagnosisResource::class]);
         }
 
         // Outside the auth middleware, like the login page.
@@ -271,6 +284,28 @@ class ScannerGuardPlugin implements Plugin
         return (bool) config('scanner-guard.http.server.enabled', false)
             && class_exists(ScannerGuardAgentEvent::class)
             && once(fn (): bool => Schema::hasTable((new ScannerGuardAgentEvent)->getTable()));
+    }
+
+    /**
+     * Central app serving the optional nginx rules to scanner-guard-agent
+     * (core 2.8+, after its create_scanner_guard_agent_nginx_rules migration ran).
+     */
+    public static function servesAgentNginxRules(): bool
+    {
+        return (bool) config('scanner-guard.http.server.enabled', false)
+            && class_exists(ScannerGuardAgentNginxRule::class)
+            && once(fn (): bool => Schema::hasTable((new ScannerGuardAgentNginxRule)->getTable()));
+    }
+
+    /**
+     * Central app asking scanner-guard-agent for IP diagnoses (core 2.8+,
+     * after its create_scanner_guard_agent_diagnostics migration ran).
+     */
+    public static function receivesAgentDiagnoses(): bool
+    {
+        return (bool) config('scanner-guard.http.server.enabled', false)
+            && class_exists(ScannerGuardAgentDiagnosis::class)
+            && once(fn (): bool => Schema::hasTable((new ScannerGuardAgentDiagnosis)->getTable()));
     }
 
     /**
