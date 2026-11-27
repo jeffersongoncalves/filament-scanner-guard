@@ -7,6 +7,7 @@ use JeffersonGoncalves\Filament\ScannerGuard\Actions\DiagnoseIpAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Actions\SetupAgentAction;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentDiagnoses\ScannerGuardAgentDiagnosisResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgents\ScannerGuardAgentResource;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgentDiagnosis;
 
 class ListScannerGuardAgents extends ListRecords
 {
@@ -15,8 +16,11 @@ class ListScannerGuardAgents extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            DiagnoseIpAction::make()
-                ->after(fn () => $this->redirect(ScannerGuardAgentDiagnosisResource::getUrl())),
+            // Core 2.8+ only: the action's form names the core's diagnosis model.
+            ...(class_exists(ScannerGuardAgentDiagnosis::class) ? [
+                DiagnoseIpAction::make()
+                    ->after(fn () => $this->redirect(ScannerGuardAgentDiagnosisResource::getUrl())),
+            ] : []),
             SetupAgentAction::make(),
         ];
     }
