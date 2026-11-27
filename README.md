@@ -172,6 +172,21 @@ An **Agent events** resource lists what the agents' report rules saw (`report: t
 - Filters: server, rule, first seen, ignored; newest first
 - **View** shows the pattern, every field and the log line (only with `store_details`); **Delete** removes rows. Nothing is created or edited from the panel.
 
+### Optional nginx rules (central app, core 2.8+)
+
+An **Optional nginx rules** resource turns on, for every server at once, the agent's nginx rules that ship off: `cms` (WordPress, Joomla and phpMyAdmin paths), `rfi`, `encoded` and `empty-agent`. Run the core's `create_scanner_guard_agent_nginx_rules` migration; with `http.server.enabled` the resource shows up.
+
+- **Rule** and what it blocks; **On** toggles it from the table
+- **Except on**: servers that keep it off, e.g. one running WordPress
+
+Only the name reaches the agents (2.8.0+): the rules ship with the agent, which writes them, runs `nginx -t` and reloads within a pull. Check a rule against a server's logs first with `scanner-guard-agent nginx-test -with cms /var/log/nginx/access.log`.
+
+### Diagnoses (central app, core 2.8+)
+
+When a client can't reach a site, **Diagnose an IP** (on the **Diagnoses** and **Agents** pages) asks the chosen servers, all the online ones by default, whether anything on them blocks the IP: every firewall, fail2ban, the agent's bans and nginx rules, whether its traffic arrives, the route to it, and optionally a packet capture of up to 120 seconds while the client tries. Run the core's `create_scanner_guard_agent_diagnostics` migration; with `http.server.enabled` the resource shows up.
+
+Each agent (2.8.0+) answers within a pull; the list refreshes every 10 seconds and shows each server's status and verdict side by side (`BLOCKED on this server by: fail2ban`, or `Nothing on this server blocks ...`), so a server that blocks the client stands out from a network problem in between. **View** shows the full report. The IP and the report are stored encrypted and pruned after `retention_days`.
+
 ### Public status page (central app)
 
 A status page anyone can open without logging in, off by default:
