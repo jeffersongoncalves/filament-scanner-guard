@@ -9,13 +9,17 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Pages\MetricsPage;
+use JeffersonGoncalves\Filament\ScannerGuard\Pages\PublicStatusPage;
+use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentEvents\ScannerGuardAgentEventResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentRules\ScannerGuardAgentRuleResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgents\ScannerGuardAgentResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBans\ScannerGuardBanResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardBlocklist\ScannerGuardBlocklistResource;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgent;
+use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgentEvent;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgentRule;
 
 class ScannerGuardPlugin implements Plugin
@@ -31,6 +35,10 @@ class ScannerGuardPlugin implements Plugin
     protected bool|Closure $revealAgentSecret = false;
 
     protected bool|Closure $purgeExpiredBans = true;
+
+    protected bool|Closure $publicStatusPage = false;
+
+    protected string $publicStatusPagePath = 'scanner-guard-status';
 
     public function getId(): string
     {
@@ -61,6 +69,16 @@ class ScannerGuardPlugin implements Plugin
         // Core 2.5+, hidden the same way until its migration ran.
         if (class_exists(ScannerGuardAgentRule::class)) {
             $panel->resources([ScannerGuardAgentRuleResource::class]);
+        }
+
+        // Core 2.6+, hidden the same way until its migration ran.
+        if (class_exists(ScannerGuardAgentEvent::class)) {
+            $panel->resources([ScannerGuardAgentEventResource::class]);
+        }
+
+        // Outside the auth middleware, like the login page.
+        if (class_exists(ScannerGuardAgent::class) && value($this->publicStatusPage)) {
+            $panel->routes(fn () => Route::get($this->publicStatusPagePath, PublicStatusPage::class)->name('scanner-guard-status'));
         }
     }
 
@@ -168,6 +186,18 @@ class ScannerGuardPlugin implements Plugin
     }
 
     /**
+     * Serves a status page without login at {panel path}/{$path}: servers,
+     * attacks and bans, never an IP, user or log line. Off by default.
+     */
+    public function publicStatusPage(bool|Closure $condition = true, string $path = 'scanner-guard-status'): static
+    {
+        $this->publicStatusPage = $condition;
+        $this->publicStatusPagePath = $path;
+
+        return $this;
+    }
+
+    /**
      * Ban duration in seconds per offense, from scanner-guard.escalation (empty = escalation off).
      *
      * @return list<int>
@@ -230,6 +260,17 @@ class ScannerGuardPlugin implements Plugin
         return (bool) config('scanner-guard.http.server.enabled', false)
             && class_exists(ScannerGuardAgentRule::class)
             && once(fn (): bool => Schema::hasTable((new ScannerGuardAgentRule)->getTable()));
+    }
+
+    /**
+     * Central app storing scanner-guard-agent report events (core 2.6+, after
+     * its create_scanner_guard_agent_events migration ran).
+     */
+    public static function receivesAgentEvents(): bool
+    {
+        return (bool) config('scanner-guard.http.server.enabled', false)
+            && class_exists(ScannerGuardAgentEvent::class)
+            && once(fn (): bool => Schema::hasTable((new ScannerGuardAgentEvent)->getTable()));
     }
 
     /**
