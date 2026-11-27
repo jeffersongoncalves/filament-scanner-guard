@@ -77,6 +77,8 @@ class ScannerGuardAgentNginxRuleResource extends Resource
                     ->description(fn (ScannerGuardAgentNginxRule $record): ?string => static::describe($record->name))
                     ->sortable(),
                 ToggleColumn::make('enabled')
+                    // The column saves without asking the policy: only for who may edit the rule.
+                    ->disabled(fn (ScannerGuardAgentNginxRule $record): bool => ! static::canEdit($record))
                     ->label(__('filament-scanner-guard::default.nginx_rules.enabled')),
                 TextColumn::make('except')
                     ->label(__('filament-scanner-guard::default.nginx_rules.except'))
