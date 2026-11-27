@@ -164,6 +164,30 @@ An **Agent rules** resource sets the threshold, window and ban steps of an agent
 
 The agents (2.5.0+) apply a change on their next pull, within a minute. Deleting the row puts the agents back on their own `agent.yaml` values. Out-of-range values are refused, as the core would leave them out: a threshold over 10000, a window over 30 days, a step over 365 days or more than 10 steps.
 
+### Agent events (central app, core 2.6+)
+
+An **Agent events** resource lists what the agents' report rules saw (`report: true`), e.g. every accepted SSH login. Run the core's `create_scanner_guard_agent_events` migration; with `http.server.enabled` the resource shows up.
+
+- Columns: when, server (`source`), rule, the fields that tell events apart (`user=deploy method=publickey key=SHA256:…`), the IP (only with `store_details`), a **New** badge the first time the central app got that event and an **Ignored** badge when the IP is on an ignore list
+- Filters: server, rule, first seen, ignored; newest first
+- **View** shows the pattern, every field and the log line (only with `store_details`); **Delete** removes rows. Nothing is created or edited from the panel.
+
+### Public status page (central app)
+
+A status page anyone can open without logging in, off by default:
+
+```php
+ScannerGuardPlugin::make()
+    ->publicStatusPage(); // {panel path}/scanner-guard-status
+
+ScannerGuardPlugin::make()
+    ->publicStatusPage(fn (): bool => app()->isProduction(), path: 'status');
+```
+
+It shows servers online, IPs blocked now (the largest `active_bans` an agent reports: they all pull the same list), attacks and bans in the last 24 hours, one card per agent (online / offline, version, last seen, active bans, attacks with an hourly bar per hour of the last 24 and its top rules) and the bans of the last 24 hours by reason. It never shows an IP, IP hash, user, key, event field or log line.
+
+The numbers are cached for 60 seconds and the page refreshes every minute. Each section shows up once its core migration ran: agents (2.1+), attacks (`create_scanner_guard_agent_metrics`, 2.6+).
+
 ### Using the actions standalone
 
 If you'd rather wire the table yourself:

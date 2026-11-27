@@ -14,6 +14,7 @@ use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use JeffersonGoncalves\Filament\ScannerGuard\ScannerGuardServiceProvider;
+use JeffersonGoncalves\Filament\ScannerGuard\Tests\Fixtures\StatusPanelProvider;
 use JeffersonGoncalves\Filament\ScannerGuard\Tests\Fixtures\TestPanelProvider;
 use JeffersonGoncalves\PestPluginDatabaseMigrations\LoadsPackageMigrations;
 use JeffersonGoncalves\ScannerGuard\ScannerGuardServiceProvider as LaravelScannerGuardServiceProvider;
@@ -42,6 +43,7 @@ abstract class TestCase extends Orchestra
             WidgetsServiceProvider::class,
             FilamentServiceProvider::class,
             TestPanelProvider::class,
+            StatusPanelProvider::class,
             LaravelScannerGuardServiceProvider::class,
             ScannerGuardServiceProvider::class,
         ];
