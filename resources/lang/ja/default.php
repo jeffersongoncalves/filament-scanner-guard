@@ -116,6 +116,8 @@ return [
         'online' => 'オンライン',
         'offline' => 'オフライン',
         'version' => 'バージョン',
+        'os' => 'OS',
+        'addresses' => 'IPアドレス',
         'rules' => 'ルール',
         'active_bans' => '有効なBAN',
         'started_at' => '起動',

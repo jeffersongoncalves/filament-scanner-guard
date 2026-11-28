@@ -116,6 +116,8 @@ return [
         'online' => 'В сети',
         'offline' => 'Не в сети',
         'version' => 'Версия',
+        'os' => 'ОС',
+        'addresses' => 'IP-адреса',
         'rules' => 'Правила',
         'active_bans' => 'Активные баны',
         'started_at' => 'Запущен',
