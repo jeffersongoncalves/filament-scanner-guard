@@ -116,6 +116,8 @@ return [
         'online' => 'Onlayn',
         'offline' => 'Oflayn',
         'version' => 'Versiya',
+        'os' => 'Əməliyyat sistemi',
+        'addresses' => 'IP ünvanları',
         'rules' => 'Qaydalar',
         'active_bans' => 'Aktiv qadağalar',
         'started_at' => 'Başladı',

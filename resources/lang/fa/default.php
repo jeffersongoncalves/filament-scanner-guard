@@ -116,6 +116,8 @@ return [
         'online' => 'آنلاین',
         'offline' => 'آفلاین',
         'version' => 'نسخه',
+        'os' => 'سیستم عامل',
+        'addresses' => 'آدرس‌های IP',
         'rules' => 'قوانین',
         'active_bans' => 'مسدودسازی‌های فعال',
         'started_at' => 'شروع',

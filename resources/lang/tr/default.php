@@ -116,6 +116,8 @@ return [
         'online' => 'Çevrimiçi',
         'offline' => 'Çevrimdışı',
         'version' => 'Sürüm',
+        'os' => 'İşletim sistemi',
+        'addresses' => 'IP adresleri',
         'rules' => 'Kurallar',
         'active_bans' => 'Aktif yasaklar',
         'started_at' => 'Başlatıldı',
