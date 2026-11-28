@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.18.0 - 2026-11-27
+
+- **OS and IP addresses on the Agents page:** two toggleable columns, filled by scanner-guard-agent 2.9.0+ (interface IPs, internal ones included). Requires laravel-scanner-guard 2.9.0 and its `add_host_to_scanner_guard_agents_table` migration; empty before. The public status page still never shows an IP. (#92)
+
 ## 3.17.0 - 2026-11-27
 
 - **Optional nginx rules page:** turns `cms`, `rfi`, `encoded` or `empty-agent` on for every server running scanner-guard-agent 2.8.0+, with exceptions per server (e.g. one running WordPress). Only users who may edit a rule can toggle it.
@@ -60,6 +64,7 @@ Update `jeffersongoncalves/laravel-scanner-guard` to 2.5, re-publish its migrati
   
   ```php
   ScannerGuardPlugin::make()->revealAgentSecret(fn (): bool => auth()->user()->is_admin); // your own check
+  
   
   
   
