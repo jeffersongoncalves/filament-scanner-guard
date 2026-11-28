@@ -137,7 +137,7 @@ With details off (the default) none of this is shown. Everyone who can open the 
 
 When the central app also records heartbeats from [scanner-guard-agent](https://github.com/jeffersongoncalves/scanner-guard-agent) (core 2.1+, run its `create_scanner_guard_agents` migration), an **Agents** resource lists one row per source:
 
-- Columns: `source`, **Status** (Online / Offline — offline after `ScannerGuardAgent::STALE_AFTER` seconds without a heartbeat), `version`, `rules`, `active_bans`, `started_at`, `last_seen_at`
+- Columns: `source`, **Status** (Online / Offline — offline after `ScannerGuardAgent::STALE_AFTER` seconds without a heartbeat), `version`, `os` and `addresses` (agent 2.9.0+ with core 2.9.0, toggleable), `rules`, `active_bans`, `started_at`, `last_seen_at`
 - A **Status** filter (Online / Offline); the table refreshes every 30 seconds
 - **Delete** forgets a decommissioned agent — a live one reappears on its next heartbeat
 

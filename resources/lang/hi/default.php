@@ -116,6 +116,8 @@ return [
         'online' => 'ऑनलाइन',
         'offline' => 'ऑफ़लाइन',
         'version' => 'संस्करण',
+        'os' => 'ऑपरेटिंग सिस्टम',
+        'addresses' => 'IP पते',
         'rules' => 'नियम',
         'active_bans' => 'सक्रिय प्रतिबंध',
         'started_at' => 'शुरू हुआ',

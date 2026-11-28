@@ -116,6 +116,8 @@ return [
         'online' => 'Online',
         'offline' => 'Offline',
         'version' => 'Versão',
+        'os' => 'Sistema operacional',
+        'addresses' => 'Endereços IP',
         'rules' => 'Regras',
         'active_bans' => 'Bans ativos',
         'started_at' => 'Iniciado',
