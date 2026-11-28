@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentResource;
 use JeffersonGoncalves\Filament\ScannerGuard\Resources\ScannerGuardAgentResource\Pages\ListScannerGuardAgents;
 use JeffersonGoncalves\ScannerGuard\Models\ScannerGuardAgent;
@@ -21,6 +22,7 @@ it('lists agents with their status and filters online / offline', function () {
     $online = ScannerGuardAgent::create([
         'source' => 'web-1',
         'version' => '1.2.0',
+        ...(Schema::hasColumn('scanner_guard_agents', 'os') ? ['os' => 'Ubuntu 22.04.5 LTS', 'addresses' => ['10.2.0.251', '203.0.113.5']] : []),
         'rules' => ['sshd', 'nginx'],
         'active_bans' => 7,
         'started_at' => now()->subDay(),
@@ -38,6 +40,7 @@ it('lists agents with their status and filters online / offline', function () {
         ->assertTableColumnStateSet('status', true, $online)
         ->assertTableColumnStateSet('status', false, $offline)
         ->assertSee(['web-1', '1.2.0', 'sshd', 'nginx'])
+        ->assertSee(Schema::hasColumn('scanner_guard_agents', 'os') ? ['Ubuntu 22.04.5 LTS', '10.2.0.251'] : [])
         ->filterTable('status', true)
         ->assertCanSeeTableRecords([$online])
         ->assertCanNotSeeTableRecords([$offline])

@@ -116,6 +116,8 @@ return [
         'online' => 'متصل',
         'offline' => 'غير متصل',
         'version' => 'الإصدار',
+        'os' => 'نظام التشغيل',
+        'addresses' => 'عناوين IP',
         'rules' => 'القواعد',
         'active_bans' => 'الحظر النشط',
         'started_at' => 'بدأ',
