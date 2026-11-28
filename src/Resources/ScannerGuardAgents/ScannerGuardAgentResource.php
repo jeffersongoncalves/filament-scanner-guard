@@ -61,6 +61,17 @@ class ScannerGuardAgentResource extends Resource
                     ->label(__('filament-scanner-guard::default.agents.version'))
                     ->fontFamily('mono')
                     ->placeholder('—'),
+                // Agent 2.9.0+ with the add_host migration of the core; empty before.
+                TextColumn::make('os')
+                    ->label(__('filament-scanner-guard::default.agents.os'))
+                    ->placeholder('—')
+                    ->toggleable(),
+                TextColumn::make('addresses')
+                    ->label(__('filament-scanner-guard::default.agents.addresses'))
+                    ->fontFamily('mono')
+                    ->listWithLineBreaks()
+                    ->placeholder('—')
+                    ->toggleable(),
                 TextColumn::make('rules')
                     ->label(__('filament-scanner-guard::default.agents.rules'))
                     ->badge()

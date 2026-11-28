@@ -116,6 +116,8 @@ return [
         'online' => '在线',
         'offline' => '离线',
         'version' => '版本',
+        'os' => '操作系统',
+        'addresses' => 'IP 地址',
         'rules' => '规则',
         'active_bans' => '生效封禁',
         'started_at' => '启动于',
